@@ -1,5 +1,5 @@
 # STATUS.md — Magic Moment Project
-> Cập nhật lần cuối: 28/04/2026
+> Cập nhật lần cuối: 29/04/2026
 > Mục đích: File này giúp Claude hiểu toàn bộ ngữ cảnh dự án để tiếp tục phát triển
 
 ---
@@ -47,10 +47,42 @@ File duy nhất tích hợp **3 module** vào một app:
 - Book view: xem toàn bộ câu chuyện dạng flip book
 - **Trạng thái:** ✅ Hoàn chỉnh
 
+### v3.1 — Engagement Loop (29/04/2026) ✅
+
+#### Feature 1 — 🔥 Streak Calendar (Sprint 1)
+- `tickStreak()`: ghi nhận ngày học, chuỗi liên tiếp, không punish khi miss
+- Streak badge trên Home (score-bar), pulse animation khi tăng
+- Milestone screen (3/7/14/30/60/100/365 ngày): full-screen overlay + confetti + Bibi celebrate
+- Gọi tại: Magic Scan thành công · Game Over · StoryDuo trang mới
+- localStorage key: `mm_streak` — current, best, lastDay, days[], milestones[]
+
+#### Feature 2 — 🐰 Mascot Bibi (Sprint 2)
+- SVG thỏ trắng inline, 6 states: `idle` `happy` `thinking` `celebrate` `sleeping` `wave`
+- Speech bubble (#bibi-bubble) — `bibiSay(text, duration)`
+- `initBibiOnHome()`: nếu vắng ≥3 ngày → sleeping → wake; lần đầu trong ngày → wave + greeting
+- `bibiTapped()`: tap Bibi → happy + praise ngẫu nhiên
+- Fixed bottom-right, responsive (60px mobile / 80px desktop)
+
+#### Feature 3 — 🎯 Daily Quest (Sprint 3)
+- 3 quest hằng ngày: Scan 5 đồ vật (+20⭐) · 1 game (+20⭐) · 1 trang StoryDuo (+20⭐)
+- Bonus: hoàn thành cả 3 → +50⭐ extra + confetti + Bibi celebrate
+- Quest Card hiển thị trên Home (dưới score-bar): progress bar, done = ✅ + opacity 50%
+- `loadDailyQuest()`: auto-reset khi date thay đổi (0h)
+- `progressQuest(type)`: gọi tại 3 integration point giống tickStreak()
+- localStorage key: `mm_quest` — date, quests{scan/game/story}, bonusGiven
+
+#### Feature 4 — 🎉 Onboarding (Sprint 4 — Polish)
+- Modal welcome lần đầu mở app (chỉ hiện 1 lần, check `mm_onboarded`)
+- Bibi wave + title "Xin chào! Tôi là Bibi!" + giải thích 3 quest
+- Nút "🚀 Bắt đầu chơi!" → set `mm_onboarded = '1'` + Bibi happy
+- Trigger trong `go('s-home')` → `checkOnboarding()`
+
+---
+
 ### Các file đã tạo
 | File | Mô tả | Trạng thái |
 |------|-------|-----------|
-| `index.html` | App tích hợp 3 module | ✅ Production ready |
+| `index.html` | App tích hợp 3 module + v3.1 engagement loop | ✅ Production ready |
 | `magic-moment.html` | Bản standalone chỉ Scan + Scene | ✅ (cũ, superseded) |
 | `storyduo.html` | Bản standalone chỉ StoryDuo | ✅ (cũ, superseded) |
 | `vercel.json` | Config deploy Vercel | ✅ |
@@ -129,19 +161,23 @@ GitHub:      Giapkhampha/magicmoment           ✅ (repo của user)
 
 ---
 
-## 🗺️ ROADMAP (chưa làm)
+## 🗺️ ROADMAP
 
-### Ưu tiên cao (Phase 2)
-- [ ] **Streak Calendar** — Học liên tục X ngày, huy hiệu thành tích
-- [ ] **Word Jar** — Bình từ vựng theo tuần, ôn tập Spaced Repetition
-- [ ] **Share Card** — Tạo ảnh "Hôm nay bé học được..." cho TikTok/Facebook
-- [ ] **Theme Packs** — Gói chủ đề: Động vật / Màu sắc / Số đếm / Thức ăn
+### ✅ Phase 2 — Engagement Loop (HOÀN THÀNH v3.1)
+- [x] **Streak Calendar** — tick, milestone, badge ✅
+- [x] **Mascot Bibi** — 6 states, speech bubble, greeting logic ✅
+- [x] **Daily Quest** — 3 quest + bonus, auto-reset 0h ✅
+- [x] **Onboarding** — modal lần đầu, giới thiệu Bibi + quest ✅
 
-### Phase 3 — Viral features
-- [ ] **StoryDuo — Printable Book** — Xuất PDF sách tranh để in
-- [ ] **Challenge Mode** — Ba con thi nhau: 10 từ trong 5 phút
-- [ ] **Story Library** — 50+ câu chuyện mẫu có sẵn
-- [ ] **PenPal Planet** — Kết nối bé với bé quốc tế qua voice message
+### Tiếp theo — Phase 2B (Viral Engine)
+- [ ] **Share Card** — Canvas 1080×1920, Web Share API → TikTok/Facebook
+- [ ] **Sticker Album** — Sưu tập emoji, unlock theo streak/words
+- [ ] **Parent Dashboard** — Bar chart, top topics, review words
+
+### Phase 3 — Family & Platform
+- [ ] **Family Challenge** — Multi-profile, leaderboard tuần
+- [ ] **StoryDuo — Printable Book** — Print CSS → PDF
+- [ ] **PWA / Offline** — Service Worker, cài lên màn hình home
 
 ### Phase 4 — Platform
 - [ ] Multi-child profiles

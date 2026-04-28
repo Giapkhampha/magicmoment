@@ -422,6 +422,23 @@ canvas{display:none;}
 .quest-check{font-size:1.1rem;line-height:1;}
 .bonus-banner{background:linear-gradient(135deg,rgba(255,217,74,.18),rgba(255,179,71,.1));border:1px solid rgba(255,217,74,.35);border-radius:12px;padding:9px 14px;text-align:center;font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--gold);margin-top:10px;display:none;}
 .bonus-banner.show{display:block;animation:bouncein .5s cubic-bezier(.34,1.56,.64,1);}
+
+/* === ONBOARDING MODAL === */
+.onboard-overlay{position:fixed;inset:0;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;z-index:400;backdrop-filter:blur(16px);opacity:0;pointer-events:none;transition:opacity .35s;}
+.onboard-overlay.show{opacity:1;pointer-events:all;}
+.onboard-card{background:linear-gradient(160deg,#1A1035,#2D1B69);border:2px solid rgba(255,217,74,.3);border-radius:28px;padding:32px 26px 28px;text-align:center;max-width:320px;width:90%;box-shadow:0 0 80px rgba(168,85,247,.25);transform:scale(.88) translateY(12px);transition:transform .4s cubic-bezier(.34,1.56,.64,1);}
+.onboard-overlay.show .onboard-card{transform:scale(1) translateY(0);}
+.onboard-bibi{font-size:4.5rem;margin-bottom:4px;display:block;animation:bibi-bounce .6s cubic-bezier(.34,1.56,.64,1) 2;}
+.onboard-title{font-family:'Baloo 2',cursive;font-size:1.55rem;font-weight:800;color:var(--gold);margin-bottom:6px;}
+.onboard-sub{color:rgba(255,248,236,.72);font-size:.85rem;line-height:1.6;margin-bottom:20px;}
+.onboard-quests{display:flex;flex-direction:column;gap:8px;margin-bottom:22px;text-align:left;}
+.onboard-quest-row{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.05);border-radius:12px;padding:9px 12px;}
+.oq-icon{font-size:1.3rem;flex-shrink:0;}
+.oq-text{flex:1;}
+.oq-name{font-family:'Baloo 2',cursive;font-size:.84rem;font-weight:800;color:rgba(255,248,236,.92);}
+.oq-desc{font-size:.7rem;color:rgba(255,255,255,.42);margin-top:1px;}
+.oq-reward{font-size:.75rem;color:var(--gold);font-weight:700;flex-shrink:0;}
+.onboard-btn{background:linear-gradient(135deg,var(--gold),var(--coral));border:none;border-radius:16px;padding:14px 36px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:800;color:#1A1035;cursor:pointer;width:100%;animation:bouncein .5s .5s cubic-bezier(.34,1.56,.64,1) both;}
 </style>
 </head>
 <body>
@@ -839,6 +856,42 @@ canvas{display:none;}
   </div>
 </div>
 
+<!-- ONBOARDING MODAL -->
+<div class="onboard-overlay" id="onboard-overlay">
+  <div class="onboard-card">
+    <span class="onboard-bibi">🐰</span>
+    <div class="onboard-title">Xin chào! Tôi là Bibi!</div>
+    <div class="onboard-sub">Bạn thỏ đồng hành của Ba &amp; con trong hành trình học tiếng Anh mỗi ngày!</div>
+    <div class="onboard-quests">
+      <div class="onboard-quest-row">
+        <div class="oq-icon">📸</div>
+        <div class="oq-text">
+          <div class="oq-name">Thám tử nhỏ</div>
+          <div class="oq-desc">Scan 5 đồ vật quanh nhà</div>
+        </div>
+        <div class="oq-reward">+20⭐</div>
+      </div>
+      <div class="onboard-quest-row">
+        <div class="oq-icon">🎮</div>
+        <div class="oq-text">
+          <div class="oq-name">Trò chơi vui</div>
+          <div class="oq-desc">Hoàn thành 1 game</div>
+        </div>
+        <div class="oq-reward">+20⭐</div>
+      </div>
+      <div class="onboard-quest-row">
+        <div class="oq-icon">📖</div>
+        <div class="oq-text">
+          <div class="oq-name">Người kể chuyện</div>
+          <div class="oq-desc">Tạo 1 trang StoryDuo</div>
+        </div>
+        <div class="oq-reward">+20⭐</div>
+      </div>
+    </div>
+    <button class="onboard-btn" onclick="closeOnboarding()">🚀 Bắt đầu chơi!</button>
+  </div>
+</div>
+
 <!-- PHASE 2: MILESTONE OVERLAY -->
 <div class="milestone-overlay" id="milestone-overlay">
   <div class="milestone-card">
@@ -889,7 +942,7 @@ function makeStars(){
     c.appendChild(s);
   }
 }
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='s-home'){setTimeout(initBibiOnHome,60);setTimeout(renderQuests,80);}}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='s-home'){setTimeout(initBibiOnHome,60);setTimeout(renderQuests,80);checkOnboarding();}}
 function updateScore(){document.getElementById('sc-today').textContent=scoreDay;document.getElementById('sc-words').textContent=wordCnt;}
 
 // ════════════════════════════════════════════════
@@ -1533,6 +1586,24 @@ function migrateToV3_1(){
     localStorage.setItem('mm_streak',JSON.stringify({current:1,best:1,lastDay:today,days:[today],milestones:[]}));
   }
   localStorage.setItem('mm_migrated_v3_1','1');
+}
+
+// ════════════════════════════════════════════════
+//  ONBOARDING (Sprint 4 — Polish)
+// ════════════════════════════════════════════════
+function checkOnboarding(){
+  if(!localStorage.getItem('mm_onboarded')){
+    setTimeout(()=>{
+      document.getElementById('onboard-overlay').classList.add('show');
+      bibiSetState('wave');
+    },350);
+  }
+}
+function closeOnboarding(){
+  localStorage.setItem('mm_onboarded','1');
+  document.getElementById('onboard-overlay').classList.remove('show');
+  bibiSay('Cùng học thôi Bé ơi! 🌟',3000);
+  bibiSetState('happy');
 }
 
 // ════════════════════════════════════════════════
