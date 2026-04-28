@@ -404,6 +404,24 @@ canvas{display:none;}
 @keyframes bibi-snore{0%,100%{transform:rotate(-5deg) translateY(2px)}50%{transform:rotate(5deg) translateY(4px)}}
 #bibi.wave{animation:bibi-wave-body .6s ease-in-out;}
 @keyframes bibi-wave-body{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
+
+/* === PHASE 2: DAILY QUEST (Sprint 3) === */
+.quest-card{background:linear-gradient(135deg,rgba(168,85,247,.09),rgba(78,205,196,.07));border:1px solid rgba(168,85,247,.22);border-radius:18px;padding:14px 15px 12px;margin:0 0 14px;width:100%;box-sizing:border-box;}
+.quest-card-title{font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:800;color:rgba(255,248,236,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
+.quest-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.quest-item:last-of-type{border-bottom:none;}
+.quest-item.done{opacity:.5;}
+.quest-icon{font-size:1.3rem;flex-shrink:0;width:26px;text-align:center;}
+.quest-info{flex:1;min-width:0;}
+.quest-name{font-family:'Baloo 2',cursive;font-size:.86rem;font-weight:800;color:rgba(255,248,236,.9);}
+.quest-desc{font-size:.69rem;color:rgba(255,255,255,.38);margin-top:1px;}
+.quest-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+.quest-reward{font-size:.68rem;color:var(--gold);font-weight:700;}
+.quest-bar{width:64px;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;}
+.quest-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4ECDC4,var(--gold));transition:width .45s cubic-bezier(.34,1.56,.64,1);}
+.quest-check{font-size:1.1rem;line-height:1;}
+.bonus-banner{background:linear-gradient(135deg,rgba(255,217,74,.18),rgba(255,179,71,.1));border:1px solid rgba(255,217,74,.35);border-radius:12px;padding:9px 14px;text-align:center;font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--gold);margin-top:10px;display:none;}
+.bonus-banner.show{display:block;animation:bouncein .5s cubic-bezier(.34,1.56,.64,1);}
 </style>
 </head>
 <body>
@@ -447,6 +465,44 @@ canvas{display:none;}
     <div class="score-card"><div class="score-label">⭐ Hôm nay</div><div class="score-num" id="sc-today">0</div></div>
     <div class="score-card"><div class="score-label">📚 Đã học</div><div class="score-num" id="sc-words">0</div></div>
     <div class="score-card" id="streak-badge-card" style="background:linear-gradient(135deg,rgba(255,107,107,.12),rgba(255,179,71,.1));border-color:rgba(255,179,71,.3);"><div class="score-label">🔥 Streak</div><div class="score-num" id="sc-streak" style="color:var(--coral);">0</div></div>
+  </div>
+  <!-- Daily Quest Card -->
+  <div class="quest-card" id="quest-card">
+    <div class="quest-card-title">🎯 Nhiệm vụ hôm nay</div>
+    <div class="quest-item" id="qi-scan">
+      <div class="quest-icon">📸</div>
+      <div class="quest-info">
+        <div class="quest-name">Thám tử nhỏ</div>
+        <div class="quest-desc">Scan 5 đồ vật</div>
+      </div>
+      <div class="quest-right">
+        <div class="quest-reward">+20⭐</div>
+        <div class="quest-bar"><div class="quest-bar-fill" id="qb-scan" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="quest-item" id="qi-game">
+      <div class="quest-icon">🎮</div>
+      <div class="quest-info">
+        <div class="quest-name">Trò chơi vui</div>
+        <div class="quest-desc">Hoàn thành 1 game</div>
+      </div>
+      <div class="quest-right">
+        <div class="quest-reward">+20⭐</div>
+        <div class="quest-bar"><div class="quest-bar-fill" id="qb-game" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="quest-item" id="qi-story">
+      <div class="quest-icon">📖</div>
+      <div class="quest-info">
+        <div class="quest-name">Người kể chuyện</div>
+        <div class="quest-desc">Tạo 1 trang chuyện</div>
+      </div>
+      <div class="quest-right">
+        <div class="quest-reward">+20⭐</div>
+        <div class="quest-bar"><div class="quest-bar-fill" id="qb-story" style="width:0%"></div></div>
+      </div>
+    </div>
+    <div class="bonus-banner" id="bonus-banner">🌟 BONUS +50⭐! Hoàn thành cả 3 nhiệm vụ!</div>
   </div>
   <!-- 2 top modes -->
   <div class="modes-top">
@@ -833,7 +889,7 @@ function makeStars(){
     c.appendChild(s);
   }
 }
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='s-home')setTimeout(initBibiOnHome,60);}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='s-home'){setTimeout(initBibiOnHome,60);setTimeout(renderQuests,80);}}
 function updateScore(){document.getElementById('sc-today').textContent=scoreDay;document.getElementById('sc-words').textContent=wordCnt;}
 
 // ════════════════════════════════════════════════
@@ -905,7 +961,7 @@ Reply ONLY valid JSON, no markdown:
     wordCnt++;localStorage.setItem('mm_wcnt',wordCnt);
     document.getElementById('btn-try').classList.remove('rec');
     document.getElementById('btn-try').textContent='🎤 Con thử nói nào!';
-    go('s-res');tickStreak();bibiSetState('happy');bibiSay(BIBI_PRAISES[~~(Math.random()*BIBI_PRAISES.length)]);setTimeout(()=>speakWord(curWord),700);
+    go('s-res');tickStreak();progressQuest('scan');bibiSetState('happy');bibiSay(BIBI_PRAISES[~~(Math.random()*BIBI_PRAISES.length)]);setTimeout(()=>speakWord(curWord),700);
   }catch(e){handleApiErr(e,'err-home');go('s-home');}
 }
 
@@ -1083,7 +1139,7 @@ function showGameOver(){
   document.getElementById('go-sub').textContent=`Ba & con đã học ${total} đồ vật trong ${sceneTitle}!`;
   document.getElementById('go-score').textContent=`+${gameScore} ⭐`;
   document.getElementById('go-stars').textContent='⭐'.repeat(stars)+'☆'.repeat(3-stars);
-  confetti();tickStreak();go('s-gameover');
+  confetti();tickStreak();progressQuest('game');go('s-gameover');
 }
 function replayGame(){if(gameMode==='find')startFindGame();else startQuizGame();}
 function endGame(){go('s-explore');}
@@ -1179,7 +1235,7 @@ Rules: translate fully, 3 key words, 4-6 scene emojis, bg colors matching scene 
     currentStory.pages.push(page);sdSave();sdPageIdx=currentStory.pages.length-1;
     sdShowPage(sdPageIdx);sdRenderPageNav();sdUpdateCounter();
     setTimeout(()=>speakWord(data.english.split('.')[0]),600);
-    confetti();tickStreak();
+    confetti();tickStreak();progressQuest('story');
     sdSetMicState('idle');
     document.getElementById('sd-vi-display').textContent='Nhấn mic hoặc gõ tiếng Việt bên dưới 🎙️';
     document.getElementById('sd-vi-display').classList.remove('active');
@@ -1477,6 +1533,63 @@ function migrateToV3_1(){
     localStorage.setItem('mm_streak',JSON.stringify({current:1,best:1,lastDay:today,days:[today],milestones:[]}));
   }
   localStorage.setItem('mm_migrated_v3_1','1');
+}
+
+// ════════════════════════════════════════════════
+//  PHASE 2: DAILY QUEST (Sprint 3)
+// ════════════════════════════════════════════════
+function addScore(pts){
+  scoreDay+=pts;
+  localStorage.setItem('mm_scoreday',scoreDay);
+  updateScore();
+}
+function loadDailyQuest(){
+  const today=new Date().toISOString().slice(0,10);
+  let q=JSON.parse(localStorage.getItem('mm_quest')||'{}');
+  if(q.date!==today){
+    q={date:today,quests:{scan:{target:5,current:0,done:false},game:{target:1,current:0,done:false},story:{target:1,current:0,done:false}},bonusGiven:false};
+    localStorage.setItem('mm_quest',JSON.stringify(q));
+  }
+  return q;
+}
+function progressQuest(type){
+  const q=loadDailyQuest();
+  const quest=q.quests[type];
+  if(quest.done)return;
+  quest.current++;
+  if(quest.current>=quest.target){
+    quest.done=true;
+    addScore(20);
+    bibiSetState('happy');
+    bibiSay('Nhiệm vụ xong! +20⭐ 🎉',3500);
+  }
+  if(!q.bonusGiven&&Object.values(q.quests).every(x=>x.done)){
+    q.bonusGiven=true;
+    addScore(50);
+    setTimeout(()=>{confetti();bibiSetState('celebrate');bibiSay('Tuyệt vời! Hoàn thành cả 3! +50⭐ BONUS! 🌟',4500);},500);
+  }
+  localStorage.setItem('mm_quest',JSON.stringify(q));
+  renderQuests();
+}
+function renderQuests(){
+  const q=loadDailyQuest();
+  ['scan','game','story'].forEach(type=>{
+    const quest=q.quests[type];
+    const item=document.getElementById('qi-'+type);
+    if(!item)return;
+    const pct=Math.min(100,Math.round(quest.current/quest.target*100));
+    const right=item.querySelector('.quest-right');
+    if(quest.done){
+      item.classList.add('done');
+      right.innerHTML='<div class="quest-check">✅</div>';
+    }else{
+      item.classList.remove('done');
+      right.innerHTML=`<div class="quest-reward">+20⭐</div><div class="quest-bar"><div class="quest-bar-fill" id="qb-${type}" style="width:${pct}%"></div></div>`;
+    }
+  });
+  const allDone=Object.values(q.quests).every(x=>x.done);
+  const bonus=document.getElementById('bonus-banner');
+  if(bonus)bonus.classList.toggle('show',allDone&&q.bonusGiven);
 }
 
 if(window.speechSynthesis){window.speechSynthesis.getVoices();window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();}
