@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Magic Moment ✨</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -14,9 +14,11 @@
   --amber:#FFB347;--rose:#EF476F;--sky:#3BA7F5;--green:#22C55E;
   --navy:#0F0A2E;--brown:#2D1B0E;--paper:#FFF8EC;
   --card:rgba(255,255,255,.07);--border:rgba(255,255,255,.12);
+  --max-w:480px;--half-w:240px;--pad-x:16px;--pad-y:16px;
+  --radius-card:16px;--radius-btn:14px;
 }
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
-body{font-family:'Nunito',sans-serif;background:var(--navy);min-height:100vh;overflow:hidden;display:flex;align-items:center;justify-content:center;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Nunito',sans-serif;background:var(--navy);min-height:100dvh;overflow:hidden;overflow-x:hidden;display:flex;align-items:center;justify-content:center;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);}
 
 /* ══════════════════════════════════════
    AMBIENT
@@ -30,8 +32,9 @@ body{font-family:'Nunito',sans-serif;background:var(--navy);min-height:100vh;ove
 /* ══════════════════════════════════════
    SCREENS
 ══════════════════════════════════════ */
-.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 18px;z-index:10;transition:opacity .4s,transform .4s;overflow-y:auto;}
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--pad-y) var(--pad-x);z-index:10;transition:opacity .4s,transform .4s;overflow-y:auto;overflow-x:hidden;}
 .screen.hidden{opacity:0;pointer-events:none;transform:scale(.97);}
+#s-home{justify-content:flex-start;padding-top:20px;}
 
 /* ══════════════════════════════════════
    SHARED BUTTONS
@@ -66,31 +69,31 @@ body{font-family:'Nunito',sans-serif;background:var(--navy);min-height:100vh;ove
 .home-icon{font-size:3.4rem;display:block;animation:bouncein .8s cubic-bezier(.34,1.56,.64,1);filter:drop-shadow(0 0 28px rgba(255,217,74,.55));}
 .home-title{font-family:'Baloo 2',cursive;font-size:2rem;font-weight:800;background:linear-gradient(135deg,var(--gold),var(--coral));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-top:4px;}
 .home-sub{color:rgba(255,255,255,.4);font-size:.8rem;margin-top:4px;}
-.score-bar{display:flex;gap:10px;margin-bottom:18px;}
-.score-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:11px 16px;text-align:center;backdrop-filter:blur(12px);min-width:96px;}
-.score-label{font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,255,255,.35);margin-bottom:3px;}
-.score-num{font-family:'Baloo 2',cursive;font-size:1.7rem;font-weight:800;color:var(--gold);}
-.modes-top{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:380px;margin-bottom:10px;}
-.mode-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:16px 12px;text-align:center;cursor:pointer;backdrop-filter:blur(12px);transition:all .2s;position:relative;overflow:hidden;}
-.mode-card:hover{border-color:rgba(255,255,255,.3);transform:translateY(-2px);}
-.mode-card:active{transform:scale(.96);}
-.mode-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-.mode-card.m1::before{background:linear-gradient(90deg,var(--coral),var(--gold));}
-.mode-card.m2::before{background:linear-gradient(90deg,var(--mint),var(--purple));}
-.mode-emoji{font-size:2rem;display:block;margin-bottom:6px;}
-.mode-name{font-family:'Baloo 2',cursive;font-size:.92rem;font-weight:800;color:white;line-height:1.2;margin-bottom:3px;}
-.mode-desc{font-size:.66rem;color:rgba(255,255,255,.38);line-height:1.4;}
-/* StoryDuo featured card */
-.mode-story{width:100%;max-width:380px;background:linear-gradient(135deg,rgba(255,179,71,.12),rgba(239,71,111,.1));border:1px solid rgba(255,179,71,.25);border-radius:18px;padding:16px 20px;cursor:pointer;backdrop-filter:blur(12px);transition:all .2s;position:relative;overflow:hidden;display:flex;align-items:center;gap:14px;margin-bottom:10px;}
-.mode-story::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--amber),var(--rose),var(--mint));}
-.mode-story:hover{transform:translateY(-2px);border-color:rgba(255,179,71,.45);}
-.mode-story:active{transform:scale(.97);}
-.ms-icon{font-size:2.8rem;flex-shrink:0;filter:drop-shadow(0 0 12px rgba(255,179,71,.4));}
-.ms-text{flex:1;}
-.ms-name{font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:800;color:var(--amber);margin-bottom:2px;}
-.ms-desc{font-size:.72rem;color:rgba(255,255,255,.45);line-height:1.4;}
-.ms-badge{display:inline-block;background:linear-gradient(135deg,var(--amber),var(--rose));border-radius:999px;padding:2px 9px;font-size:.62rem;font-weight:800;color:white;margin-top:4px;}
-.home-footer{display:flex;gap:8px;width:100%;max-width:380px;}
+.score-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;width:100%;}
+.score-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-card);padding:10px 8px;text-align:center;backdrop-filter:blur(12px);min-width:0;}
+.score-label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.38);margin-bottom:3px;display:flex;align-items:center;justify-content:center;gap:3px;}
+.score-num{font-family:'Baloo 2',cursive;font-size:1.6rem;font-weight:800;color:var(--gold);line-height:1.15;margin-top:2px;}
+/* Module grid — 2 col + StoryDuo full-width */
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;margin-bottom:10px;}
+.module-btn{border-radius:var(--radius-btn);padding:18px 12px;text-align:center;border:1.5px solid rgba(255,255,255,.12);cursor:pointer;transition:transform .12s,box-shadow .12s;-webkit-tap-highlight-color:transparent;min-height:100px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:relative;overflow:hidden;backdrop-filter:blur(12px);}
+.module-btn::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.module-btn:hover{transform:translateY(-2px);}
+.module-btn:active{transform:scale(.96);}
+.module-btn.scan{background:linear-gradient(135deg,rgba(255,107,107,.1),rgba(255,217,74,.06));border-color:rgba(255,107,107,.28);}
+.module-btn.scan::before{background:linear-gradient(90deg,var(--coral),var(--gold));}
+.module-btn.scene{background:linear-gradient(135deg,rgba(78,205,196,.1),rgba(168,85,247,.06));border-color:rgba(78,205,196,.28);}
+.module-btn.scene::before{background:linear-gradient(90deg,var(--mint),var(--purple));}
+.module-btn.story{grid-column:1/-1;flex-direction:row;justify-content:flex-start;gap:14px;padding:16px 20px;min-height:auto;background:linear-gradient(135deg,rgba(255,179,71,.12),rgba(239,71,111,.1));border-color:rgba(255,179,71,.28);}
+.module-btn.story::before{background:linear-gradient(90deg,var(--amber),var(--rose),var(--mint));}
+.module-btn.story:hover{border-color:rgba(255,179,71,.45);}
+.mod-icon{font-size:2rem;flex-shrink:0;}
+.module-btn.story .mod-icon{font-size:2.8rem;filter:drop-shadow(0 0 12px rgba(255,179,71,.4));}
+.mod-text{flex:1;}
+.mod-name{font:800 1rem 'Baloo 2',cursive;color:#FFF8EC;line-height:1.2;margin-bottom:2px;}
+.module-btn.story .mod-name{color:var(--amber);font-size:1.05rem;}
+.mod-desc{font:600 .68rem 'Nunito',sans-serif;color:rgba(255,255,255,.42);line-height:1.4;}
+.mod-badge{display:inline-block;background:linear-gradient(135deg,var(--amber),var(--rose));border-radius:999px;padding:2px 9px;font-size:.62rem;font-weight:800;color:white;margin-top:4px;}
+.home-footer{display:flex;gap:8px;width:100%;margin-top:4px;}
 .home-footer button{flex:1;}
 
 /* ══════════════════════════════════════
@@ -371,11 +374,15 @@ canvas{display:none;}
 .milestone-ok{background:linear-gradient(135deg,var(--gold),var(--coral));border:none;border-radius:14px;padding:13px 32px;font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:#1A1035;cursor:pointer;}
 
 /* === PHASE 2: MASCOT BIBI === */
-#bibi-container{position:fixed;bottom:16px;right:16px;z-index:150;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none;}
-#bibi{width:80px;height:80px;cursor:pointer;pointer-events:all;filter:drop-shadow(0 4px 18px rgba(255,248,236,.22));transform-origin:bottom center;}
-@media(max-width:480px){#bibi{width:60px;height:60px;}}
-#bibi-bubble{background:rgba(255,248,236,.97);border:2px solid rgba(255,179,71,.42);border-radius:16px 16px 4px 16px;padding:8px 13px;font-family:'Nunito',sans-serif;font-size:.78rem;font-weight:800;color:#2D1B0E;max-width:190px;text-align:center;line-height:1.4;pointer-events:none;transition:opacity .3s,transform .3s;opacity:0;transform:scale(.85) translateY(5px);}
-#bibi-bubble.show{opacity:1;transform:scale(1) translateY(0);}
+#bibi-container{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom));right:16px;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:6px;pointer-events:none;}
+#bibi{width:60px;height:60px;cursor:pointer;pointer-events:all;filter:drop-shadow(0 4px 18px rgba(255,248,236,.22));transform-origin:bottom center;}
+@media(min-width:600px){
+  #bibi-container{right:calc(50% - var(--half-w) + 16px);}
+  #bibi{width:72px;height:72px;}
+}
+#bibi-bubble{background:rgba(255,255,255,.96);color:#0F0A2E;font:700 .8rem 'Nunito',sans-serif;padding:8px 12px;border-radius:12px 12px 4px 12px;max-width:180px;text-align:center;box-shadow:0 4px 18px rgba(0,0,0,.28);pointer-events:none;opacity:0;transform:scale(.85) translateY(5px);transition:opacity .25s,transform .25s;}
+#bibi-bubble.show{opacity:1;transform:scale(1) translateY(0);animation:bubblePop .2s ease;}
+@keyframes bubblePop{from{transform:scale(.8) translateY(4px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
 .bibi-zzz{position:absolute;top:-4px;right:1px;font-size:.7rem;font-weight:800;color:var(--sky);opacity:0;pointer-events:none;}
 @keyframes bibi-zzz-anim{0%{opacity:0;transform:translate(0,0) scale(.5)}45%{opacity:1;transform:translate(3px,-8px) scale(1)}100%{opacity:0;transform:translate(7px,-18px) scale(.4)}}
 /* Eyes - always blink */
@@ -405,21 +412,21 @@ canvas{display:none;}
 #bibi.wave{animation:bibi-wave-body .6s ease-in-out;}
 @keyframes bibi-wave-body{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
 
-/* === PHASE 2: DAILY QUEST (Sprint 3) === */
-.quest-card{background:linear-gradient(135deg,rgba(168,85,247,.09),rgba(78,205,196,.07));border:1px solid rgba(168,85,247,.22);border-radius:18px;padding:14px 15px 12px;margin:0 0 14px;width:100%;box-sizing:border-box;}
-.quest-card-title{font-family:'Baloo 2',cursive;font-size:.78rem;font-weight:800;color:rgba(255,248,236,.5);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;}
-.quest-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);}
-.quest-item:last-of-type{border-bottom:none;}
-.quest-item.done{opacity:.5;}
-.quest-icon{font-size:1.3rem;flex-shrink:0;width:26px;text-align:center;}
-.quest-info{flex:1;min-width:0;}
-.quest-name{font-family:'Baloo 2',cursive;font-size:.86rem;font-weight:800;color:rgba(255,248,236,.9);}
-.quest-desc{font-size:.69rem;color:rgba(255,255,255,.38);margin-top:1px;}
-.quest-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
-.quest-reward{font-size:.68rem;color:var(--gold);font-weight:700;}
-.quest-bar{width:64px;height:6px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;}
-.quest-bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4ECDC4,var(--gold));transition:width .45s cubic-bezier(.34,1.56,.64,1);}
-.quest-check{font-size:1.1rem;line-height:1;}
+/* === PHASE 2: DAILY QUEST (Sprint 3 — redesigned) === */
+.quest-section{margin:0 0 12px;width:100%;}
+.quest-section-title{font:700 .7rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+/* Individual quest card — grid layout */
+.quest-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-card);padding:12px 14px;margin-bottom:7px;display:grid;grid-template-columns:36px 1fr auto;grid-template-rows:auto 6px;column-gap:12px;align-items:center;}
+.quest-card:last-child{margin-bottom:0;}
+.quest-card.done{opacity:.5;border-color:rgba(34,197,94,.28);background:rgba(34,197,94,.04);}
+.quest-icon{font-size:1.4rem;grid-row:1;grid-column:1;text-align:center;}
+.quest-info{grid-row:1;grid-column:2;}
+.quest-name{font:700 .9rem 'Nunito',sans-serif;color:#FFF8EC;}
+.quest-desc{font:600 .72rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);margin-top:1px;}
+.quest-reward{grid-row:1;grid-column:3;font:700 .85rem 'Baloo 2',cursive;color:var(--gold);white-space:nowrap;}
+.quest-progress{grid-row:2;grid-column:1/-1;height:4px;background:rgba(255,255,255,.1);border-radius:99px;margin-top:8px;overflow:hidden;}
+.quest-progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4ECDC4,var(--purple));transition:width .4s ease;}
+.quest-card.done .quest-progress-fill{background:linear-gradient(90deg,var(--green),#4ECDC4);width:100%!important;}
 .bonus-banner{background:linear-gradient(135deg,rgba(255,217,74,.18),rgba(255,179,71,.1));border:1px solid rgba(255,217,74,.35);border-radius:12px;padding:9px 14px;text-align:center;font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--gold);margin-top:10px;display:none;}
 .bonus-banner.show{display:block;animation:bouncein .5s cubic-bezier(.34,1.56,.64,1);}
 
@@ -439,6 +446,20 @@ canvas{display:none;}
 .oq-desc{font-size:.7rem;color:rgba(255,255,255,.42);margin-top:1px;}
 .oq-reward{font-size:.75rem;color:var(--gold);font-weight:700;flex-shrink:0;}
 .onboard-btn{background:linear-gradient(135deg,var(--gold),var(--coral));border:none;border-radius:16px;padding:14px 36px;font-family:'Baloo 2',cursive;font-size:1.05rem;font-weight:800;color:#1A1035;cursor:pointer;width:100%;animation:bouncein .5s .5s cubic-bezier(.34,1.56,.64,1) both;}
+
+/* === TYPOGRAPHY SCALE === */
+.text-xs{font-size:.7rem;}.text-sm{font-size:.85rem;}.text-base{font-size:1rem;}
+.text-lg{font-size:1.25rem;}.text-xl{font-size:1.5rem;}.text-2xl{font-size:2rem;}
+
+/* === DESKTOP CENTERING (≥600px) === */
+@media(min-width:600px){
+  body{background:#080518;}
+  .screen{left:calc(50% - var(--half-w));right:calc(50% - var(--half-w));box-shadow:0 0 80px rgba(0,0,0,.55),0 0 0 1px rgba(255,255,255,.06);}
+  .screen.hidden{opacity:0;pointer-events:none;transform:scale(.97);}
+  .btn-back{left:calc(50% - var(--half-w) + 14px);}
+  .btn-view-book-fixed{right:calc(50% - var(--half-w) + 14px);}
+  .book-actions-fixed{left:calc(50% - var(--half-w));right:calc(50% - var(--half-w));}
+}
 </style>
 </head>
 <body>
@@ -483,64 +504,35 @@ canvas{display:none;}
     <div class="score-card"><div class="score-label">📚 Đã học</div><div class="score-num" id="sc-words">0</div></div>
     <div class="score-card" id="streak-badge-card" style="background:linear-gradient(135deg,rgba(255,107,107,.12),rgba(255,179,71,.1));border-color:rgba(255,179,71,.3);"><div class="score-label">🔥 Streak</div><div class="score-num" id="sc-streak" style="color:var(--coral);">0</div></div>
   </div>
-  <!-- Daily Quest Card -->
-  <div class="quest-card" id="quest-card">
-    <div class="quest-card-title">🎯 Nhiệm vụ hôm nay</div>
-    <div class="quest-item" id="qi-scan">
-      <div class="quest-icon">📸</div>
-      <div class="quest-info">
-        <div class="quest-name">Thám tử nhỏ</div>
-        <div class="quest-desc">Scan 5 đồ vật</div>
-      </div>
-      <div class="quest-right">
-        <div class="quest-reward">+20⭐</div>
-        <div class="quest-bar"><div class="quest-bar-fill" id="qb-scan" style="width:0%"></div></div>
-      </div>
-    </div>
-    <div class="quest-item" id="qi-game">
-      <div class="quest-icon">🎮</div>
-      <div class="quest-info">
-        <div class="quest-name">Trò chơi vui</div>
-        <div class="quest-desc">Hoàn thành 1 game</div>
-      </div>
-      <div class="quest-right">
-        <div class="quest-reward">+20⭐</div>
-        <div class="quest-bar"><div class="quest-bar-fill" id="qb-game" style="width:0%"></div></div>
-      </div>
-    </div>
-    <div class="quest-item" id="qi-story">
-      <div class="quest-icon">📖</div>
-      <div class="quest-info">
-        <div class="quest-name">Người kể chuyện</div>
-        <div class="quest-desc">Tạo 1 trang chuyện</div>
-      </div>
-      <div class="quest-right">
-        <div class="quest-reward">+20⭐</div>
-        <div class="quest-bar"><div class="quest-bar-fill" id="qb-story" style="width:0%"></div></div>
-      </div>
-    </div>
+  <!-- Daily Quest Section -->
+  <div class="quest-section" id="quest-card">
+    <div class="quest-section-title">🎯 Nhiệm vụ hôm nay</div>
+    <div id="quest-list"></div>
     <div class="bonus-banner" id="bonus-banner">🌟 BONUS +50⭐! Hoàn thành cả 3 nhiệm vụ!</div>
   </div>
-  <!-- 2 top modes -->
-  <div class="modes-top">
-    <div class="mode-card m1" onclick="go('s-cam')">
-      <span class="mode-emoji">📸</span>
-      <div class="mode-name">Scan<br>đồ vật</div>
-      <div class="mode-desc">Chụp ảnh, AI nói tên tiếng Anh ngay</div>
+  <!-- Module grid -->
+  <div class="module-grid">
+    <div class="module-btn scan" onclick="go('s-cam')">
+      <div class="mod-icon">📸</div>
+      <div class="mod-text">
+        <div class="mod-name">Scan đồ vật</div>
+        <div class="mod-desc">Chụp ảnh, AI nói tên tiếng Anh ngay</div>
+      </div>
     </div>
-    <div class="mode-card m2" onclick="go('s-scene')">
-      <span class="mode-emoji">🖼️</span>
-      <div class="mode-name">Khám phá<br>bức hình</div>
-      <div class="mode-desc">Upload hình → chơi trò tìm từ!</div>
+    <div class="module-btn scene" onclick="go('s-scene')">
+      <div class="mod-icon">🖼️</div>
+      <div class="mod-text">
+        <div class="mod-name">Khám phá bức hình</div>
+        <div class="mod-desc">Upload hình → chơi trò tìm từ!</div>
+      </div>
     </div>
-  </div>
-  <!-- StoryDuo featured -->
-  <div class="mode-story" onclick="go('s-sd-home');renderSDHome()">
-    <div class="ms-icon">📖</div>
-    <div class="ms-text">
-      <div class="ms-name">StoryDuo — Kể chuyện cùng con</div>
-      <div class="ms-desc">Ba nói/gõ tiếng Việt → AI vẽ sách tranh song ngữ</div>
-      <span class="ms-badge">✨ Minh họa tự động</span>
+    <div class="module-btn story" onclick="go('s-sd-home');renderSDHome()">
+      <div class="mod-icon">📖</div>
+      <div class="mod-text">
+        <div class="mod-name">StoryDuo — Kể chuyện cùng con</div>
+        <div class="mod-desc">Ba nói/gõ tiếng Việt → AI vẽ sách tranh song ngữ</div>
+        <span class="mod-badge">✨ Minh họa tự động</span>
+      </div>
     </div>
   </div>
   <div class="home-footer">
@@ -1644,20 +1636,23 @@ function progressQuest(type){
 }
 function renderQuests(){
   const q=loadDailyQuest();
-  ['scan','game','story'].forEach(type=>{
-    const quest=q.quests[type];
-    const item=document.getElementById('qi-'+type);
-    if(!item)return;
-    const pct=Math.min(100,Math.round(quest.current/quest.target*100));
-    const right=item.querySelector('.quest-right');
-    if(quest.done){
-      item.classList.add('done');
-      right.innerHTML='<div class="quest-check">✅</div>';
-    }else{
-      item.classList.remove('done');
-      right.innerHTML=`<div class="quest-reward">+20⭐</div><div class="quest-bar"><div class="quest-bar-fill" id="qb-${type}" style="width:${pct}%"></div></div>`;
-    }
-  });
+  const items=[
+    {key:'scan', icon:'📸',name:'Thám tử nhỏ',   desc:`Scan ${q.quests.scan.target} đồ vật`},
+    {key:'game', icon:'🎮',name:'Trò chơi vui',   desc:'Hoàn thành 1 game'},
+    {key:'story',icon:'📖',name:'Người kể chuyện',desc:'Tạo 1 trang chuyện'},
+  ];
+  const list=document.getElementById('quest-list');
+  if(!list)return;
+  list.innerHTML=items.map(it=>{
+    const qd=q.quests[it.key];
+    const pct=Math.min(100,(qd.current/qd.target)*100);
+    return `<div class="quest-card${qd.done?' done':''}">
+      <div class="quest-icon">${it.icon}</div>
+      <div class="quest-info"><div class="quest-name">${it.name}</div><div class="quest-desc">${it.desc}</div></div>
+      <div class="quest-reward">${qd.done?'✅':'+20⭐'}</div>
+      <div class="quest-progress"><div class="quest-progress-fill" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
   const allDone=Object.values(q.quests).every(x=>x.done);
   const bonus=document.getElementById('bonus-banner');
   if(bonus)bonus.classList.toggle('show',allDone&&q.bonusGiven);
