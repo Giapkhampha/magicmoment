@@ -1,5 +1,5 @@
 # STATUS.md — Magic Moment Project
-> Cập nhật lần cuối: 29/04/2026 (v4.1 — Theme Packs)
+> Cập nhật lần cuối: 29/04/2026 (v4.2 — In-App Help Guide)
 > Mục đích: File này giúp Claude hiểu toàn bộ ngữ cảnh dự án để tiếp tục phát triển
 
 ---
@@ -49,6 +49,18 @@
 - localStorage: mm_themes = {packId: {completed, completedAt, learned[], timesPlayed}}
 - Home: story tile thu nhỏ về 2x2 grid, thêm tile "📚 Chủ đề" (amber→gold)
 - Parent Dashboard: getTopTopics() hiện "🐱 Động vật" thay vì "theme:animals"
+
+#### v4.2 — In-App Help Guide (Phase 3 Feature 2)
+- **Help Guide** — 9 sections accordion với Bibi mini SVG (wave state) làm tour guide
+- Auto-popup lần đầu cho user mới (sau khi đóng onboarding modal)
+- Icon ❓ góc trên phải home screen → mở help bất kỳ lúc nào
+- CTA "Thử ngay" trong từng section → đi thẳng vào đúng module
+- localStorage key mới: `mm_help_seen_v1`
+- Sections: Bắt đầu nhanh · Magic Scan · Scene Explorer · StoryDuo · Theme Packs · Phần thưởng · Dashboard · Mẹo · Hỏi đáp
+
+#### v4.1 — Theme Packs (Phase 3 Feature 1)
+- **Theme Packs** — 5 chủ đề starter: Animals, Colors, Food, Body, Numbers
+- *(chi tiết xem phần v4.1 bên dưới)*
 
 #### v4.0 — Polish & Deploy
 - **Meta tags** — description, theme-color, OG tags (Facebook/Zalo share preview)
@@ -177,7 +189,7 @@ GitHub:      Giapkhampha/magicmoment           ✅ (repo của user)
 - Ba dùng **Samsung Android** + **Windows Chrome**
 - Stack: Vanilla HTML/CSS/JS · Groq API (gsk_...) · Vercel
 - Repo: Giapkhampha/magicmoment
-- Version hiện tại: **v4.1**
+- Version hiện tại: **v4.2**
 - Mọi text error: **tiếng Việt**
 - KHÔNG dùng framework, KHÔNG external asset
 - JS validate: `node -e "new Function(require('fs').readFileSync('index.html','utf8').match(/<script>([\s\S]*)<\/script>/)[1])"`

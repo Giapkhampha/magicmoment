@@ -591,6 +591,38 @@ canvas{display:none;}
 .tc-sticker{margin:10px 0 18px;font-size:2.5rem;}
 .btn-tc-primary{width:100%;background:linear-gradient(135deg,var(--gold),var(--amber));border:none;border-radius:14px;padding:16px;color:var(--brown);font:800 1rem 'Baloo 2',sans-serif;cursor:pointer;margin-bottom:10px;}
 .btn-tc-secondary{width:100%;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px;color:rgba(255,255,255,.6);font:700 .9rem 'Nunito',sans-serif;cursor:pointer;}
+/* ══════════════════════════════════════
+   HELP GUIDE
+══════════════════════════════════════ */
+#s-help{justify-content:flex-start;overflow-y:auto;}
+.help-bibi-banner{display:flex;gap:12px;align-items:center;background:linear-gradient(135deg,rgba(255,217,74,.13),rgba(78,205,196,.1));border:1px solid var(--border);border-radius:16px;padding:16px;margin:16px 16px 4px;}
+.bibi-mini{width:56px;height:56px;flex-shrink:0;}
+.bibi-quote p{margin:4px 0;font-size:.9rem;line-height:1.4;color:rgba(255,255,255,.85);}
+.help-accordion{padding:0 16px 16px;}
+.help-item{margin-bottom:8px;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
+.help-header{width:100%;display:flex;align-items:center;gap:12px;padding:14px 14px 14px 12px;background:transparent;border:none;border-left:4px solid;cursor:pointer;text-align:left;color:white;font-family:'Nunito',sans-serif;}
+.help-icon{font-size:1.6rem;flex-shrink:0;}
+.help-title-wrap{flex:1;display:flex;flex-direction:column;gap:2px;}
+.help-title{font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1rem;}
+.help-summary{font-size:.78rem;opacity:.6;}
+.help-chevron{font-size:1.2rem;opacity:.5;}
+.help-body{padding:4px 16px 16px;font-family:'Nunito',sans-serif;font-size:.92rem;line-height:1.6;color:rgba(255,255,255,.85);}
+.help-block{margin-bottom:16px;}
+.help-block h4{font-family:'Baloo 2',sans-serif;margin:8px 0 4px;color:white;}
+.help-block p,.help-block li{font-size:.9rem;}
+.help-block ol,.help-block ul{padding-left:22px;}
+.help-block code{background:rgba(255,255,255,.1);padding:2px 6px;border-radius:4px;font-size:.85em;}
+.help-block a{color:var(--gold);}
+.help-tip{background:rgba(255,217,74,.12);border-left:3px solid var(--gold);padding:8px 12px;border-radius:8px;font-size:.85rem;margin-top:6px;}
+.help-table{width:100%;border-collapse:collapse;margin:8px 0;}
+.help-table th,.help-table td{padding:6px 10px;border-bottom:1px solid var(--border);text-align:left;font-size:.85rem;}
+.help-table th{background:rgba(255,255,255,.05);font-weight:700;}
+.help-cta{width:100%;padding:12px;border:none;border-radius:12px;font-family:'Baloo 2',sans-serif;font-weight:700;font-size:1rem;color:white;cursor:pointer;margin-top:12px;box-shadow:0 4px 12px rgba(0,0,0,.2);}
+.help-cta:active{transform:translateY(1px);}
+.btn-help-home{background:rgba(255,255,255,.1);border:1px solid var(--border);color:white;font-size:1rem;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;flex-shrink:0;}
+.help-footer{text-align:center;padding:24px 16px;font-size:.75rem;opacity:.4;}
+#help-bibi-svg{animation:bibi-wave-body .6s ease-in-out 3;}
+#help-bibi-svg .bibi-paw-r{animation:bibi-paw .38s ease-in-out 5 alternate;}
 </style>
 </head>
 <body>
@@ -630,6 +662,7 @@ canvas{display:none;}
 
 <!-- ════════ HOME ════════ -->
 <div class="screen hidden" id="s-home">
+  <button class="btn-help-home" onclick="openHelp()" style="position:absolute;top:16px;right:16px;z-index:20;" title="Hướng dẫn sử dụng">❓</button>
   <div class="home-logo">
     <span class="home-icon">🪄</span>
     <div class="home-title">Magic Moment</div>
@@ -684,7 +717,7 @@ canvas{display:none;}
     <button class="btn-ghost" onclick="go('s-key')" style="font-size:.74rem;">⚙️</button>
   </div>
   <div class="err-msg" id="err-home"></div>
-  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.1 · Magic Moment ✨</div>
+  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.2 · Magic Moment ✨</div>
 </div>
 
 <!-- ════════ CAMERA ════════ -->
@@ -1028,6 +1061,42 @@ canvas{display:none;}
   </div>
 </div>
 
+<!-- ════════ HELP GUIDE ════════ -->
+<div class="screen hidden" id="s-help">
+  <div style="width:100%;max-width:480px;padding-bottom:30px;">
+    <div class="th-header">
+      <button class="btn-back" style="position:relative;top:0;left:0;backdrop-filter:none;" onclick="exitHelp()">← Về nhà</button>
+      <h2 style="flex:1;text-align:center;font:800 1.1rem 'Baloo 2',sans-serif;color:#FFF8EC;margin:0;">📖 Hướng dẫn</h2>
+      <span style="width:80px;"></span>
+    </div>
+    <div class="help-bibi-banner">
+      <div class="bibi-mini">
+        <svg id="help-bibi-svg" viewBox="0 0 100 100" width="56" height="56">
+          <g class="bibi-ear-l"><ellipse cx="33" cy="20" rx="9" ry="21" fill="#FFF8EC" stroke="#E8D5B7" stroke-width="1.5"/><ellipse cx="33" cy="20" rx="5" ry="15" fill="#F9BFCC"/></g>
+          <g class="bibi-ear-r"><ellipse cx="67" cy="20" rx="9" ry="21" fill="#FFF8EC" stroke="#E8D5B7" stroke-width="1.5"/><ellipse cx="67" cy="20" rx="5" ry="15" fill="#F9BFCC"/></g>
+          <ellipse cx="50" cy="81" rx="26" ry="19" fill="#FFF8EC" stroke="#E8D5B7" stroke-width="1.5"/>
+          <ellipse cx="50" cy="57" rx="24" ry="22" fill="#FFF8EC" stroke="#E8D5B7" stroke-width="1.5"/>
+          <ellipse cx="37" cy="63" rx="7" ry="4.5" fill="#F9BFCC" opacity=".4"/>
+          <ellipse cx="63" cy="63" rx="7" ry="4.5" fill="#F9BFCC" opacity=".4"/>
+          <ellipse class="bibi-eye" cx="42" cy="53" rx="3.2" ry="3.8" fill="#2D1B0E"/><circle cx="43.2" cy="51.6" r="1" fill="white"/>
+          <ellipse class="bibi-eye" cx="58" cy="53" rx="3.2" ry="3.8" fill="#2D1B0E"/><circle cx="59.2" cy="51.6" r="1" fill="white"/>
+          <ellipse cx="50" cy="62" rx="2.8" ry="2" fill="#F092A5"/>
+          <path d="M 46 65.5 Q 50 69.5 54 65.5" stroke="#C0436A" fill="none" stroke-width="1.5" stroke-linecap="round"/>
+          <ellipse cx="27" cy="76" rx="9" ry="5.5" fill="#FFF8EC" stroke="#E8D5B7" stroke-width="1.2" transform="rotate(-25,27,76)"/>
+          <g class="bibi-paw-r"><ellipse cx="73" cy="76" rx="9" ry="5.5" fill="#FFF8EC" stroke="#E8D5B7" stroke-width="1.2"/></g>
+          <circle cx="50" cy="99" r="4.5" fill="white" opacity=".65"/>
+        </svg>
+      </div>
+      <div class="bibi-quote">
+        <p><strong>Chào ba/mẹ!</strong></p>
+        <p>Bibi sẽ hướng dẫn ba/mẹ chơi cùng bé. Tap vào từng mục để xem chi tiết.</p>
+      </div>
+    </div>
+    <div class="help-accordion" id="help-accordion"></div>
+    <div class="help-footer"><p>Magic Moment v4.2 · Made with ❤️ for Maya</p></div>
+  </div>
+</div>
+
 <!-- ════════ PARENT DASHBOARD ════════ -->
 <div class="screen hidden" id="s-dashboard" style="justify-content:flex-start;overflow-y:auto;">
   <div style="width:100%;max-width:480px;padding-bottom:30px;">
@@ -1215,6 +1284,7 @@ window.onload=()=>{
   migrateToV3_1();
   updateStreakBadge();
   go(apiKey?'s-home':'s-key');
+  if(apiKey)checkHelpAutoOpen();
 };
 function makeStars(){
   const c=document.getElementById('stars');
@@ -1237,6 +1307,7 @@ function saveKey(){
   apiKey=v;localStorage.setItem('mm_key',apiKey);
   document.getElementById('err-box').style.display='none';
   go('s-home');
+  checkHelpAutoOpen();
 }
 function showKeyErr(m){document.getElementById('err-msg-key').textContent=m;document.getElementById('err-box').style.display='block';}
 
@@ -1887,6 +1958,7 @@ function closeOnboarding(){
   document.getElementById('onboard-overlay').classList.remove('show');
   bibiSay('Cùng học thôi Bé ơi! 🌟',3000);
   bibiSetState('happy');
+  checkHelpAutoOpen();
 }
 
 // ════════════════════════════════════════════════
@@ -2626,6 +2698,95 @@ function tryUnlockStickerForTheme(theme){
   checkThemeBadge(s,picked);
   updateAlbumHomeCount();
   setTimeout(function(){showStickerUnlock(picked);},1200);
+}
+
+// ════════════════════════════════════════════════
+//  HELP GUIDE (v4.2)
+// ════════════════════════════════════════════════
+const HELP_SECTIONS=[
+  {
+    id:'start',icon:'🚀',title:'Bắt đầu nhanh',color:'#FFD94A',
+    summary:'Cài đặt 1 lần — chơi mãi mãi miễn phí',
+    cta_label:null,cta_action:null,
+    body_html:`<div class="help-block"><h4>👋 Chào ba/mẹ!</h4><p>Magic Moment giúp ba/mẹ và bé học tiếng Anh <strong>cùng nhau</strong>, không phải bé tự học một mình. Ba/mẹ không cần giỏi tiếng Anh — AI sẽ làm cầu nối.</p></div><div class="help-block"><h4>🔑 Cài đặt API Key (1 lần duy nhất)</h4><p>App dùng Groq AI <strong>miễn phí</strong>. Lấy key 30 giây:</p><ol><li>Vào <a href="https://console.groq.com" target="_blank">console.groq.com</a> → đăng nhập Google</li><li>Tab "API Keys" → "Create API Key"</li><li>Copy key (bắt đầu bằng <code>gsk_...</code>)</li><li>Dán vào ô "API Key" trên trang chủ Magic Moment → Lưu</li></ol><p class="help-tip">💡 Key chỉ lưu trên máy ba/mẹ, không gửi đi đâu. Free 14,400 lượt/ngày — quá đủ!</p></div><div class="help-block"><h4>🎯 Buổi học đầu tiên (5 phút)</h4><ol><li>Tap <strong>📚 Chủ đề</strong> → chọn "Động vật"</li><li>Bé học 8 con vật với hình + phát âm</li><li>Hoàn thành → bé nhận sticker đầu tiên 🎉</li></ol><p class="help-tip">💡 Đừng ép bé. Chơi 5 phút thấy bé hứng thì học 10 phút. Mệt thì dừng.</p></div>`
+  },
+  {
+    id:'scan',icon:'📸',title:'Magic Scan',color:'#FF6B6B',
+    summary:'Chụp đồ vật trong nhà → AI dạy bé từ vựng',
+    cta_label:'Thử Magic Scan ngay',cta_action:"go('s-cam')",
+    body_html:`<div class="help-block"><h4>📸 Magic Scan là gì?</h4><p>Bất kỳ đồ vật nào trong nhà → chụp ảnh → AI nói tên tiếng Anh + dịch + đọc cho bé nghe.</p></div><div class="help-block"><h4>🎮 Cách chơi</h4><ol><li>Tap <strong>📸 Magic Scan</strong> trên trang chủ</li><li>Chọn "📷 Camera" (chụp trực tiếp) hoặc "🖼️ Thư viện" (ảnh có sẵn)</li><li>Hướng vào 1 đồ vật rõ nét (cái cốc, quả táo, đôi giày...)</li><li>AI nhận dạng → đọc tên tiếng Anh</li><li>Bé tap nút 🎤 lặp lại theo → cộng ⭐</li></ol></div><div class="help-block"><h4>👶 Phù hợp với</h4><p><strong>Bé 3-6 tuổi.</strong> Mỗi session 2-5 phút. Có thể chơi mọi lúc — trong bếp, công viên, siêu thị.</p></div><div class="help-block"><h4>💡 Mẹo nhỏ cho ba/mẹ</h4><ul><li>Chụp <strong>1 đồ vật rõ ràng</strong> — đừng chụp cả căn phòng (sai dùng Scene Explorer)</li><li>Ánh sáng đủ → AI nhận dạng chính xác hơn</li><li>Cho bé tự cầm điện thoại chụp → bé thấy mình "làm chủ"</li><li>Sau khi học, hỏi bé bằng tiếng Việt: "Quả táo tiếng Anh là gì nhỉ?" → bé trả lời "apple"</li></ul></div>`
+  },
+  {
+    id:'scene',icon:'🖼️',title:'Scene Explorer',color:'#4ECDC4',
+    summary:'Upload ảnh → chơi 2 trò chơi: Đố Tìm &amp; Quiz',
+    cta_label:'Thử Scene Explorer',cta_action:"go('s-scene')",
+    body_html:`<div class="help-block"><h4>🖼️ Scene Explorer là gì?</h4><p>1 bức ảnh nhiều đồ vật (như phòng bếp, công viên) → AI đặt ghim lên từng vật → chơi 2 trò chơi tương tác.</p></div><div class="help-block"><h4>🎮 Trò chơi 1: "Đố Tìm"</h4><ol><li>AI đọc 1 từ tiếng Anh (vd: "table")</li><li>Bé tap đúng vị trí cái bàn trên ảnh</li><li>Đúng lần đầu = +15⭐ · Lần 2 = +10⭐ · Lần 3 = +5⭐</li><li>Sai 2 lần: app tự gợi ý vùng có đáp án</li></ol></div><div class="help-block"><h4>🎮 Trò chơi 2: "Quiz Đoán Từ"</h4><ol><li>AI hiện 1 emoji + gợi ý tiếng Việt (vd: "Bồn rửa")</li><li>Bé chọn 1 trong 4 đáp án tiếng Anh</li><li>Đúng = confetti 🎉 +10⭐</li></ol></div><div class="help-block"><h4>💡 Mẹo nhỏ</h4><ul><li>Bắt đầu với ảnh <strong>quen thuộc</strong>: phòng bé, sân chơi, bếp nhà mình</li><li>Chơi Đố Tìm trước (dễ hơn) → Quiz sau (cần nhớ tên)</li><li>Mỗi bức ảnh chơi được 5-10 phút trước khi bé chán</li></ul></div>`
+  },
+  {
+    id:'story',icon:'📖',title:'StoryDuo',color:'#FFB347',
+    summary:'Ba kể 1 câu tiếng Việt → AI dịch + minh hoạ',
+    cta_label:'Kể chuyện cho bé',cta_action:"go('s-sd-home');renderSDHome()",
+    body_html:`<div class="help-block"><h4>📖 StoryDuo là gì?</h4><p>Ba/mẹ kể 1 câu chuyện <strong>tiếng Việt</strong>. AI dịch sang tiếng Anh + vẽ minh hoạ emoji + chọn 3 từ vựng quan trọng dạy bé.</p></div><div class="help-block"><h4>🎮 Cách chơi</h4><ol><li>Tap <strong>📖 StoryDuo</strong> trên trang chủ</li><li>Gõ (hoặc nói qua mic) câu chuyện tiếng Việt</li><li>AI tạo trang sách: tiếng Việt + tiếng Anh + emoji + 3 từ key</li><li>Tap "Lật trang" để kể tiếp câu thứ 2</li><li>Hoàn thành 4-8 trang là 1 quyển sách hoàn chỉnh</li></ol></div><div class="help-block"><h4>📚 Câu chuyện gì hay?</h4><ul><li><strong>Cổ tích Việt Nam:</strong> Tấm Cám, Sơn Tinh Thuỷ Tinh, Thạch Sanh</li><li><strong>Chuyện hằng ngày:</strong> "Sáng nay Maya đi siêu thị với mẹ..."</li><li><strong>Sáng tạo vui:</strong> "Có 1 con thỏ muốn làm TikToker..." 😄</li><li><strong>Kỷ niệm gia đình:</strong> chuyến đi biển hè vừa rồi, sinh nhật bé</li></ul></div><div class="help-block"><h4>✏️ Độ dài câu</h4><p>15-80 từ tiếng Việt mỗi câu. Đừng viết câu quá dài (&gt;100 từ) — AI dịch sẽ tóm tắt.</p></div><div class="help-block"><h4>💡 Mẹo nhỏ</h4><ul><li>Cho bé tự "kể" — bé nói gì ba gõ vào, kể cả khi sai ngữ pháp</li><li>1 quyển sách hoàn chỉnh = chia thành 4-8 buổi (mỗi buổi 1 trang)</li><li>Đọc đi đọc lại quyển sách cũ → bé sẽ thuộc lúc nào không hay</li></ul></div>`
+  },
+  {
+    id:'theme',icon:'📚',title:'Theme Packs',color:'#A855F7',
+    summary:'5 chủ đề có sẵn — học mọi lúc, không cần camera',
+    cta_label:'Mở chủ đề',cta_action:"openThemes()",
+    body_html:`<div class="help-block"><h4>📚 Theme Packs là gì?</h4><p>5 chủ đề từ vựng có sẵn (Động vật, Màu sắc, Thức ăn, Cơ thể, Số đếm). Mỗi chủ đề 8 từ. <strong>Không cần camera, không cần mạng</strong> — chơi trên giường, trên xe đều được.</p></div><div class="help-block"><h4>🎮 Cách chơi</h4><ol><li>Tap <strong>📚 Chủ đề</strong> trên trang chủ → chọn 1 pack</li><li>Mỗi từ hiện 1 thẻ: emoji + tiếng Anh + IPA + tiếng Việt + câu ví dụ</li><li>Tap 🔊 nghe phát âm</li><li>Bé hiểu rồi → tap <strong>"✅ Đã thuộc"</strong> (+5⭐)</li><li>Bé chưa rõ → tap <strong>"🤔 Chưa rõ"</strong> (gặp lại sau)</li><li>Học hết 8 từ → +50⭐ bonus + nhận sticker chủ đề 🎉</li></ol></div><div class="help-block"><h4>🔁 Ôn tập</h4><p>Vào lại pack đã hoàn thành = ôn tập. Vẫn cộng ⭐ bình thường nhưng không có bonus +50 lần 2 (để công bằng với pack mới).</p></div><div class="help-block"><h4>💡 Mẹo nhỏ</h4><ul><li>Lần đầu chơi nên chọn <strong>Động vật</strong> hoặc <strong>Màu sắc</strong> — bé dễ liên tưởng nhất</li><li>Không cần học 1 chủ đề trong 1 ngày — chia 2-3 ngày, mỗi ngày vài từ</li><li>Sau khi học, ra ngoài thực tế ba có thể hỏi: "What color is this?" 🍎</li></ul></div>`
+  },
+  {
+    id:'rewards',icon:'🎯',title:'Phần thưởng &amp; Tiến độ',color:'#22C55E',
+    summary:'Streak · Daily Quest · Sticker · Mascot Bibi',
+    cta_label:null,cta_action:null,
+    body_html:`<div class="help-block"><h4>🔥 Streak — Chuỗi ngày học liên tục</h4><p>Bé chơi bất kỳ module nào trong ngày = tick streak. Cột mốc 3, 7, 14, 30, 60, 100 ngày có phần thưởng đặc biệt. <strong>Không học 1 ngày = streak reset về 0.</strong></p><p class="help-tip">💡 5 phút/ngày tốt hơn 30 phút/tuần. Đều đặn là chìa khoá.</p></div><div class="help-block"><h4>🎯 Daily Quest — 3 nhiệm vụ mỗi ngày</h4><ul><li>Mỗi ngày 0h reset 3 nhiệm vụ (vd: "scan 3 đồ vật", "chơi 1 game", "kể 1 trang chuyện")</li><li>Hoàn thành cả 3 = bonus <strong>+50⭐</strong></li><li>Bỏ lỡ 1 ngày = không sao, mai có quest mới</li></ul></div><div class="help-block"><h4>🏆 Sticker Album — 30 sticker × 5 chủ đề</h4><p>Mỗi 5-10 từ học được = mở 1 sticker ngẫu nhiên. <strong>20% sticker hiếm</strong> (rare). Hoàn thành Theme Pack = nhận sticker theme tương ứng.</p><p class="help-tip">💡 Bé sẽ "săn" sticker — đây là động lực chơi tiếp tự nhiên nhất.</p></div><div class="help-block"><h4>🐰 Mascot Bibi — Bạn đồng hành</h4><p>Thỏ trắng Bibi xuất hiện trong app, có 6 cảm xúc: vui, suy nghĩ, ăn mừng, ngủ, vẫy tay, bình thường. Bibi phản ứng theo việc bé làm — đúng = vui, hoàn thành = ăn mừng.</p></div>`
+  },
+  {
+    id:'dashboard',icon:'📊',title:'Dashboard cha mẹ',color:'#3BA7F5',
+    summary:'Xem bé học bao nhiêu từ, chủ đề nào yêu thích',
+    cta_label:'Mở Dashboard',cta_action:"openDashboard()",
+    body_html:`<div class="help-block"><h4>📊 Dashboard có gì?</h4><ul><li><strong>Biểu đồ 7 ngày qua:</strong> bé học bao nhiêu ⭐ mỗi ngày</li><li><strong>Top chủ đề:</strong> bé thích chủ đề nào nhất</li><li><strong>Sticker tiến độ:</strong> đã mở bao nhiêu / 30</li><li><strong>Từ đã học:</strong> tổng số từ + danh sách review</li><li><strong>Stats tổng:</strong> tổng ngày học, streak best, tổng ⭐</li></ul></div><div class="help-block"><h4>📥 Khi nào xem?</h4><p>Mỗi tuần 1 lần là đủ. <strong>Không nên xem mỗi ngày</strong> — sẽ tạo áp lực cho ba/mẹ và bé.</p></div><div class="help-block"><h4>🎁 Chia sẻ với ông bà</h4><p>Tap nút <strong>"Chia sẻ thành tích"</strong> → tạo card đẹp 1080×1920 → gửi qua Zalo cho ông bà xem cháu giỏi.</p></div>`
+  },
+  {
+    id:'tips',icon:'💡',title:'Mẹo chơi cùng bé',color:'#EF476F',
+    summary:'7 nguyên tắc giúp bé tiến bộ nhanh hơn',
+    cta_label:null,cta_action:null,
+    body_html:`<div class="help-block"><h4>💡 7 nguyên tắc vàng</h4><ol><li><strong>Chơi cùng, không bắt bé tự chơi.</strong> Ba/mẹ ngồi cạnh, hỏi đáp, vui cười.</li><li><strong>Khen nhiều — không chỉnh sai.</strong> Bé đọc "ah-pô" thay "apple" cũng cứ khen "Giỏi!". Nói lại đúng cho bé nghe, không bắt bé sửa.</li><li><strong>5-15 phút/ngày là vừa.</strong> Đừng bắt bé học 30 phút liền — não 3 tuổi chưa chịu nổi.</li><li><strong>Kết nối với đời thực.</strong> Sau khi học "apple" → đi chợ chỉ vào quả táo: "Look! An apple!"</li><li><strong>Lặp lại — đừng vội học từ mới.</strong> Bé cần nghe 1 từ 50+ lần mới nhớ.</li><li><strong>Để bé chán là dừng.</strong> Bé bắt đầu xao nhãng = đóng app ngay. Ép bé sẽ ghét app.</li><li><strong>Bibi và sticker quan trọng hơn điểm số.</strong> Đừng so sánh ⭐ với bé khác.</li></ol></div><div class="help-block"><h4>📅 Lịch học gợi ý</h4><table class="help-table"><tr><th>Thời gian</th><th>Hoạt động</th></tr><tr><td>Sáng</td><td>1 từ Theme Pack lúc đánh răng</td></tr><tr><td>Trưa</td><td>Magic Scan đồ ăn → "rice", "milk"</td></tr><tr><td>Tối</td><td>StoryDuo trước khi ngủ (1 trang)</td></tr></table><p class="help-tip">💡 Không cần đủ cả 3. 1 hoạt động/ngày là đã thành công rồi!</p></div><div class="help-block"><h4>🚫 Tránh những điều này</h4><ul><li>So sánh: "Con bạn A đã thuộc 100 từ, sao con mới 30?"</li><li>Ép học khi bé mệt, đói, buồn ngủ</li><li>Dạy ngữ pháp (bé 3-6 tuổi không cần)</li><li>Bắt bé viết — chỉ cần nghe và nói thôi</li></ul></div>`
+  },
+  {
+    id:'faq',icon:'❓',title:'Hỏi đáp',color:'#9CA3AF',
+    summary:'Lỗi thường gặp · Mic không nhận · TTS im lặng',
+    cta_label:null,cta_action:null,
+    body_html:`<div class="help-block"><h4>❓ Bé chưa biết tiếng Việt rành, có dùng được không?</h4><p>Được. App song ngữ, nhưng nếu bé chỉ biết tiếng Việt cơ bản → bắt đầu Theme Packs trước (có emoji minh hoạ).</p></div><div class="help-block"><h4>❓ Mic không nhận giọng bé?</h4><p>Bé 3 tuổi phát âm chưa rõ — bình thường. Nếu mic không hoạt động hẳn:</p><ul><li>Dùng Chrome (Firefox không hỗ trợ tốt)</li><li>Cấp quyền micro khi browser hỏi</li><li>Vẫn không được? Tap "Đã thuộc" thay vì mic — vẫn cộng điểm</li></ul></div><div class="help-block"><h4>❓ TTS (đọc tiếng Anh) im lặng?</h4><ul><li>Tăng âm lượng máy lên</li><li>iOS: tap màn hình 1 lần trước (Safari yêu cầu user gesture)</li><li>Reload trang nếu vẫn không có tiếng</li></ul></div><div class="help-block"><h4>❓ Có bị mất dữ liệu khi xoá app/đổi máy?</h4><p>Có. Dữ liệu lưu trên trình duyệt máy này. Đổi máy = bắt đầu lại. <em>Sẽ thêm tính năng đồng bộ trong bản kế tiếp.</em></p></div><div class="help-block"><h4>❓ App có an toàn cho bé không?</h4><ul><li>Không thu thập dữ liệu cá nhân</li><li>Ảnh chụp chỉ gửi AI để nhận dạng, không lưu server</li><li>Không có quảng cáo, không có in-app purchase trẻ em</li><li>Không kết nối social media, không chat người lạ</li></ul></div><div class="help-block"><h4>❓ Sau Theme Packs có thêm gì không?</h4><p>Có. Roadmap kế tiếp: Story Library (50+ chuyện mẫu), Family Challenge (ba con thi đua), PenPal Planet (kết nối bé với bé quốc tế).</p></div>`
+  }
+];
+
+function openHelp(){renderHelp();go('s-help');}
+function renderHelp(){
+  const wrap=document.getElementById('help-accordion');
+  if(!wrap)return;
+  wrap.innerHTML=HELP_SECTIONS.map(s=>`<div class="help-item" data-id="${s.id}"><button class="help-header" onclick="toggleHelp('${s.id}')" style="border-left-color:${s.color}"><span class="help-icon">${s.icon}</span><span class="help-title-wrap"><span class="help-title">${s.title}</span><span class="help-summary">${s.summary}</span></span><span class="help-chevron" id="chev-${s.id}">▸</span></button><div class="help-body" id="body-${s.id}" style="display:none;">${s.body_html}${s.cta_label?`<button class="help-cta" style="background:linear-gradient(135deg,${s.color},${s.color}cc)" onclick="${s.cta_action};markHelpSeen();">${s.cta_label} ▶</button>`:''}</div></div>`).join('');
+  toggleHelp('start');
+}
+function toggleHelp(id){
+  HELP_SECTIONS.forEach(s=>{
+    const b=document.getElementById('body-'+s.id);
+    const c=document.getElementById('chev-'+s.id);
+    if(b)b.style.display='none';
+    if(c)c.textContent='▸';
+  });
+  const target=document.getElementById('body-'+id);
+  if(target&&target.style.display==='none'){
+    target.style.display='block';
+    const chev=document.getElementById('chev-'+id);
+    if(chev)chev.textContent='▾';
+  }
+}
+function markHelpSeen(){localStorage.setItem('mm_help_seen_v1','true');}
+function exitHelp(){markHelpSeen();go('s-home');}
+function checkHelpAutoOpen(){
+  if(!localStorage.getItem('mm_help_seen_v1')&&localStorage.getItem('mm_onboarded')){
+    setTimeout(()=>{openHelp();},800);
+  }
 }
 
 window.addEventListener('load', function() {
