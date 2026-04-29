@@ -546,6 +546,51 @@ canvas{display:none;}
 .dat-num{font:800 1.6rem 'Baloo 2',sans-serif;color:#FFF8EC;}
 .dat-label{font:600 .65rem 'Nunito',sans-serif;color:rgba(255,255,255,.35);}
 .btn-dashboard{background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.28);border-radius:12px;padding:9px 14px;color:var(--mint);font:700 .78rem 'Nunito',sans-serif;cursor:pointer;white-space:nowrap;}
+
+/* === THEME PACKS === */
+.module-btn.story{grid-column:auto;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:18px 12px;min-height:100px;}
+.module-btn.story .mod-icon{font-size:2rem;filter:none;}
+.module-btn.story .mod-name{font-size:1rem;text-align:center;}
+.module-btn.story .mod-desc,.module-btn.story .mod-badge{display:none;}
+.module-btn.theme{background:linear-gradient(135deg,rgba(255,179,71,.1),rgba(239,71,111,.08));border-color:rgba(255,179,71,.28);}
+.module-btn.theme::before{background:linear-gradient(90deg,var(--amber),var(--gold));}
+.theme-screen-wrap{width:100%;max-width:480px;padding-bottom:40px;}
+.th-header{display:flex;align-items:center;gap:8px;padding:14px 0 4px;width:100%;}
+.th-subtitle{font:600 .85rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);margin:4px 0 14px;text-align:center;width:100%;}
+.score-pill{background:rgba(255,217,74,.12);border:1px solid rgba(255,217,74,.22);border-radius:999px;padding:4px 12px;font:800 .8rem 'Baloo 2',sans-serif;color:#FFD94A;white-space:nowrap;}
+.theme-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;}
+.theme-card{border-radius:18px;padding:16px 14px;cursor:pointer;position:relative;overflow:hidden;transition:transform .12s;border:1.5px solid rgba(255,255,255,.1);}
+.theme-card:active{transform:scale(.96);}
+.theme-card-icon{font-size:2.4rem;margin-bottom:6px;display:block;}
+.theme-card-name{font:800 1rem 'Baloo 2',sans-serif;color:rgba(255,255,255,.95);margin-bottom:2px;}
+.theme-card-count{font:600 .7rem 'Nunito',sans-serif;color:rgba(255,255,255,.5);margin-bottom:8px;}
+.theme-prog-wrap{height:5px;background:rgba(0,0,0,.25);border-radius:99px;overflow:hidden;}
+.theme-prog-bar{height:100%;background:rgba(255,255,255,.65);border-radius:99px;transition:width .4s ease;}
+.theme-done-badge{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.3);border-radius:999px;padding:2px 7px;font:700 .58rem 'Nunito',sans-serif;color:rgba(255,255,255,.85);}
+.pack-topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0 10px;width:100%;}
+.btn-close{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:8px 14px;color:rgba(255,255,255,.65);font:700 .83rem 'Nunito',sans-serif;cursor:pointer;}
+.pack-progress{font:700 .9rem 'Baloo 2',sans-serif;color:rgba(255,255,255,.4);}
+.flashcard-tp{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:28px 20px 24px;text-align:center;width:100%;margin-bottom:14px;min-height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.fc-emoji{font-size:4.5rem;line-height:1;margin-bottom:2px;}
+.fc-en{font:800 2.6rem 'Baloo 2',sans-serif;background:linear-gradient(135deg,var(--gold),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1;}
+.fc-phonetic{font:500 .88rem 'Nunito',sans-serif;color:rgba(255,255,255,.3);font-style:italic;}
+.fc-vi{font:700 1.5rem 'Caveat',cursive;color:#FFF8EC;margin-top:2px;}
+.fc-sentence{font:600 .78rem 'Nunito',sans-serif;color:rgba(255,255,255,.38);font-style:italic;margin-top:4px;padding:0 6px;line-height:1.5;}
+.card-actions{width:100%;display:flex;flex-direction:column;gap:8px;}
+.btn-tts-tp{width:100%;background:rgba(78,205,196,.1);border:1px solid rgba(78,205,196,.25);border-radius:13px;padding:12px;color:var(--mint);font:700 .9rem 'Nunito',sans-serif;cursor:pointer;}
+.btn-mic-tp{width:100%;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.22);border-radius:13px;padding:10px;color:#c084fc;font:700 .82rem 'Nunito',sans-serif;cursor:pointer;}
+.action-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.btn-unsure{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:13px;padding:16px 10px;color:rgba(255,255,255,.6);font:700 .85rem 'Nunito',sans-serif;cursor:pointer;}
+.btn-known{background:linear-gradient(135deg,rgba(34,197,94,.18),rgba(78,205,196,.12));border:1px solid rgba(34,197,94,.32);border-radius:13px;padding:16px 10px;color:#4ade80;font:800 .9rem 'Nunito',sans-serif;cursor:pointer;}
+.tc-wrap{text-align:center;padding:20px 0 40px;width:100%;max-width:480px;}
+.tc-big-emoji{font-size:4rem;margin-bottom:8px;display:block;}
+.tc-title{font:800 2rem 'Baloo 2',sans-serif;background:linear-gradient(135deg,var(--gold),var(--coral));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
+.tc-sub{font:600 .9rem 'Nunito',sans-serif;color:rgba(255,255,255,.6);margin-bottom:18px;}
+.tc-bonus{background:rgba(255,217,74,.1);border:1px solid rgba(255,217,74,.2);border-radius:12px;padding:10px 16px;font:700 .9rem 'Nunito',sans-serif;color:#FFD94A;margin-bottom:8px;}
+.tc-stats{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:10px 16px;font:600 .82rem 'Nunito',sans-serif;color:rgba(255,255,255,.5);margin-bottom:16px;}
+.tc-sticker{margin:10px 0 18px;font-size:2.5rem;}
+.btn-tc-primary{width:100%;background:linear-gradient(135deg,var(--gold),var(--amber));border:none;border-radius:14px;padding:16px;color:var(--brown);font:800 1rem 'Baloo 2',sans-serif;cursor:pointer;margin-bottom:10px;}
+.btn-tc-secondary{width:100%;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:13px;color:rgba(255,255,255,.6);font:700 .9rem 'Nunito',sans-serif;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -620,9 +665,15 @@ canvas{display:none;}
     <div class="module-btn story" onclick="go('s-sd-home');renderSDHome()">
       <div class="mod-icon">📖</div>
       <div class="mod-text">
-        <div class="mod-name">StoryDuo — Kể chuyện cùng con</div>
-        <div class="mod-desc">Ba nói/gõ tiếng Việt → AI vẽ sách tranh song ngữ</div>
-        <span class="mod-badge">✨ Minh họa tự động</span>
+        <div class="mod-name">Kể chuyện</div>
+        <div class="mod-desc">Ba gõ tiếng Việt → sách song ngữ</div>
+      </div>
+    </div>
+    <div class="module-btn theme" onclick="openThemes()">
+      <div class="mod-icon">📚</div>
+      <div class="mod-text">
+        <div class="mod-name">Chủ đề</div>
+        <div class="mod-desc">Học từ vựng theo chủ đề</div>
       </div>
     </div>
   </div>
@@ -633,7 +684,7 @@ canvas{display:none;}
     <button class="btn-ghost" onclick="go('s-key')" style="font-size:.74rem;">⚙️</button>
   </div>
   <div class="err-msg" id="err-home"></div>
-  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.0 · Magic Moment ✨</div>
+  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.1 · Magic Moment ✨</div>
 </div>
 
 <!-- ════════ CAMERA ════════ -->
@@ -922,6 +973,58 @@ canvas{display:none;}
   <div class="share-caption">
     <p>Caption gợi ý:</p>
     <div id="share-caption-text" class="caption-box"></div>
+  </div>
+</div>
+
+<!-- ════════ THEME PACKS LIST ════════ -->
+<div class="screen hidden" id="s-themes" style="justify-content:flex-start;overflow-y:auto;">
+  <div class="theme-screen-wrap">
+    <div class="th-header">
+      <button class="btn-back" style="position:relative;top:0;left:0;backdrop-filter:none;" onclick="go('s-home')">← Về nhà</button>
+      <h2 style="flex:1;text-align:center;font:800 1.1rem 'Baloo 2',sans-serif;color:#FFF8EC;margin:0;">📚 Chủ đề</h2>
+      <span class="score-pill">⭐ <span id="th-score">0</span></span>
+    </div>
+    <p class="th-subtitle">Hôm nay học gì với bé?</p>
+    <div class="theme-grid" id="theme-grid"></div>
+  </div>
+</div>
+
+<!-- ════════ THEME PACK FLASHCARD ════════ -->
+<div class="screen hidden" id="s-theme-pack" style="justify-content:flex-start;">
+  <div style="width:100%;max-width:480px;">
+    <div class="pack-topbar">
+      <button class="btn-close" onclick="exitPack()">✕ Thoát</button>
+      <span class="pack-progress"><span id="pp-cur">1</span> / <span id="pp-total">8</span></span>
+    </div>
+    <div class="flashcard-tp">
+      <div class="fc-emoji" id="fc-emoji">🐱</div>
+      <div class="fc-en" id="fc-en">CAT</div>
+      <div class="fc-phonetic" id="fc-phonetic">/kæt/</div>
+      <div class="fc-vi" id="fc-vi">Con mèo</div>
+      <div class="fc-sentence" id="fc-sentence">"The cat says meow!"</div>
+    </div>
+    <div class="card-actions">
+      <button class="btn-tts-tp" onclick="ttsCurrent()">🔊 Nghe lại</button>
+      <button class="btn-mic-tp" id="btn-mic-theme" onclick="micCurrent()">🎤 Nói thử</button>
+      <div class="action-row">
+        <button class="btn-unsure" onclick="markUnsure()">🤔 Chưa rõ</button>
+        <button class="btn-known" id="btn-known" onclick="markKnown()">✅ Đã thuộc</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ THEME COMPLETE ════════ -->
+<div class="screen hidden" id="s-theme-complete" style="justify-content:flex-start;overflow-y:auto;">
+  <div class="tc-wrap">
+    <span class="tc-big-emoji">🎉</span>
+    <div class="tc-title">Tuyệt vời!</div>
+    <p class="tc-sub">Bé đã học xong chủ đề <strong id="tc-name"></strong>! <span id="tc-icon"></span></p>
+    <div class="tc-bonus" id="tc-bonus">⭐ +50 bonus hoàn thành!</div>
+    <div class="tc-stats">📊 <span id="tc-learned">8</span>/<span id="tc-total">8</span> từ đã thuộc</div>
+    <div class="tc-sticker" id="tc-sticker"></div>
+    <button class="btn-tc-primary" onclick="go('s-themes');renderThemeGrid()">Học chủ đề khác 📚</button>
+    <button class="btn-tc-secondary" onclick="go('s-home')">Về trang chủ 🏠</button>
   </div>
 </div>
 
@@ -1555,7 +1658,7 @@ function buildVocabRow(kws){
 function showHistory(){
   const g=document.getElementById('hist-grid');g.innerHTML='';
   if(!wordHist.length){g.innerHTML='<div class="hist-empty"><span>📚</span>Chưa có từ nào — scan thôi!</div>';}
-  else wordHist.forEach(it=>{const d=document.createElement('div');d.className='hist-item';d.innerHTML=`<img src="${it.image}" loading="lazy"><div class="hist-word">${it.emoji} ${it.english.toUpperCase()}</div><div class="hist-vi">${it.vietnamese}</div>`;d.onclick=()=>speakWord(it.english);g.appendChild(d);});
+  else wordHist.forEach(it=>{const d=document.createElement('div');d.className='hist-item';const thumb=it.image?`<img src="${it.image}" loading="lazy">`:`<div style="font-size:2rem;aspect-ratio:1;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);border-radius:8px 8px 0 0;margin-bottom:3px;">${it.emoji}</div>`;d.innerHTML=thumb+`<div class="hist-word">${it.emoji} ${it.english.toUpperCase()}</div><div class="hist-vi">${it.vietnamese}</div>`;d.onclick=()=>speakWord(it.english);g.appendChild(d);});
   go('s-hist');
 }
 
@@ -2143,7 +2246,16 @@ function getTopTopics(){
   const map={};
   hist.forEach(w=>{const src=w.source||'scan';map[src]=(map[src]||0)+1;});
   const LABELS={scan:'📸 Magic Scan',quiz:'🎮 Trò chơi',story:'📖 Kể chuyện'};
-  return Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k,v])=>({label:LABELS[k]||k,count:v}));
+  return Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,3).map(function(entry){
+    const k=entry[0],v=entry[1];
+    let label=LABELS[k];
+    if(!label&&k.startsWith('theme:')){
+      const packId=k.slice(6);
+      const pack=THEME_PACKS.find(function(p){return p.id===packId;});
+      label=pack?pack.icon+' '+pack.title_vi:'📚 Chủ đề';
+    }
+    return {label:label||k,count:v};
+  });
 }
 
 function getReviewWords(){
@@ -2261,6 +2373,259 @@ function renderBarChart(){
 
 async function shareDashboard(){
   await openShareCard('weekly');
+}
+
+// ════════════════════════════════════════════════
+//  PHASE 3: THEME PACKS
+// ════════════════════════════════════════════════
+const THEME_PACKS=[
+  {id:'animals',title_vi:'Động vật',title_en:'Animals',icon:'🐱',color:'#FFB347',color2:'#EF476F',level:1,sticker_theme:'animals',words:[
+    {en:'cat',    vi:'Con mèo',   phonetic:'/kæt/',       emoji:'🐱',sentence:'The cat says meow!'},
+    {en:'dog',    vi:'Con chó',   phonetic:'/dɒɡ/',       emoji:'🐶',sentence:'The dog says woof!'},
+    {en:'fish',   vi:'Con cá',    phonetic:'/fɪʃ/',       emoji:'🐠',sentence:'Fish swim in water.'},
+    {en:'bird',   vi:'Con chim',  phonetic:'/bɜːrd/',     emoji:'🐦',sentence:'Birds can fly!'},
+    {en:'rabbit', vi:'Con thỏ',   phonetic:'/ˈræbɪt/',    emoji:'🐰',sentence:'Rabbits love carrots.'},
+    {en:'elephant',vi:'Con voi',  phonetic:'/ˈɛlɪfənt/',  emoji:'🐘',sentence:'Elephants are big!'},
+    {en:'lion',   vi:'Con sư tử', phonetic:'/ˈlaɪən/',    emoji:'🦁',sentence:'The lion is strong.'},
+    {en:'cow',    vi:'Con bò',    phonetic:'/kaʊ/',        emoji:'🐄',sentence:'Cows give us milk.'}
+  ]},
+  {id:'colors',title_vi:'Màu sắc',title_en:'Colors',icon:'🌈',color:'#A855F7',color2:'#3BA7F5',level:1,sticker_theme:'nature',words:[
+    {en:'red',    vi:'Màu đỏ',        phonetic:'/rɛd/',      emoji:'🔴',sentence:'The apple is red.'},
+    {en:'blue',   vi:'Màu xanh dương',phonetic:'/bluː/',     emoji:'🔵',sentence:'The sky is blue.'},
+    {en:'green',  vi:'Màu xanh lá',   phonetic:'/ɡriːn/',    emoji:'🟢',sentence:'The grass is green.'},
+    {en:'yellow', vi:'Màu vàng',      phonetic:'/ˈjɛloʊ/',   emoji:'🟡',sentence:'The sun is yellow.'},
+    {en:'pink',   vi:'Màu hồng',      phonetic:'/pɪŋk/',     emoji:'🌸',sentence:'The flower is pink.'},
+    {en:'white',  vi:'Màu trắng',     phonetic:'/waɪt/',     emoji:'⚪',sentence:'Snow is white.'},
+    {en:'black',  vi:'Màu đen',       phonetic:'/blæk/',     emoji:'⚫',sentence:'The night is black.'},
+    {en:'orange', vi:'Màu cam',       phonetic:'/ˈɔːrɪndʒ/', emoji:'🟠',sentence:'The pumpkin is orange.'}
+  ]},
+  {id:'food',title_vi:'Thức ăn',title_en:'Food',icon:'🍎',color:'#FF6B6B',color2:'#FFD94A',level:1,sticker_theme:'food',words:[
+    {en:'apple',  vi:'Quả táo',   phonetic:'/ˈæpəl/',   emoji:'🍎',sentence:'I love apples!'},
+    {en:'banana', vi:'Quả chuối', phonetic:'/bəˈnænə/', emoji:'🍌',sentence:'Bananas are yellow.'},
+    {en:'rice',   vi:'Cơm',       phonetic:'/raɪs/',    emoji:'🍚',sentence:'I eat rice today.'},
+    {en:'milk',   vi:'Sữa',       phonetic:'/mɪlk/',    emoji:'🥛',sentence:'Milk is yummy.'},
+    {en:'egg',    vi:'Quả trứng', phonetic:'/ɛɡ/',      emoji:'🥚',sentence:'Eggs are round.'},
+    {en:'bread',  vi:'Bánh mì',   phonetic:'/brɛd/',    emoji:'🍞',sentence:'I eat bread.'},
+    {en:'water',  vi:'Nước',      phonetic:'/ˈwɔːtər/', emoji:'💧',sentence:'Drink water!'},
+    {en:'cake',   vi:'Bánh ngọt', phonetic:'/keɪk/',    emoji:'🍰',sentence:'Cake is sweet!'}
+  ]},
+  {id:'body',title_vi:'Cơ thể',title_en:'Body',icon:'👁️',color:'#4ECDC4',color2:'#22C55E',level:1,sticker_theme:'family',words:[
+    {en:'eye',   vi:'Mắt',   phonetic:'/aɪ/',   emoji:'👁️',sentence:'I see with my eyes.'},
+    {en:'ear',   vi:'Tai',   phonetic:'/ɪər/',  emoji:'👂',sentence:'I hear with my ears.'},
+    {en:'nose',  vi:'Mũi',   phonetic:'/noʊz/', emoji:'👃',sentence:'I smell with my nose.'},
+    {en:'mouth', vi:'Miệng', phonetic:'/maʊθ/', emoji:'👄',sentence:'I eat with my mouth.'},
+    {en:'hand',  vi:'Tay',   phonetic:'/hænd/', emoji:'✋',sentence:'I clap my hands.'},
+    {en:'foot',  vi:'Chân',  phonetic:'/fʊt/',  emoji:'🦶',sentence:'I walk with my feet.'},
+    {en:'hair',  vi:'Tóc',   phonetic:'/hɛər/', emoji:'💇',sentence:'My hair is long.'},
+    {en:'tooth', vi:'Răng',  phonetic:'/tuːθ/', emoji:'🦷',sentence:'I brush my tooth.'}
+  ]},
+  {id:'numbers',title_vi:'Số đếm',title_en:'Numbers',icon:'1️⃣',color:'#3BA7F5',color2:'#A855F7',level:1,sticker_theme:'transport',words:[
+    {en:'one',   vi:'Số 1', phonetic:'/wʌn/',    emoji:'1️⃣',sentence:'One apple.'},
+    {en:'two',   vi:'Số 2', phonetic:'/tuː/',    emoji:'2️⃣',sentence:'Two cats.'},
+    {en:'three', vi:'Số 3', phonetic:'/θriː/',   emoji:'3️⃣',sentence:'Three dogs.'},
+    {en:'four',  vi:'Số 4', phonetic:'/fɔːr/',   emoji:'4️⃣',sentence:'Four birds.'},
+    {en:'five',  vi:'Số 5', phonetic:'/faɪv/',   emoji:'5️⃣',sentence:'Five fingers.'},
+    {en:'six',   vi:'Số 6', phonetic:'/sɪks/',   emoji:'6️⃣',sentence:'Six fish.'},
+    {en:'seven', vi:'Số 7', phonetic:'/ˈsɛvən/', emoji:'7️⃣',sentence:'Seven stars.'},
+    {en:'eight', vi:'Số 8', phonetic:'/eɪt/',    emoji:'8️⃣',sentence:'Eight legs.'}
+  ]}
+];
+
+let tpCurrent=null;
+let tpQueue=[];
+let tpShownCount=0;
+let tpStreakTicked=false;
+
+function loadThemesState(){return JSON.parse(localStorage.getItem('mm_themes')||'{}');}
+function saveThemesState(s){localStorage.setItem('mm_themes',JSON.stringify(s));}
+
+function openThemes(){
+  const el=document.getElementById('th-score');
+  if(el)el.textContent=scoreDay;
+  renderThemeGrid();
+  go('s-themes');
+  bibiSetState('wave');
+  bibiSay('Hôm nay học chủ đề nào nào? 📚',3000);
+}
+
+function renderThemeGrid(){
+  const state=loadThemesState();
+  const el=document.getElementById('th-score');
+  if(el)el.textContent=scoreDay;
+  const grid=document.getElementById('theme-grid');
+  if(!grid)return;
+  grid.innerHTML=THEME_PACKS.map(function(pack){
+    const ps=state[pack.id]||{completed:false,learned:[]};
+    const ln=ps.learned?ps.learned.length:0;
+    const tot=pack.words.length;
+    const pct=tot>0?Math.round(ln/tot*100):0;
+    const doneBadge=ps.completed?'<div class="theme-done-badge">✓ Xong</div>':'';
+    return '<div class="theme-card" onclick="openTheme(\''+pack.id+'\')" style="background:linear-gradient(135deg,'+pack.color+'22,'+pack.color2+'18);border-color:'+pack.color+'44;">'+
+      doneBadge+
+      '<span class="theme-card-icon">'+pack.icon+'</span>'+
+      '<div class="theme-card-name">'+pack.title_vi+'</div>'+
+      '<div class="theme-card-count">'+ln+'/'+tot+' từ</div>'+
+      '<div class="theme-prog-wrap"><div class="theme-prog-bar" style="width:'+pct+'%"></div></div>'+
+    '</div>';
+  }).join('');
+}
+
+function openTheme(packId){
+  tpCurrent=THEME_PACKS.find(function(p){return p.id===packId;});
+  if(!tpCurrent)return;
+  const state=loadThemesState();
+  const ps=state[packId]||{completed:false,learned:[],timesPlayed:0,bestScore:0};
+  if(!ps.learned)ps.learned=[];
+  ps.timesPlayed=(ps.timesPlayed||0)+1;
+  state[packId]=ps;
+  saveThemesState(state);
+  const unlearned=tpCurrent.words.filter(function(w){return !ps.learned.includes(w.en);});
+  const alreadyLearned=tpCurrent.words.filter(function(w){return ps.learned.includes(w.en);});
+  tpQueue=unlearned.concat(alreadyLearned);
+  tpShownCount=0;
+  tpStreakTicked=false;
+  bibiSetState('wave');
+  bibiSay('Bắt đầu học '+tpCurrent.title_vi+' nào! 🐰',2500);
+  go('s-theme-pack');
+  showThemeCard();
+}
+
+function showThemeCard(){
+  if(!tpCurrent||tpQueue.length===0){completeTheme();return;}
+  tpShownCount++;
+  const word=tpQueue[0];
+  const total=tpCurrent.words.length;
+  const ppCur=document.getElementById('pp-cur');
+  const ppTot=document.getElementById('pp-total');
+  if(ppCur)ppCur.textContent=Math.min(tpShownCount,total);
+  if(ppTot)ppTot.textContent=total;
+  const emojiEl=document.getElementById('fc-emoji');
+  const enEl=document.getElementById('fc-en');
+  const phonEl=document.getElementById('fc-phonetic');
+  const viEl=document.getElementById('fc-vi');
+  const sentEl=document.getElementById('fc-sentence');
+  if(emojiEl)emojiEl.textContent=word.emoji;
+  if(enEl)enEl.textContent=word.en.toUpperCase();
+  if(phonEl)phonEl.textContent=word.phonetic;
+  if(viEl)viEl.textContent=word.vi;
+  if(sentEl)sentEl.textContent='"'+word.sentence+'"';
+  setTimeout(function(){speakWord(word.en);},200);
+}
+
+function ttsCurrent(){
+  if(!tpCurrent||!tpQueue.length)return;
+  speakWord(tpQueue[0].en);
+}
+
+function micCurrent(){
+  if(!tpCurrent||!tpQueue.length)return;
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){bibiSay('Trình duyệt không hỗ trợ mic 😅',2000);return;}
+  const word=tpQueue[0];
+  const btnMic=document.getElementById('btn-mic-theme');
+  if(btnMic)btnMic.textContent='🎤 Đang nghe...';
+  const recog=new SR();
+  recog.lang='en-US';
+  recog.interimResults=false;
+  recog.onresult=function(e){
+    const said=(e.results[0][0].transcript||'').toLowerCase().trim();
+    if(btnMic)btnMic.textContent='🎤 Nói thử';
+    const ok=said.split(/\s+/).some(function(w){return lev(w,word.en.toLowerCase())<=Math.floor(word.en.length*.4);});
+    if(ok){addScore(5);bibiSetState('happy');bibiSay('Phát âm chuẩn! +5⭐ 🎉',2500);}
+    else{bibiSay('Thử lại nhé: '+word.en+' 😊',2500);}
+  };
+  recog.onerror=function(){if(btnMic)btnMic.textContent='🎤 Nói thử';};
+  recog.start();
+}
+
+function markKnown(){
+  if(!tpCurrent||!tpQueue.length)return;
+  const word=tpQueue.shift();
+  const state=loadThemesState();
+  const ps=state[tpCurrent.id]||{completed:false,learned:[],timesPlayed:0};
+  if(!ps.learned)ps.learned=[];
+  const isNew=!ps.learned.includes(word.en);
+  if(isNew){
+    ps.learned.push(word.en);
+    wordHist.unshift({image:'',english:word.en,vietnamese:word.vi,emoji:word.emoji,timestamp:Date.now(),source:'theme:'+tpCurrent.id});
+    if(wordHist.length>100)wordHist.pop();
+    localStorage.setItem('mm_hist',JSON.stringify(wordHist));
+    wordCnt++;
+    localStorage.setItem('mm_wcnt',wordCnt);
+    if(!tpStreakTicked){tickStreak();tpStreakTicked=true;}
+    tryUnlockSticker();
+    progressQuest('scan');
+  }
+  addScore(5);
+  bibiSetState('happy');
+  state[tpCurrent.id]=ps;
+  saveThemesState(state);
+  updateScore();
+  showThemeCard();
+}
+
+function markUnsure(){
+  if(!tpCurrent||!tpQueue.length)return;
+  const word=tpQueue.shift();
+  tpQueue.push(word);
+  bibiSay('Ôn lại sau nhé! 😊',1500);
+  showThemeCard();
+}
+
+function exitPack(){
+  go('s-themes');
+  renderThemeGrid();
+}
+
+function completeTheme(){
+  if(!tpCurrent)return;
+  const state=loadThemesState();
+  const ps=state[tpCurrent.id]||{completed:false,learned:[],timesPlayed:0};
+  if(!ps.learned)ps.learned=[];
+  const isFirstComplete=!ps.completed;
+  if(isFirstComplete){
+    ps.completed=true;
+    ps.completedAt=new Date().toISOString();
+    addScore(50);
+    progressQuest('scan');
+    tryUnlockStickerForTheme(tpCurrent.sticker_theme);
+  }
+  state[tpCurrent.id]=ps;
+  saveThemesState(state);
+  const nameEl=document.getElementById('tc-name');
+  const iconEl=document.getElementById('tc-icon');
+  const learnedEl=document.getElementById('tc-learned');
+  const totalEl=document.getElementById('tc-total');
+  const bonusEl=document.getElementById('tc-bonus');
+  const stickerEl=document.getElementById('tc-sticker');
+  if(nameEl)nameEl.textContent=tpCurrent.title_vi;
+  if(iconEl)iconEl.textContent=tpCurrent.icon;
+  if(learnedEl)learnedEl.textContent=ps.learned.length;
+  if(totalEl)totalEl.textContent=tpCurrent.words.length;
+  if(bonusEl)bonusEl.style.display=isFirstComplete?'':'none';
+  if(stickerEl)stickerEl.textContent=isFirstComplete?tpCurrent.icon:'';
+  go('s-theme-complete');
+  confetti();
+  bibiSetState('celebrate');
+  bibiSay('Tuyệt vời! Bé học xong '+tpCurrent.title_vi+'! 🎉',4000);
+  updateScore();
+}
+
+function tryUnlockStickerForTheme(theme){
+  let s=JSON.parse(localStorage.getItem('mm_stickers')||'{"unlocked":[],"themeBadges":[],"wordsSinceLastSticker":0}');
+  if(!s.themeBadges)s.themeBadges=[];
+  const themeStickers=STICKER_DB[theme];
+  if(!themeStickers){tryUnlockSticker();return;}
+  const available=themeStickers.filter(function(st){return !s.unlocked.includes(st.id);});
+  if(!available.length){checkThemeBadge(s,null);return;}
+  const picked=available[Math.floor(Math.random()*available.length)];
+  s.unlocked.push(picked.id);
+  s.lastUnlock=picked.id;
+  s.wordsSinceLastSticker=0;
+  localStorage.setItem('mm_stickers',JSON.stringify(s));
+  checkThemeBadge(s,picked);
+  updateAlbumHomeCount();
+  setTimeout(function(){showStickerUnlock(picked);},1200);
 }
 
 window.addEventListener('load', function() {

@@ -1,5 +1,5 @@
 # STATUS.md — Magic Moment Project
-> Cập nhật lần cuối: 29/04/2026 (v4.0 — Final Deploy)
+> Cập nhật lần cuối: 29/04/2026 (v4.1 — Theme Packs)
 > Mục đích: File này giúp Claude hiểu toàn bộ ngữ cảnh dự án để tiếp tục phát triển
 
 ---
@@ -36,6 +36,19 @@
 
 #### Phase 2C — Parent Insight
 - **Parent Dashboard** — Bar chart 7 ngày, top topics, sticker progress, review words, all-time stats
+
+#### v4.1 — Theme Packs (Phase 3)
+- **Theme Packs** — 5 chủ đề starter: Animals, Colors, Food, Body, Numbers
+- 8 từ × 5 pack = 40 từ cấu trúc; data hardcoded (no API)
+- Flashcard UI: emoji + EN (Baloo 2 gold) + IPA + VI (Caveat) + example sentence
+- TTS auto khi mở card; nút Nghe lại + Nói thử (en-US mic + Levenshtein check)
+- "✅ Đã thuộc" → +5⭐, vào wordHist(source:'theme:packId'), tryUnlockSticker, progressQuest
+- "🤔 Chưa rõ" → word đẩy về cuối queue, gặp lại sau
+- Hoàn thành pack lần đầu: +50⭐ bonus + forceUnlock sticker từ đúng theme
+- Review mode (pack completed): ôn lại tất cả, không cộng bonus lần 2
+- localStorage: mm_themes = {packId: {completed, completedAt, learned[], timesPlayed}}
+- Home: story tile thu nhỏ về 2x2 grid, thêm tile "📚 Chủ đề" (amber→gold)
+- Parent Dashboard: getTopTopics() hiện "🐱 Động vật" thay vì "theme:animals"
 
 #### v4.0 — Polish & Deploy
 - **Meta tags** — description, theme-color, OG tags (Facebook/Zalo share preview)
@@ -164,7 +177,7 @@ GitHub:      Giapkhampha/magicmoment           ✅ (repo của user)
 - Ba dùng **Samsung Android** + **Windows Chrome**
 - Stack: Vanilla HTML/CSS/JS · Groq API (gsk_...) · Vercel
 - Repo: Giapkhampha/magicmoment
-- Version hiện tại: **v4.0**
+- Version hiện tại: **v4.1**
 - Mọi text error: **tiếng Việt**
 - KHÔNG dùng framework, KHÔNG external asset
 - JS validate: `node -e "new Function(require('fs').readFileSync('index.html','utf8').match(/<script>([\s\S]*)<\/script>/)[1])"`
