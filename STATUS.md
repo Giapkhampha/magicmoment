@@ -1,5 +1,5 @@
 # STATUS.md — Magic Moment Project
-> Cập nhật lần cuối: 29/04/2026 (Phase 2B Sprint 5-7)
+> Cập nhật lần cuối: 29/04/2026 (Phase 2C Sprint 8-9)
 > Mục đích: File này giúp Claude hiểu toàn bộ ngữ cảnh dự án để tiếp tục phát triển
 
 ---
@@ -46,6 +46,22 @@ File duy nhất tích hợp **3 module** vào một app:
 - Lưu nhiều câu chuyện (max 10), mỗi câu có nhiều trang (max 20)
 - Book view: xem toàn bộ câu chuyện dạng flip book
 - **Trạng thái:** ✅ Hoàn chỉnh
+
+### v3.3 — Parent Dashboard (29/04/2026) ✅
+
+#### Feature 7 — 📊 Parent Dashboard (Sprint 8-9)
+- 5 helper functions: `getWordsInRange()`, `getWeeklyWordCounts()`, `getTopTopics()`, `getReviewWords()`, `getWeekStats()`
+- Stats row: từ tuần này + diff badge (↑↓=) vs tuần trước · streak hiện tại · phút học ước tính
+- SVG bar chart 7 ngày: ngày hôm nay màu vàng, past ngày xám
+- Topics bar chart: 3 nguồn học (scan/quiz/story) với progress bar relative
+- Sticker progress: X/30 stickers + animated progress bar + theme badges
+- Review words: top 5 từ chưa gặp >7 ngày → tap để nghe phát âm
+- All-time stats: tổng từ · sticker · best streak
+- `openDashboard()` → navigate + `renderDashboard()` + `renderBarChart()`
+- `shareDashboard()` → reuse `openShareCard('weekly')`
+- Nút "📊 Báo cáo" thêm vào home footer
+- `source:'scan'` field thêm vào `wordHist` entries mới
+- localStorage key: đọc từ `mm_hist`, `mm_streak`, `mm_stickers`, `mm_scoreday`
 
 ### v3.2 — Sticker Album + Share Card (29/04/2026) ✅
 
@@ -195,8 +211,8 @@ GitHub:      Giapkhampha/magicmoment           ✅ (repo của user)
 - [x] **Share Card** — Canvas 1080×1920, Web Share API → TikTok/Facebook ✅
 - [x] **Sticker Album** — 30 stickers, 5 chủ đề, unlock mỗi 5 từ, rare 20% ✅
 
-### Tiếp theo — Phase 2C
-- [ ] **Parent Dashboard** — Bar chart, top topics, review words
+### ✅ Phase 2C — Parent Dashboard (HOÀN THÀNH v3.3)
+- [x] **Parent Dashboard** — Bar chart, top topics, review words, sticker progress, all-time stats ✅
 
 ### Phase 3 — Family & Platform
 - [ ] **Family Challenge** — Multi-profile, leaderboard tuần

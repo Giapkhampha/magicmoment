@@ -492,6 +492,51 @@ canvas{display:none;}
 /* Home album btn + result share btn */
 .btn-album-home{background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.28);border-radius:12px;padding:9px 14px;color:#c084fc;font:700 .78rem 'Nunito',sans-serif;cursor:pointer;white-space:nowrap;}
 .btn-share-result{width:100%;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.25);border-radius:13px;padding:10px;color:#c084fc;font:700 .85rem 'Nunito',sans-serif;cursor:pointer;}
+
+/* === PARENT DASHBOARD === */
+.dash-header{display:flex;align-items:center;justify-content:space-between;padding:16px 0 8px;}
+.dash-title{font:800 1.1rem 'Baloo 2',sans-serif;color:#FFF8EC;margin:0;}
+.btn-dash-share{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:6px 10px;font-size:1.1rem;cursor:pointer;}
+.dash-daterange{font:600 .75rem 'Nunito',sans-serif;color:rgba(255,255,255,.35);text-align:center;margin:0 0 12px;}
+.dash-stats-row{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:8px;margin-bottom:16px;}
+.dash-stat-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:12px 10px;text-align:center;}
+.dash-stat-card.primary{background:rgba(255,217,74,.08);border-color:rgba(255,217,74,.2);}
+.dsc-icon{font-size:1.4rem;margin-bottom:4px;}
+.dsc-value{font:800 1.8rem 'Baloo 2',sans-serif;color:#FFD94A;line-height:1;}
+.dsc-label{font:600 .65rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);margin-top:3px;}
+.dsc-sub{font:600 .6rem 'Nunito',sans-serif;color:rgba(255,255,255,.25);margin-top:2px;}
+.dsc-diff{font:700 .65rem 'Nunito',sans-serif;margin-top:4px;border-radius:99px;padding:2px 6px;display:inline-block;}
+.dsc-diff.up{background:rgba(34,197,94,.2);color:#22C55E;}
+.dsc-diff.down{background:rgba(255,107,107,.2);color:#FF6B6B;}
+.dsc-diff.neutral{background:rgba(255,255,255,.08);color:rgba(255,255,255,.4);}
+.dash-section{margin-bottom:20px;}
+.dash-section-title{font:700 .7rem 'Nunito',sans-serif;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+.dash-chart-wrap{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px 12px 8px;}
+.topic-row{display:grid;grid-template-columns:110px 1fr 50px;align-items:center;gap:8px;margin-bottom:8px;}
+.topic-label{font:600 .8rem 'Nunito',sans-serif;color:rgba(255,255,255,.6);}
+.topic-bar-wrap{height:8px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;}
+.topic-bar{height:100%;background:linear-gradient(90deg,#4ECDC4,#A855F7);border-radius:99px;transition:width .6s ease;}
+.topic-count{font:700 .75rem 'Baloo 2',sans-serif;color:rgba(255,255,255,.4);text-align:right;}
+.sticker-prog-row{display:flex;justify-content:space-between;margin-bottom:6px;}
+.sp-label{font:700 .85rem 'Baloo 2',sans-serif;color:#FFD94A;}
+.sp-badges{font:600 .75rem 'Nunito',sans-serif;color:rgba(255,255,255,.5);}
+.sp-bar-wrap{height:10px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;margin-bottom:6px;}
+.sp-bar{height:100%;background:linear-gradient(90deg,#FFD94A,#FFB347);border-radius:99px;transition:width .8s ease;}
+.sp-hint{font:600 .75rem 'Nunito',sans-serif;color:rgba(255,255,255,.3);margin:0;}
+.dash-review-hint{font:600 .72rem 'Nunito',sans-serif;color:rgba(255,255,255,.25);margin:-6px 0 8px;}
+.review-word-card{display:grid;grid-template-columns:32px 1fr auto auto;align-items:center;gap:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:10px 12px;margin-bottom:6px;cursor:pointer;transition:background .15s;}
+.review-word-card:active{background:rgba(255,255,255,.08);}
+.rwc-emoji{font-size:1.3rem;text-align:center;}
+.rwc-text{display:flex;flex-direction:column;}
+.rwc-en{font:800 .95rem 'Baloo 2',sans-serif;color:#FFD94A;}
+.rwc-vi{font:600 .72rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);}
+.rwc-days{font:600 .65rem 'Nunito',sans-serif;color:rgba(255,107,107,.7);background:rgba(255,107,107,.1);border-radius:99px;padding:2px 6px;white-space:nowrap;}
+.rwc-speaker{font-size:1rem;opacity:.4;}
+.dash-alltime-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.dat-item{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:14px 8px;text-align:center;display:flex;flex-direction:column;gap:4px;}
+.dat-num{font:800 1.6rem 'Baloo 2',sans-serif;color:#FFF8EC;}
+.dat-label{font:600 .65rem 'Nunito',sans-serif;color:rgba(255,255,255,.35);}
+.btn-dashboard{background:rgba(78,205,196,.12);border:1px solid rgba(78,205,196,.28);border-radius:12px;padding:9px 14px;color:var(--mint);font:700 .78rem 'Nunito',sans-serif;cursor:pointer;white-space:nowrap;}
 </style>
 </head>
 <body>
@@ -570,7 +615,8 @@ canvas{display:none;}
   <div class="home-footer">
     <button class="btn-ghost" onclick="showHistory()">📖 Từ đã học</button>
     <button class="btn-album-home" onclick="renderAlbum();go('s-album')">🎟️ <span id="album-home-count">0</span>/30</button>
-    <button class="btn-ghost" onclick="go('s-key')" style="font-size:.74rem;">⚙️ API key</button>
+    <button class="btn-dashboard" onclick="openDashboard()">📊 Báo cáo</button>
+    <button class="btn-ghost" onclick="go('s-key')" style="font-size:.74rem;">⚙️</button>
   </div>
   <div class="err-msg" id="err-home"></div>
 </div>
@@ -864,6 +910,65 @@ canvas{display:none;}
   </div>
 </div>
 
+<!-- ════════ PARENT DASHBOARD ════════ -->
+<div class="screen hidden" id="s-dashboard" style="justify-content:flex-start;overflow-y:auto;">
+  <div style="width:100%;max-width:480px;padding-bottom:30px;">
+    <div class="dash-header">
+      <button class="btn-back" style="position:relative;top:0;left:0;backdrop-filter:none;" onclick="go('s-home')">← Về nhà</button>
+      <h2 class="dash-title">📊 Báo cáo của Bé</h2>
+      <button class="btn-dash-share" onclick="shareDashboard()">📱</button>
+    </div>
+    <p class="dash-daterange" id="dash-daterange">...</p>
+    <div class="dash-stats-row">
+      <div class="dash-stat-card primary">
+        <div class="dsc-icon">📚</div>
+        <div class="dsc-value" id="dash-total-words">0</div>
+        <div class="dsc-label">Từ tuần này</div>
+        <div class="dsc-diff" id="dash-diff"></div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dsc-icon">🔥</div>
+        <div class="dsc-value" id="dash-streak">0</div>
+        <div class="dsc-label">Ngày liên tục</div>
+        <div class="dsc-sub" id="dash-best-streak">Best: 0 ngày</div>
+      </div>
+      <div class="dash-stat-card">
+        <div class="dsc-icon">⏱️</div>
+        <div class="dsc-value" id="dash-time">0</div>
+        <div class="dsc-label">Phút học</div>
+        <div class="dsc-sub">ước tính</div>
+      </div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-section-title">Học mỗi ngày</div>
+      <div class="dash-chart-wrap">
+        <svg id="dash-chart" width="100%" viewBox="0 0 280 110" preserveAspectRatio="xMidYMid meet"></svg>
+      </div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-section-title">Bé thích học qua</div>
+      <div id="dash-topics"></div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-section-title">Bộ sưu tập sticker</div>
+      <div id="dash-sticker-progress"></div>
+    </div>
+    <div class="dash-section" id="dash-review-section">
+      <div class="dash-section-title">💡 Nên ôn lại</div>
+      <p class="dash-review-hint">Những từ học từ 7+ ngày trước</p>
+      <div id="dash-review-words"></div>
+    </div>
+    <div class="dash-section">
+      <div class="dash-section-title">Thành tích tổng</div>
+      <div class="dash-alltime-row">
+        <div class="dat-item"><div class="dat-num" id="dash-alltime-words">0</div><div class="dat-label">Tổng từ</div></div>
+        <div class="dat-item"><div class="dat-num" id="dash-alltime-stickers">0</div><div class="dat-label">Stickers</div></div>
+        <div class="dat-item"><div class="dat-num" id="dash-best-streak2">0</div><div class="dat-label">Best streak</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- PHASE 2: BIBI MASCOT -->
 <div id="bibi-container">
   <div id="bibi-bubble"></div>
@@ -1061,7 +1166,7 @@ Reply ONLY valid JSON, no markdown:
     document.getElementById('w-ph').textContent=d.phonetic||'';
     document.getElementById('w-vi').textContent=`${d.emoji} ${d.vietnamese}`;
     document.getElementById('w-sent').textContent=`"${d.sentence}"`;
-    wordHist.unshift({image:dataUrl,english:d.english,vietnamese:d.vietnamese,emoji:d.emoji,timestamp:Date.now()});
+    wordHist.unshift({image:dataUrl,english:d.english,vietnamese:d.vietnamese,emoji:d.emoji,timestamp:Date.now(),source:'scan'});
     if(wordHist.length>30)wordHist.pop();
     localStorage.setItem('mm_hist',JSON.stringify(wordHist));
     wordCnt++;localStorage.setItem('mm_wcnt',wordCnt);
@@ -1984,6 +2089,156 @@ function doDownload(){
   a.href=_shareDataUrl;
   a.download='magic-moment-'+new Date().toISOString().slice(0,10)+'.png';
   a.click();
+}
+
+// ════════════════════════════════════════════════
+//  PHASE 2C: PARENT DASHBOARD
+// ════════════════════════════════════════════════
+function getWordsInRange(days){
+  const hist=JSON.parse(localStorage.getItem('mm_hist')||'[]');
+  const cutoff=Date.now()-days*86400000;
+  return hist.filter(w=>w.timestamp&&w.timestamp>cutoff);
+}
+
+function getWeeklyWordCounts(){
+  const hist=JSON.parse(localStorage.getItem('mm_hist')||'[]');
+  const counts=Array(7).fill(0);
+  const labels=[];
+  for(let i=6;i>=0;i--){
+    const d=new Date(Date.now()-i*86400000);
+    labels.push(['CN','T2','T3','T4','T5','T6','T7'][d.getDay()]);
+    const dayStr=d.toISOString().slice(0,10);
+    counts[6-i]=hist.filter(w=>{
+      if(!w.timestamp)return false;
+      return new Date(w.timestamp).toISOString().slice(0,10)===dayStr;
+    }).length;
+  }
+  return{counts,labels};
+}
+
+function getTopTopics(){
+  const hist=JSON.parse(localStorage.getItem('mm_hist')||'[]');
+  const map={};
+  hist.forEach(w=>{const src=w.source||'scan';map[src]=(map[src]||0)+1;});
+  const LABELS={scan:'📸 Magic Scan',quiz:'🎮 Trò chơi',story:'📖 Kể chuyện'};
+  return Object.entries(map).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([k,v])=>({label:LABELS[k]||k,count:v}));
+}
+
+function getReviewWords(){
+  const hist=JSON.parse(localStorage.getItem('mm_hist')||'[]');
+  const SEVEN_DAYS=7*86400000;
+  const now=Date.now();
+  const lastSeen={};
+  hist.forEach(w=>{
+    if(!lastSeen[w.english]||w.timestamp>lastSeen[w.english].timestamp){
+      lastSeen[w.english]=w;
+    }
+  });
+  return Object.values(lastSeen)
+    .filter(w=>w.timestamp&&(now-w.timestamp)>SEVEN_DAYS)
+    .sort((a,b)=>a.timestamp-b.timestamp)
+    .slice(0,5);
+}
+
+function getWeekStats(){
+  const thisWeek=getWordsInRange(7).length;
+  const twoWeeks=getWordsInRange(14).length;
+  const lastWeek=twoWeeks-thisWeek;
+  const diff=thisWeek-lastWeek;
+  const hist=JSON.parse(localStorage.getItem('mm_hist')||'[]');
+  const totalTime=Math.round(hist.length*0.5);
+  return{thisWeek,lastWeek,diff,totalTime};
+}
+
+function openDashboard(){
+  go('s-dashboard');
+  renderDashboard();
+}
+
+function renderDashboard(){
+  const hist=JSON.parse(localStorage.getItem('mm_hist')||'[]');
+  const streakD=JSON.parse(localStorage.getItem('mm_streak')||'{"current":0,"best":0}');
+  const stickersD=JSON.parse(localStorage.getItem('mm_stickers')||'{"unlocked":[],"themeBadges":[]}');
+  if(!stickersD.unlocked)stickersD.unlocked=[];
+  if(!stickersD.themeBadges)stickersD.themeBadges=[];
+
+  const today=new Date();
+  const weekAgo=new Date(Date.now()-6*86400000);
+  const fmt=d=>d.getDate()+'/'+(d.getMonth()+1);
+  const drEl=document.getElementById('dash-daterange');
+  if(drEl)drEl.textContent=fmt(weekAgo)+' – '+fmt(today)+'/'+today.getFullYear();
+
+  const stats=getWeekStats();
+  const twEl=document.getElementById('dash-total-words');if(twEl)twEl.textContent=stats.thisWeek;
+  const stEl=document.getElementById('dash-streak');if(stEl)stEl.textContent=streakD.current;
+  const tmEl=document.getElementById('dash-time');if(tmEl)tmEl.textContent=stats.totalTime;
+  const bsEl=document.getElementById('dash-best-streak');if(bsEl)bsEl.textContent='Best: '+streakD.best+' ngày';
+
+  const diffEl=document.getElementById('dash-diff');
+  if(diffEl){
+    if(stats.diff>0){diffEl.textContent='↑'+stats.diff+' vs tuần trước';diffEl.className='dsc-diff up';}
+    else if(stats.diff<0){diffEl.textContent='↓'+Math.abs(stats.diff)+' vs tuần trước';diffEl.className='dsc-diff down';}
+    else{diffEl.textContent='= tuần trước';diffEl.className='dsc-diff neutral';}
+  }
+
+  renderBarChart();
+
+  const topics=getTopTopics();
+  const maxCount=topics[0]?topics[0].count:1;
+  const topicsEl=document.getElementById('dash-topics');
+  if(topicsEl){
+    topicsEl.innerHTML=topics.length?topics.map(t=>'<div class="topic-row"><div class="topic-label">'+t.label+'</div><div class="topic-bar-wrap"><div class="topic-bar" style="width:'+Math.round((t.count/maxCount)*100)+'%"></div></div><div class="topic-count">'+t.count+' từ</div></div>').join(''):'<div style="color:rgba(255,255,255,.25);font-size:.85rem;padding:12px;">Chưa có dữ liệu</div>';
+  }
+
+  const total=30;
+  const owned=stickersD.unlocked.length;
+  const pct=Math.round((owned/total)*100);
+  const badges=stickersD.themeBadges.length;
+  const spEl=document.getElementById('dash-sticker-progress');
+  if(spEl){
+    spEl.innerHTML='<div class="sticker-prog-row"><span class="sp-label">'+owned+'/'+total+' stickers</span>'+(badges>0?'<span class="sp-badges">🏆 '+badges+' bộ hoàn thành</span>':'')+'</div><div class="sp-bar-wrap"><div class="sp-bar" style="width:'+pct+'%"></div></div><p class="sp-hint">'+(pct<100?'Còn '+(total-owned)+' sticker nữa là đủ bộ!':'🎉 Đã sưu tập đủ 30 stickers!')+'</p>';
+  }
+
+  const reviewWords=getReviewWords();
+  const revSection=document.getElementById('dash-review-section');
+  const revWords=document.getElementById('dash-review-words');
+  if(revSection){
+    if(!reviewWords.length){revSection.style.display='none';}
+    else{
+      revSection.style.display='';
+      if(revWords){
+        revWords.innerHTML=reviewWords.map(function(w){
+          const safeEn=(w.english||'').replace(/'/g,"\\'");
+          const daysAgo=Math.floor((Date.now()-w.timestamp)/86400000);
+          return '<div class="review-word-card" onclick="speakWord(\''+safeEn+'\')">'+'<div class="rwc-emoji">'+(w.emoji||'⭐')+'</div>'+'<div class="rwc-text"><div class="rwc-en">'+((w.english||'').toUpperCase())+'</div><div class="rwc-vi">'+(w.vietnamese||'')+'</div></div>'+'<div class="rwc-days">'+daysAgo+'ng</div>'+'<div class="rwc-speaker">🔊</div>'+'</div>';
+        }).join('');
+      }
+    }
+  }
+
+  const awEl=document.getElementById('dash-alltime-words');if(awEl)awEl.textContent=hist.length;
+  const asEl=document.getElementById('dash-alltime-stickers');if(asEl)asEl.textContent=owned;
+  const bs2El=document.getElementById('dash-best-streak2');if(bs2El)bs2El.textContent=streakD.best;
+}
+
+function renderBarChart(){
+  const wc=getWeeklyWordCounts();
+  const counts=wc.counts;const labels=wc.labels;
+  const max=Math.max.apply(null,counts.concat([1]));
+  const W=280,H=80,barW=28,step=(W-barW)/6;
+  const bars=counts.map(function(v,i){
+    const x=i*step;
+    const barH=Math.max((v/max)*H,v>0?4:0);
+    const y=H-barH;
+    const isToday=i===6;
+    return '<rect x="'+x+'" y="'+y+'" width="'+barW+'" height="'+barH+'" fill="'+(isToday?'#FFD94A':'rgba(255,255,255,.18)')+'" rx="4"/>'+(v>0?'<text x="'+(x+barW/2)+'" y="'+(y-4)+'" text-anchor="middle" fill="rgba(255,255,255,.6)" font-size="10">'+v+'</text>':'')+'<text x="'+(x+barW/2)+'" y="'+(H+20)+'" text-anchor="middle" fill="rgba(255,255,255,.35)" font-size="10">'+labels[i]+'</text>';
+  }).join('');
+  const el=document.getElementById('dash-chart');
+  if(el)el.innerHTML=bars;
+}
+
+async function shareDashboard(){
+  await openShareCard('weekly');
 }
 </script>
 </body>
