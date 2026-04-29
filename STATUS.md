@@ -1,5 +1,5 @@
 # STATUS.md — Magic Moment Project
-> Cập nhật lần cuối: 29/04/2026
+> Cập nhật lần cuối: 29/04/2026 (Phase 2B Sprint 5-7)
 > Mục đích: File này giúp Claude hiểu toàn bộ ngữ cảnh dự án để tiếp tục phát triển
 
 ---
@@ -46,6 +46,28 @@ File duy nhất tích hợp **3 module** vào một app:
 - Lưu nhiều câu chuyện (max 10), mỗi câu có nhiều trang (max 20)
 - Book view: xem toàn bộ câu chuyện dạng flip book
 - **Trạng thái:** ✅ Hoàn chỉnh
+
+### v3.2 — Sticker Album + Share Card (29/04/2026) ✅
+
+#### Feature 5 — 🎟️ Sticker Album (Sprint 5-6)
+- `STICKER_DB`: 30 stickers, 5 chủ đề × 6 (animals/food/transport/nature/family)
+- `tryUnlockSticker()`: mỗi 5 từ → 1 sticker random (rare 20%)
+- `showStickerUnlock()`: full-screen overlay + spin animation + confetti + Bibi
+- `renderAlbum()`: grid 6 cột, owned vs ?, rare có viền vàng glow
+- `checkThemeBadge()`: hoàn thành 1 chủ đề → Bibi thông báo
+- Gọi tại: Magic Scan success · Quiz correct · StoryDuo trang mới (×3)
+- Nút 🎟️ trên Home footer: mở album + đếm số sticker đã có
+- localStorage key: `mm_stickers` — unlocked[], themeBadges[], lastUnlock, wordsSinceLastSticker
+
+#### Feature 6 — 📱 Share Card (Sprint 7)
+- `buildShareCard()`: Canvas 1080×1920, background gradient + dots
+- Nội dung: Bibi 🐰, từ học hôm nay (từ mm_hist với timestamp), sticker mới nhất
+- Streak badge + Score badge ở dưới
+- `openShareCard()`: navigate s-share, generate canvas async
+- `doShare()`: Web Share API (Android) + fallback download
+- `doDownload()`: lưu PNG với tên ngày tháng
+- Trigger: nút "Khoe thành tích" ở result scan + nút "Khoe với mọi người" trong sticker overlay
+- wordHist entries giờ có `timestamp: Date.now()` để filter today's words
 
 ### v3.1 — Engagement Loop (29/04/2026) ✅
 
@@ -169,9 +191,11 @@ GitHub:      Giapkhampha/magicmoment           ✅ (repo của user)
 - [x] **Daily Quest** — 3 quest + bonus, auto-reset 0h ✅
 - [x] **Onboarding** — modal lần đầu, giới thiệu Bibi + quest ✅
 
-### Tiếp theo — Phase 2B (Viral Engine)
-- [ ] **Share Card** — Canvas 1080×1920, Web Share API → TikTok/Facebook
-- [ ] **Sticker Album** — Sưu tập emoji, unlock theo streak/words
+### ✅ Phase 2B — Viral Engine (HOÀN THÀNH v3.2)
+- [x] **Share Card** — Canvas 1080×1920, Web Share API → TikTok/Facebook ✅
+- [x] **Sticker Album** — 30 stickers, 5 chủ đề, unlock mỗi 5 từ, rare 20% ✅
+
+### Tiếp theo — Phase 2C
 - [ ] **Parent Dashboard** — Bar chart, top topics, review words
 
 ### Phase 3 — Family & Platform

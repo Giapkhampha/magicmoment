@@ -413,18 +413,18 @@ canvas{display:none;}
 @keyframes bibi-wave-body{0%,100%{transform:rotate(0)}25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
 
 /* === PHASE 2: DAILY QUEST (Sprint 3 — redesigned) === */
-.quest-section{margin:0 0 12px;width:100%;}
-.quest-section-title{font:700 .7rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-/* Individual quest card — grid layout */
-.quest-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius-card);padding:12px 14px;margin-bottom:7px;display:grid;grid-template-columns:36px 1fr auto;grid-template-rows:auto 6px;column-gap:12px;align-items:center;}
+.quest-section{margin:0 0 10px;width:100%;}
+.quest-section-title{font:700 .68rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;display:flex;align-items:center;gap:6px;}
+/* Individual quest card — compact row */
+.quest-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:7px 11px;margin-bottom:4px;display:grid;grid-template-columns:28px 1fr auto;grid-template-rows:auto 4px;column-gap:8px;align-items:center;}
 .quest-card:last-child{margin-bottom:0;}
 .quest-card.done{opacity:.5;border-color:rgba(34,197,94,.28);background:rgba(34,197,94,.04);}
-.quest-icon{font-size:1.4rem;grid-row:1;grid-column:1;text-align:center;}
+.quest-icon{font-size:1.15rem;grid-row:1;grid-column:1;text-align:center;}
 .quest-info{grid-row:1;grid-column:2;}
-.quest-name{font:700 .9rem 'Nunito',sans-serif;color:#FFF8EC;}
-.quest-desc{font:600 .72rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);margin-top:1px;}
-.quest-reward{grid-row:1;grid-column:3;font:700 .85rem 'Baloo 2',cursive;color:var(--gold);white-space:nowrap;}
-.quest-progress{grid-row:2;grid-column:1/-1;height:4px;background:rgba(255,255,255,.1);border-radius:99px;margin-top:8px;overflow:hidden;}
+.quest-name{font:700 .82rem 'Nunito',sans-serif;color:#FFF8EC;line-height:1.2;}
+.quest-desc{font:600 .68rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);margin-top:1px;}
+.quest-reward{grid-row:1;grid-column:3;font:700 .78rem 'Baloo 2',cursive;color:var(--gold);white-space:nowrap;}
+.quest-progress{grid-row:2;grid-column:1/-1;height:3px;background:rgba(255,255,255,.1);border-radius:99px;margin-top:5px;overflow:hidden;}
 .quest-progress-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#4ECDC4,var(--purple));transition:width .4s ease;}
 .quest-card.done .quest-progress-fill{background:linear-gradient(90deg,var(--green),#4ECDC4);width:100%!important;}
 .bonus-banner{background:linear-gradient(135deg,rgba(255,217,74,.18),rgba(255,179,71,.1));border:1px solid rgba(255,217,74,.35);border-radius:12px;padding:9px 14px;text-align:center;font-family:'Baloo 2',cursive;font-size:.9rem;font-weight:800;color:var(--gold);margin-top:10px;display:none;}
@@ -460,6 +460,38 @@ canvas{display:none;}
   .btn-view-book-fixed{right:calc(50% - var(--half-w) + 14px);}
   .book-actions-fixed{left:calc(50% - var(--half-w));right:calc(50% - var(--half-w));}
 }
+
+/* === PHASE 2B: STICKER ALBUM + SHARE CARD === */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes stickerSpin{from{transform:scale(0) rotate(-180deg)}to{transform:scale(1) rotate(0)}}
+.sticker-unlock-overlay{position:fixed;inset:0;background:rgba(10,5,30,.92);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;z-index:9999;animation:fadeIn .3s ease;}
+.sticker-unlock-card{background:linear-gradient(135deg,#1a0f3d,#2d1b4e);border:2px solid rgba(168,85,247,.4);border-radius:24px;padding:32px 24px;text-align:center;max-width:300px;width:90%;animation:bouncein .4s cubic-bezier(.34,1.56,.64,1);}
+.sul-label{font:700 .85rem 'Nunito',sans-serif;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;}
+.sul-emoji{font-size:5rem;line-height:1;animation:stickerSpin .6s cubic-bezier(.34,1.56,.64,1);display:block;margin:0 auto 12px;}
+.sul-name{font:800 1.4rem 'Baloo 2',sans-serif;color:#FFF8EC;margin-bottom:4px;}
+.sul-rare{font:700 .8rem 'Nunito',sans-serif;color:#FFD94A;margin-bottom:16px;}
+.btn-share-sticker{display:block;width:100%;background:linear-gradient(135deg,#A855F7,#7C3AED);color:white;border:none;border-radius:12px;padding:12px;margin-bottom:8px;font:700 .9rem 'Nunito',sans-serif;cursor:pointer;}
+.btn-close-sticker{display:block;width:100%;background:transparent;color:rgba(255,255,255,.4);border:1px solid rgba(255,255,255,.15);border-radius:12px;padding:10px;font:600 .85rem 'Nunito',sans-serif;cursor:pointer;}
+/* Album */
+.album-theme{margin-bottom:24px;width:100%;max-width:480px;}
+.album-theme-header{display:flex;justify-content:space-between;align-items:center;font:700 .9rem 'Nunito',sans-serif;color:rgba(255,255,255,.6);margin-bottom:10px;}
+.album-theme-count{color:rgba(255,255,255,.4);}
+.album-theme-count.badge-done{color:#FFD94A;}
+.sticker-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;}
+.sticker-cell{aspect-ratio:1;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;}
+.sticker-cell.owned{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);}
+.sticker-cell.owned.rare{border-color:rgba(255,215,0,.5);background:rgba(255,215,0,.08);box-shadow:0 0 12px rgba(255,215,0,.2);}
+.sticker-cell:not(.owned) .sticker-emoji{opacity:.15;}
+/* Share */
+.share-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0;width:100%;max-width:400px;}
+.btn-share-main{background:linear-gradient(135deg,#A855F7,#7C3AED);color:#fff;border:none;border-radius:14px;padding:14px;font:700 .95rem 'Nunito',sans-serif;cursor:pointer;}
+.btn-share-dl{background:rgba(255,255,255,.08);color:#FFF8EC;border:1px solid rgba(255,255,255,.15);border-radius:14px;padding:14px;font:700 .95rem 'Nunito',sans-serif;cursor:pointer;}
+.share-caption{width:100%;max-width:400px;}
+.share-caption p{font:600 .75rem 'Nunito',sans-serif;color:rgba(255,255,255,.4);margin-bottom:6px;}
+.caption-box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px;font:600 .85rem 'Nunito',sans-serif;color:rgba(255,255,255,.7);line-height:1.5;}
+/* Home album btn + result share btn */
+.btn-album-home{background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.28);border-radius:12px;padding:9px 14px;color:#c084fc;font:700 .78rem 'Nunito',sans-serif;cursor:pointer;white-space:nowrap;}
+.btn-share-result{width:100%;background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.25);border-radius:13px;padding:10px;color:#c084fc;font:700 .85rem 'Nunito',sans-serif;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -537,6 +569,7 @@ canvas{display:none;}
   </div>
   <div class="home-footer">
     <button class="btn-ghost" onclick="showHistory()">📖 Từ đã học</button>
+    <button class="btn-album-home" onclick="renderAlbum();go('s-album')">🎟️ <span id="album-home-count">0</span>/30</button>
     <button class="btn-ghost" onclick="go('s-key')" style="font-size:.74rem;">⚙️ API key</button>
   </div>
   <div class="err-msg" id="err-home"></div>
@@ -597,6 +630,7 @@ canvas{display:none;}
   <div class="res-actions">
     <button class="btn-listen" onclick="speakWord(curWord)">🔊 Nghe phát âm</button>
     <button class="btn-try" id="btn-try" onclick="startMicRepeat()">🎤 Con thử nói nào!</button>
+    <button class="btn-share-result" onclick="openShareCard('daily')">📱 Khoe thành tích</button>
     <button class="btn-next" onclick="go('s-cam')">📸 Scan tiếp!</button>
   </div>
   <div class="err-msg" id="err-res"></div>
@@ -803,6 +837,33 @@ canvas{display:none;}
   </div>
 </div>
 
+<!-- ════════ STICKER ALBUM ════════ -->
+<div class="screen hidden" id="s-album" style="justify-content:flex-start;">
+  <button class="btn-back" onclick="go('s-home')">← Về nhà</button>
+  <div style="width:100%;max-width:480px;padding-top:50px;display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+    <div style="font-family:'Baloo 2',cursive;font-size:1.2rem;font-weight:800;color:white;">🎟️ Bộ sưu tập</div>
+    <span id="album-count" style="font:700 .82rem 'Nunito',sans-serif;color:var(--gold);background:rgba(255,217,74,.1);border:1px solid rgba(255,217,74,.3);border-radius:999px;padding:3px 11px;">0/30</span>
+  </div>
+  <div id="album-themes" style="width:100%;max-width:480px;"></div>
+</div>
+
+<!-- ════════ SHARE CARD ════════ -->
+<div class="screen hidden" id="s-share" style="justify-content:flex-start;">
+  <button class="btn-back" onclick="go('s-home')">← Về nhà</button>
+  <div style="font-family:'Baloo 2',cursive;font-size:1.1rem;font-weight:800;color:white;text-align:center;margin-bottom:12px;padding-top:50px;">📱 Chia sẻ thành tích</div>
+  <div id="share-preview" style="text-align:center;margin:0 0 12px;width:100%;max-width:400px;">
+    <img id="share-img" style="width:100%;border-radius:16px;max-width:360px;transition:opacity .3s;" alt="Share card" />
+  </div>
+  <div class="share-actions">
+    <button onclick="doShare()" class="btn-share-main">📱 Chia sẻ ngay</button>
+    <button onclick="doDownload()" class="btn-share-dl">⬇️ Lưu ảnh</button>
+  </div>
+  <div class="share-caption">
+    <p>Caption gợi ý:</p>
+    <div id="share-caption-text" class="caption-box"></div>
+  </div>
+</div>
+
 <!-- PHASE 2: BIBI MASCOT -->
 <div id="bibi-container">
   <div id="bibi-bubble"></div>
@@ -934,7 +995,7 @@ function makeStars(){
     c.appendChild(s);
   }
 }
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='s-home'){setTimeout(initBibiOnHome,60);setTimeout(renderQuests,80);checkOnboarding();}}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='s-home'){setTimeout(initBibiOnHome,60);setTimeout(renderQuests,80);checkOnboarding();updateAlbumHomeCount();}}
 function updateScore(){document.getElementById('sc-today').textContent=scoreDay;document.getElementById('sc-words').textContent=wordCnt;}
 
 // ════════════════════════════════════════════════
@@ -1000,13 +1061,13 @@ Reply ONLY valid JSON, no markdown:
     document.getElementById('w-ph').textContent=d.phonetic||'';
     document.getElementById('w-vi').textContent=`${d.emoji} ${d.vietnamese}`;
     document.getElementById('w-sent').textContent=`"${d.sentence}"`;
-    wordHist.unshift({image:dataUrl,english:d.english,vietnamese:d.vietnamese,emoji:d.emoji});
+    wordHist.unshift({image:dataUrl,english:d.english,vietnamese:d.vietnamese,emoji:d.emoji,timestamp:Date.now()});
     if(wordHist.length>30)wordHist.pop();
     localStorage.setItem('mm_hist',JSON.stringify(wordHist));
     wordCnt++;localStorage.setItem('mm_wcnt',wordCnt);
     document.getElementById('btn-try').classList.remove('rec');
     document.getElementById('btn-try').textContent='🎤 Con thử nói nào!';
-    go('s-res');tickStreak();progressQuest('scan');bibiSetState('happy');bibiSay(BIBI_PRAISES[~~(Math.random()*BIBI_PRAISES.length)]);setTimeout(()=>speakWord(curWord),700);
+    go('s-res');tickStreak();progressQuest('scan');tryUnlockSticker();bibiSetState('happy');bibiSay(BIBI_PRAISES[~~(Math.random()*BIBI_PRAISES.length)]);setTimeout(()=>speakWord(curWord),700);
   }catch(e){handleApiErr(e,'err-home');go('s-home');}
 }
 
@@ -1168,7 +1229,7 @@ function nextQuizQ(){
 }
 function onQuizChoose(btn,isCorrect){
   document.querySelectorAll('.quiz-choice').forEach(b=>{b.onclick=null;});
-  if(isCorrect){btn.classList.add('correct');gameScore+=10;confetti();gameIdx++;setTimeout(nextQuizQ,1200);}
+  if(isCorrect){btn.classList.add('correct');gameScore+=10;tryUnlockSticker();confetti();gameIdx++;setTimeout(nextQuizQ,1200);}
   else{
     btn.classList.add('wrong');
     document.querySelectorAll('.quiz-choice').forEach(b=>{if(b.querySelector('.qc-word').textContent===currentQuizObj.english.toUpperCase())b.classList.add('reveal');});
@@ -1280,7 +1341,7 @@ Rules: translate fully, 3 key words, 4-6 scene emojis, bg colors matching scene 
     currentStory.pages.push(page);sdSave();sdPageIdx=currentStory.pages.length-1;
     sdShowPage(sdPageIdx);sdRenderPageNav();sdUpdateCounter();
     setTimeout(()=>speakWord(data.english.split('.')[0]),600);
-    confetti();tickStreak();progressQuest('story');
+    confetti();tickStreak();progressQuest('story');tryUnlockSticker();tryUnlockSticker();tryUnlockSticker();
     sdSetMicState('idle');
     document.getElementById('sd-vi-display').textContent='Nhấn mic hoặc gõ tiếng Việt bên dưới 🎙️';
     document.getElementById('sd-vi-display').classList.remove('active');
@@ -1659,6 +1720,271 @@ function renderQuests(){
 }
 
 if(window.speechSynthesis){window.speechSynthesis.getVoices();window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();}
+
+// ════════════════════════════════════════════════
+//  PHASE 2B: STICKER ALBUM
+// ════════════════════════════════════════════════
+const STICKER_DB={
+  animals:[
+    {id:'rabbit',  emoji:'🐰',name:'Thỏ Bibi',   rare:true },
+    {id:'dog',     emoji:'🐶',name:'Cún cưng',   rare:false},
+    {id:'cat',     emoji:'🐱',name:'Mèo mướp',   rare:false},
+    {id:'fish',    emoji:'🐠',name:'Cá vàng',    rare:false},
+    {id:'butterfly',emoji:'🦋',name:'Bướm xinh', rare:false},
+    {id:'bee',     emoji:'🐝',name:'Ong mật',    rare:false},
+  ],
+  food:[
+    {id:'apple',   emoji:'🍎',name:'Táo đỏ',     rare:false},
+    {id:'banana',  emoji:'🍌',name:'Chuối vàng', rare:false},
+    {id:'pizza',   emoji:'🍕',name:'Pizza',       rare:false},
+    {id:'cake',    emoji:'🍰',name:'Bánh kem',    rare:true },
+    {id:'icecream',emoji:'🍦',name:'Kem',         rare:false},
+    {id:'sandwich',emoji:'🥪',name:'Bánh mì',    rare:false},
+  ],
+  transport:[
+    {id:'car',     emoji:'🚗',name:'Ô tô',        rare:false},
+    {id:'bus',     emoji:'🚌',name:'Xe buýt',     rare:false},
+    {id:'plane',   emoji:'✈️',name:'Máy bay',     rare:true },
+    {id:'train',   emoji:'🚂',name:'Tàu hỏa',    rare:false},
+    {id:'rocket',  emoji:'🚀',name:'Tên lửa',     rare:true },
+    {id:'bike',    emoji:'🚲',name:'Xe đạp',      rare:false},
+  ],
+  nature:[
+    {id:'tree',    emoji:'🌳',name:'Cây xanh',    rare:false},
+    {id:'flower',  emoji:'🌸',name:'Hoa anh đào', rare:false},
+    {id:'sun',     emoji:'☀️',name:'Mặt trời',    rare:false},
+    {id:'rainbow', emoji:'🌈',name:'Cầu vồng',    rare:true },
+    {id:'moon',    emoji:'🌙',name:'Mặt trăng',   rare:false},
+    {id:'star',    emoji:'⭐',name:'Ngôi sao',    rare:false},
+  ],
+  family:[
+    {id:'dad',     emoji:'👨',name:'Ba',           rare:false},
+    {id:'mom',     emoji:'👩',name:'Mẹ',           rare:false},
+    {id:'baby',    emoji:'👶',name:'Em bé',        rare:false},
+    {id:'grandpa', emoji:'👴',name:'Ông',          rare:false},
+    {id:'grandma', emoji:'👵',name:'Bà',           rare:false},
+    {id:'heart',   emoji:'❤️',name:'Trái tim',    rare:true },
+  ],
+};
+
+function tryUnlockSticker(){
+  let s=JSON.parse(localStorage.getItem('mm_stickers')||'{"unlocked":[],"themeBadges":[],"wordsSinceLastSticker":0}');
+  if(!s.themeBadges)s.themeBadges=[];
+  if(typeof s.wordsSinceLastSticker!=='number')s.wordsSinceLastSticker=0;
+  s.wordsSinceLastSticker++;
+  if(s.wordsSinceLastSticker>=5){
+    s.wordsSinceLastSticker=0;
+    const allStickers=Object.values(STICKER_DB).flat();
+    const available=allStickers.filter(st=>!s.unlocked.includes(st.id));
+    if(!available.length){localStorage.setItem('mm_stickers',JSON.stringify(s));return;}
+    const rarePool=available.filter(st=>st.rare);
+    const normalPool=available.filter(st=>!st.rare);
+    let pool=(Math.random()<0.2&&rarePool.length)?rarePool:normalPool;
+    if(!pool.length)pool=available;
+    const picked=pool[Math.floor(Math.random()*pool.length)];
+    s.unlocked.push(picked.id);
+    s.lastUnlock=picked.id;
+    localStorage.setItem('mm_stickers',JSON.stringify(s));
+    checkThemeBadge(s,picked);
+    showStickerUnlock(picked);
+  }else{
+    localStorage.setItem('mm_stickers',JSON.stringify(s));
+  }
+  updateAlbumHomeCount();
+}
+
+function checkThemeBadge(s,picked){
+  const TNAMES={animals:'Động vật',food:'Đồ ăn',transport:'Phương tiện',nature:'Thiên nhiên',family:'Gia đình'};
+  for(const[theme,stickers]of Object.entries(STICKER_DB)){
+    if(s.themeBadges.includes(theme))continue;
+    if(stickers.every(st=>s.unlocked.includes(st.id))){
+      s.themeBadges.push(theme);
+      localStorage.setItem('mm_stickers',JSON.stringify(s));
+      bibiSay('🏆 Hoàn thành bộ '+(TNAMES[theme]||theme)+'! Tuyệt vời!',4000);
+    }
+  }
+}
+
+function showStickerUnlock(sticker){
+  const overlay=document.createElement('div');
+  overlay.className='sticker-unlock-overlay';
+  overlay.innerHTML=
+    '<div class="sticker-unlock-card">'+
+      '<div class="sul-label">Sticker mới! ✨</div>'+
+      '<div class="sul-emoji">'+sticker.emoji+'</div>'+
+      '<div class="sul-name">'+sticker.name+'</div>'+
+      (sticker.rare?'<div class="sul-rare">✨ HIẾM ✨</div>':'<div style="margin-bottom:16px;"></div>')+
+      '<button class="btn-share-sticker" onclick="stickerOverlayShare(this)">Khoe với mọi người 📱</button>'+
+      '<button class="btn-close-sticker" onclick="this.closest(\'.sticker-unlock-overlay\').remove()">Tiếp tục học</button>'+
+    '</div>';
+  document.body.appendChild(overlay);
+  confetti();
+  bibiSay('Sticker mới rồi! Đẹp ghê! 🐰',3000);
+  setTimeout(()=>{if(overlay.parentNode)overlay.remove();},8000);
+}
+
+function stickerOverlayShare(btn){
+  btn.closest('.sticker-unlock-overlay').remove();
+  openShareCard('sticker');
+}
+
+function updateAlbumHomeCount(){
+  const el=document.getElementById('album-home-count');
+  if(!el)return;
+  const s=JSON.parse(localStorage.getItem('mm_stickers')||'{"unlocked":[]}');
+  el.textContent=s.unlocked?s.unlocked.length:0;
+}
+
+function renderAlbum(){
+  const s=JSON.parse(localStorage.getItem('mm_stickers')||'{"unlocked":[],"themeBadges":[]}');
+  if(!s.themeBadges)s.themeBadges=[];
+  const TNAMES={animals:'🐾 Động vật',food:'🍎 Đồ ăn',transport:'🚗 Phương tiện',nature:'🌳 Thiên nhiên',family:'👨‍👩‍👧 Gia đình'};
+  const countEl=document.getElementById('album-count');
+  if(countEl)countEl.textContent=(s.unlocked?s.unlocked.length:0)+'/30';
+  const container=document.getElementById('album-themes');
+  if(!container)return;
+  container.innerHTML=Object.entries(STICKER_DB).map(([theme,stickers])=>{
+    const done=stickers.filter(st=>s.unlocked.includes(st.id)).length;
+    const hasBadge=s.themeBadges.includes(theme);
+    const cells=stickers.map(st=>{
+      const owned=s.unlocked.includes(st.id);
+      return '<div class="sticker-cell'+(owned?' owned':'')+(st.rare?' rare':'')+'"><span class="sticker-emoji">'+(owned?st.emoji:'❓')+'</span></div>';
+    }).join('');
+    return '<div class="album-theme">'+
+      '<div class="album-theme-header">'+
+        '<span>'+TNAMES[theme]+'</span>'+
+        '<span class="album-theme-count'+(hasBadge?' badge-done':'')+'">'+(hasBadge?'🏆 Hoàn thành!':done+'/'+stickers.length)+'</span>'+
+      '</div>'+
+      '<div class="sticker-grid">'+cells+'</div>'+
+    '</div>';
+  }).join('');
+  updateAlbumHomeCount();
+}
+
+// ════════════════════════════════════════════════
+//  PHASE 2B: SHARE CARD
+// ════════════════════════════════════════════════
+function roundRectCanvas(ctx,x,y,w,h,r){
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();
+}
+
+async function buildShareCard(){
+  const hist=JSON.parse(localStorage.getItem('mm_hist')||'[]');
+  const streak=JSON.parse(localStorage.getItem('mm_streak')||'{"current":0}');
+  const stData=JSON.parse(localStorage.getItem('mm_stickers')||'{"unlocked":[],"lastUnlock":null}');
+  const today=new Date().toISOString().slice(0,10);
+  const todayWords=hist.filter(w=>w.timestamp&&new Date(w.timestamp).toISOString().slice(0,10)===today).slice(0,5);
+  const lastSticker=stData.lastUnlock?Object.values(STICKER_DB).flat().find(st=>st.id===stData.lastUnlock):null;
+  const cv=document.createElement('canvas');
+  cv.width=1080;cv.height=1920;
+  const ctx=cv.getContext('2d');
+  // Background
+  const bg=ctx.createLinearGradient(0,0,1080,1920);
+  bg.addColorStop(0,'#0F0A2E');bg.addColorStop(.5,'#1a0f3d');bg.addColorStop(1,'#2D1B0E');
+  ctx.fillStyle=bg;ctx.fillRect(0,0,1080,1920);
+  // Dots decoration
+  ctx.fillStyle='rgba(255,255,255,.03)';
+  for(let i=0;i<60;i++){
+    const dx=Math.random()*1080,dy=Math.random()*1920,dr=Math.random()*3+1;
+    ctx.beginPath();ctx.arc(dx,dy,dr,0,Math.PI*2);ctx.fill();
+  }
+  // Header
+  ctx.fillStyle='#FFD94A';ctx.font='bold 72px sans-serif';ctx.textAlign='center';
+  ctx.fillText('✨ Magic Moment ✨',540,140);
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='400 44px sans-serif';
+  ctx.fillText('Ba & Bé yêu cùng học tiếng Anh',540,210);
+  ctx.strokeStyle='rgba(255,255,255,.1)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(140,250);ctx.lineTo(940,250);ctx.stroke();
+  // Bibi
+  ctx.font='200px serif';ctx.textAlign='center';ctx.fillText('🐰',540,520);
+  // Words box
+  ctx.fillStyle='rgba(255,255,255,.06)';roundRectCanvas(ctx,100,570,880,640,32);ctx.fill();
+  ctx.strokeStyle='rgba(255,255,255,.12)';ctx.lineWidth=2;roundRectCanvas(ctx,100,570,880,640,32);ctx.stroke();
+  if(todayWords.length>0){
+    ctx.fillStyle='rgba(255,255,255,.4)';ctx.font='500 36px sans-serif';ctx.textAlign='center';
+    ctx.fillText('HÔM NAY BÉ HỌC ĐƯỢC '+todayWords.length+' TỪ 🌟',540,640);
+    todayWords.forEach((w,i)=>{
+      const wy=730+i*90;
+      if(i%2===0){ctx.fillStyle='rgba(255,255,255,.04)';ctx.fillRect(120,wy-30,840,70);}
+      ctx.fillStyle='#FFD94A';ctx.font='bold 52px sans-serif';ctx.textAlign='left';
+      ctx.fillText((w.emoji||'⭐')+' '+(w.english||'').toUpperCase(),160,wy+22);
+      ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='500 38px sans-serif';ctx.textAlign='right';
+      ctx.fillText(w.vietnamese||'',920,wy+22);
+    });
+  }else{
+    ctx.fillStyle='rgba(255,255,255,.3)';ctx.font='500 48px sans-serif';ctx.textAlign='center';
+    ctx.fillText('🌟 Bé đang học cùng Ba! 🌟',540,870);
+  }
+  // Last sticker section
+  if(lastSticker){
+    ctx.fillStyle='rgba(168,85,247,.15)';roundRectCanvas(ctx,100,1240,880,150,24);ctx.fill();
+    ctx.strokeStyle='rgba(168,85,247,.4)';ctx.lineWidth=2;roundRectCanvas(ctx,100,1240,880,150,24);ctx.stroke();
+    ctx.font='80px serif';ctx.textAlign='left';ctx.fillText(lastSticker.emoji,150,1340);
+    ctx.fillStyle='#FFF8EC';ctx.font='bold 48px sans-serif';ctx.textAlign='left';
+    ctx.fillText('Sticker mới: '+lastSticker.name+'!',260,1330);
+  }
+  // Streak badge
+  if(streak.current>0){
+    ctx.fillStyle='rgba(255,107,107,.15)';roundRectCanvas(ctx,100,1420,420,120,20);ctx.fill();
+    ctx.fillStyle='#FFF8EC';ctx.font='bold 56px sans-serif';ctx.textAlign='center';
+    ctx.fillText('🔥 '+streak.current+' ngày',310,1495);
+  }
+  // Score badge
+  const score=+(localStorage.getItem('mm_scoreday')||0);
+  ctx.fillStyle='rgba(255,215,74,.15)';roundRectCanvas(ctx,560,1420,420,120,20);ctx.fill();
+  ctx.fillStyle='#FFD94A';ctx.font='bold 56px sans-serif';ctx.textAlign='center';
+  ctx.fillText('⭐ '+score+' điểm',770,1495);
+  // Footer
+  ctx.fillStyle='rgba(255,255,255,.2)';ctx.font='400 38px sans-serif';ctx.textAlign='center';
+  ctx.fillText('magicmoment.vercel.app',540,1740);
+  ctx.fillStyle='rgba(255,255,255,.15)';ctx.font='400 32px sans-serif';
+  ctx.fillText('#BaConHọcCùngNhau  #MagicMoment',540,1800);
+  return cv.toDataURL('image/png');
+}
+
+let _shareDataUrl=null;
+
+async function openShareCard(type){
+  go('s-share');
+  const img=document.getElementById('share-img');
+  if(img){img.src='';img.style.opacity='.3';}
+  const captions=[
+    'Hôm nay ba con mình cùng học tiếng Anh! Bé yêu học nhanh lắm 😍 #MagicMoment',
+    'Học tiếng Anh cùng con mà không cần giỏi tiếng Anh 🎉 #BaConHọcCùngNhau',
+    'AI giúp ba dạy con tiếng Anh từ đồ vật trong nhà ✨ #MagicMoment',
+  ];
+  const capEl=document.getElementById('share-caption-text');
+  if(capEl)capEl.textContent=captions[Math.floor(Math.random()*captions.length)];
+  try{
+    _shareDataUrl=await buildShareCard();
+    if(img){img.src=_shareDataUrl;img.style.opacity='1';}
+  }catch(e){console.error(e);}
+}
+
+async function doShare(){
+  if(!_shareDataUrl)return;
+  try{
+    const blob=await(await fetch(_shareDataUrl)).blob();
+    const file=new File([blob],'magic-moment.png',{type:'image/png'});
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+      await navigator.share({
+        title:'Magic Moment — Ba & Bé yêu học tiếng Anh',
+        text:document.getElementById('share-caption-text')?.textContent||'',
+        files:[file]
+      });
+    }else{doDownload();}
+  }catch(e){doDownload();}
+}
+
+function doDownload(){
+  if(!_shareDataUrl)return;
+  const a=document.createElement('a');
+  a.href=_shareDataUrl;
+  a.download='magic-moment-'+new Date().toISOString().slice(0,10)+'.png';
+  a.click();
+}
 </script>
 </body>
 </html>
