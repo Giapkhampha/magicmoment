@@ -3,7 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>Magic Moment ✨</title>
+<meta name="description" content="Ba & Bé yêu cùng học tiếng Anh mỗi ngày — Magic Moment">
+<meta name="theme-color" content="#0F0A2E">
+<meta property="og:title" content="Magic Moment — Ba & Bé học tiếng Anh">
+<meta property="og:description" content="Học tiếng Anh qua đồ vật thật trong nhà. Miễn phí mãi mãi.">
+<meta property="og:type" content="website">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Magic Moment">
+<title>Magic Moment ✨ — Ba & Bé học tiếng Anh</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════
@@ -540,6 +549,11 @@ canvas{display:none;}
 </style>
 </head>
 <body>
+<div id="app-loader" style="position:fixed;inset:0;background:#0F0A2E;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:99999;transition:opacity 0.4s;">
+  <div style="font-size:3rem;margin-bottom:12px">🐰</div>
+  <div style="font:800 1.5rem 'Baloo 2',sans-serif;background:linear-gradient(135deg,#FFD94A,#FFB347);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Magic Moment</div>
+  <div style="font:600 0.8rem 'Nunito',sans-serif;color:rgba(255,255,255,0.4);margin-top:6px">Đang tải...</div>
+</div>
 
 <div class="stars" id="stars"></div>
 <div class="orb" style="width:360px;height:360px;background:var(--mint);top:-100px;right:-80px;--fd:10s;--dx:40px;--dy:-30px;"></div>
@@ -619,6 +633,7 @@ canvas{display:none;}
     <button class="btn-ghost" onclick="go('s-key')" style="font-size:.74rem;">⚙️</button>
   </div>
   <div class="err-msg" id="err-home"></div>
+  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.0 · Magic Moment ✨</div>
 </div>
 
 <!-- ════════ CAMERA ════════ -->
@@ -1061,6 +1076,13 @@ canvas{display:none;}
 </div>
 
 <script>
+window.onerror = function(msg, src, line) {
+  console.error('MM Error:', msg, 'line:', line);
+  return true;
+};
+window.onunhandledrejection = function(e) {
+  console.error('MM Promise Error:', e.reason);
+};
 // ════════════════════════════════════════════════
 //  SHARED STATE
 // ════════════════════════════════════════════════
@@ -2240,6 +2262,14 @@ function renderBarChart(){
 async function shareDashboard(){
   await openShareCard('weekly');
 }
+
+window.addEventListener('load', function() {
+  const loader = document.getElementById('app-loader');
+  if (loader) {
+    loader.style.opacity = '0';
+    setTimeout(function(){ loader.remove(); }, 400);
+  }
+});
 </script>
 </body>
 </html>

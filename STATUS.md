@@ -1,5 +1,5 @@
 # STATUS.md — Magic Moment Project
-> Cập nhật lần cuối: 29/04/2026 (Phase 2C Sprint 8-9)
+> Cập nhật lần cuối: 29/04/2026 (v4.0 — Final Deploy)
 > Mục đích: File này giúp Claude hiểu toàn bộ ngữ cảnh dự án để tiếp tục phát triển
 
 ---
@@ -7,122 +7,62 @@
 ## 🎯 DỰ ÁN LÀ GÌ?
 
 **Magic Moment** — Web app học tiếng Anh cho trẻ 3-6 tuổi, ba/mẹ đồng hành.
-- **Người dùng:** Bố (mất gốc tiếng Anh) + con gái 3 tuổi
+- **Người dùng:** Bố (mất gốc tiếng Anh) + con gái Maya 3 tuổi
 - **Triết lý:** "Ba là người chơi cùng, không phải giáo viên" — AI làm cầu nối
 - **Stack:** Single-file HTML/CSS/JS · Groq API (free) · Deploy Vercel
 - **Live URL:** `https://[tên-project].vercel.app` (do user deploy)
+- **Repo:** Giapkhampha/magicmoment
 
 ---
 
-## ✅ ĐÃ HOÀN THÀNH
+## ✅ ĐÃ HOÀN THÀNH (v4.0)
 
-### App chính: `index.html` (Magic Moment v3 — unified)
-File duy nhất tích hợp **3 module** vào một app:
+### App chính: `index.html` (Magic Moment v4.0)
 
-#### Module 1 — 📸 Magic Scan
-- Chụp ảnh đồ vật bằng webcam (desktop) hoặc camera/thư viện (mobile)
-- Groq Vision AI nhận dạng → trả về: tên tiếng Anh, IPA phonetic, tiếng Việt, emoji, câu ví dụ
-- Text-to-Speech đọc to từ vựng
-- Bé nói vào mic → App chấm phát âm (Levenshtein) → +10⭐ hoặc +5⭐
-- Lưu lịch sử từ đã học (ảnh + từ) vào localStorage
-- **Trạng thái:** ✅ Hoàn chỉnh, đang dùng được
+#### Phase 1 — MVP (3 modules cốt lõi)
+- **Magic Scan** — Chụp ảnh → AI nhận dạng → TTS + mic chấm phát âm
+- **Scene Explorer** — Upload ảnh → ghim đồ vật → Đố Tìm + Quiz
+- **StoryDuo** — Ba kể chuyện VI → AI dịch EN + emoji scene + 3 từ vựng
 
-#### Module 2 — 🖼️ Scene Explorer + 2 Games
-- Upload ảnh bất kỳ → Groq phân tích → đặt ghim màu lên 6-8 đồ vật
-- **Trò chơi 1 — Đố Tìm:** AI đọc tên → Bé tap vào đúng vị trí trong hình
-  - Đúng lần 1: +15⭐ | lần 2: +10⭐ | lần 3: +5⭐
-  - Gợi ý (hint ring) sau 2 lần sai
-  - Auto-reveal sau 3 lần sai
-- **Trò chơi 2 — Quiz:** Thấy emoji + gợi ý VI → Chọn 1/4 đáp án
-- Màn hình Game Over có tổng điểm + 1-3 sao
-- **Trạng thái:** ✅ Hoàn chỉnh
+#### Phase 2A — Engagement Loop
+- **Streak Calendar** — Tick hằng ngày, cột mốc 3/7/14/30/60/100 ngày
+- **Mascot Bibi** — Thỏ trắng SVG inline, 6 states (idle/happy/thinking/celebrate/sleeping/wave)
+- **Daily Quest** — 3 nhiệm vụ/ngày reset 0h, bonus +50⭐ khi hoàn thành cả 3
+- **UI Responsive** — Mobile-first, max-width 480px, safe area iPhone/Android
 
-#### Module 3 — 📖 StoryDuo
-- Ba kể chuyện bằng tiếng Việt (nói mic HOẶC gõ text — đề phòng nơi ồn ào)
-- Groq dịch đầy đủ sang tiếng Anh (không tóm tắt), trích 3 từ vựng chính
-- AI trả về 4-6 emojis + màu nền phù hợp → Build **Emoji Scene** (animation, instant)
-- 3 từ vựng được highlight màu khác nhau (amber/rose/mint) ngay trong câu EN
-- Vocab badges: `RABBIT = con thỏ`
-- Lưu nhiều câu chuyện (max 10), mỗi câu có nhiều trang (max 20)
-- Book view: xem toàn bộ câu chuyện dạng flip book
-- **Trạng thái:** ✅ Hoàn chỉnh
+#### Phase 2B — Viral Engine
+- **Sticker Album** — 30 stickers × 5 chủ đề, rare 20%, flip animation, theme badge
+- **Share Card** — Canvas 1080×1920, Web Share API, fallback download
 
-### v3.3 — Parent Dashboard (29/04/2026) ✅
+#### Phase 2C — Parent Insight
+- **Parent Dashboard** — Bar chart 7 ngày, top topics, sticker progress, review words, all-time stats
 
-#### Feature 7 — 📊 Parent Dashboard (Sprint 8-9)
-- 5 helper functions: `getWordsInRange()`, `getWeeklyWordCounts()`, `getTopTopics()`, `getReviewWords()`, `getWeekStats()`
-- Stats row: từ tuần này + diff badge (↑↓=) vs tuần trước · streak hiện tại · phút học ước tính
-- SVG bar chart 7 ngày: ngày hôm nay màu vàng, past ngày xám
-- Topics bar chart: 3 nguồn học (scan/quiz/story) với progress bar relative
-- Sticker progress: X/30 stickers + animated progress bar + theme badges
-- Review words: top 5 từ chưa gặp >7 ngày → tap để nghe phát âm
-- All-time stats: tổng từ · sticker · best streak
-- `openDashboard()` → navigate + `renderDashboard()` + `renderBarChart()`
-- `shareDashboard()` → reuse `openShareCard('weekly')`
-- Nút "📊 Báo cáo" thêm vào home footer
-- `source:'scan'` field thêm vào `wordHist` entries mới
-- localStorage key: đọc từ `mm_hist`, `mm_streak`, `mm_stickers`, `mm_scoreday`
+#### v4.0 — Polish & Deploy
+- **Meta tags** — description, theme-color, OG tags (Facebook/Zalo share preview)
+- **PWA meta** — apple-mobile-web-app-capable, status-bar-style, title
+- **Loading screen** — Loader 🐰 fade-out khi app sẵn sàng (xóa trắng màn hình)
+- **Error boundary** — `window.onerror` + `window.onunhandledrejection` (log, không crash)
+- **Version badge** — "v4.0 · Magic Moment ✨" ở footer home
 
-### v3.2 — Sticker Album + Share Card (29/04/2026) ✅
-
-#### Feature 5 — 🎟️ Sticker Album (Sprint 5-6)
-- `STICKER_DB`: 30 stickers, 5 chủ đề × 6 (animals/food/transport/nature/family)
-- `tryUnlockSticker()`: mỗi 5 từ → 1 sticker random (rare 20%)
-- `showStickerUnlock()`: full-screen overlay + spin animation + confetti + Bibi
-- `renderAlbum()`: grid 6 cột, owned vs ?, rare có viền vàng glow
-- `checkThemeBadge()`: hoàn thành 1 chủ đề → Bibi thông báo
-- Gọi tại: Magic Scan success · Quiz correct · StoryDuo trang mới (×3)
-- Nút 🎟️ trên Home footer: mở album + đếm số sticker đã có
-- localStorage key: `mm_stickers` — unlocked[], themeBadges[], lastUnlock, wordsSinceLastSticker
-
-#### Feature 6 — 📱 Share Card (Sprint 7)
-- `buildShareCard()`: Canvas 1080×1920, background gradient + dots
-- Nội dung: Bibi 🐰, từ học hôm nay (từ mm_hist với timestamp), sticker mới nhất
-- Streak badge + Score badge ở dưới
-- `openShareCard()`: navigate s-share, generate canvas async
-- `doShare()`: Web Share API (Android) + fallback download
-- `doDownload()`: lưu PNG với tên ngày tháng
-- Trigger: nút "Khoe thành tích" ở result scan + nút "Khoe với mọi người" trong sticker overlay
-- wordHist entries giờ có `timestamp: Date.now()` để filter today's words
-
-### v3.1 — Engagement Loop (29/04/2026) ✅
-
-#### Feature 1 — 🔥 Streak Calendar (Sprint 1)
-- `tickStreak()`: ghi nhận ngày học, chuỗi liên tiếp, không punish khi miss
-- Streak badge trên Home (score-bar), pulse animation khi tăng
-- Milestone screen (3/7/14/30/60/100/365 ngày): full-screen overlay + confetti + Bibi celebrate
-- Gọi tại: Magic Scan thành công · Game Over · StoryDuo trang mới
-- localStorage key: `mm_streak` — current, best, lastDay, days[], milestones[]
-
-#### Feature 2 — 🐰 Mascot Bibi (Sprint 2)
-- SVG thỏ trắng inline, 6 states: `idle` `happy` `thinking` `celebrate` `sleeping` `wave`
-- Speech bubble (#bibi-bubble) — `bibiSay(text, duration)`
-- `initBibiOnHome()`: nếu vắng ≥3 ngày → sleeping → wake; lần đầu trong ngày → wave + greeting
-- `bibiTapped()`: tap Bibi → happy + praise ngẫu nhiên
-- Fixed bottom-right, responsive (60px mobile / 80px desktop)
-
-#### Feature 3 — 🎯 Daily Quest (Sprint 3)
-- 3 quest hằng ngày: Scan 5 đồ vật (+20⭐) · 1 game (+20⭐) · 1 trang StoryDuo (+20⭐)
-- Bonus: hoàn thành cả 3 → +50⭐ extra + confetti + Bibi celebrate
-- Quest Card hiển thị trên Home (dưới score-bar): progress bar, done = ✅ + opacity 50%
-- `loadDailyQuest()`: auto-reset khi date thay đổi (0h)
-- `progressQuest(type)`: gọi tại 3 integration point giống tickStreak()
-- localStorage key: `mm_quest` — date, quests{scan/game/story}, bonusGiven
-
-#### Feature 4 — 🎉 Onboarding (Sprint 4 — Polish)
-- Modal welcome lần đầu mở app (chỉ hiện 1 lần, check `mm_onboarded`)
-- Bibi wave + title "Xin chào! Tôi là Bibi!" + giải thích 3 quest
-- Nút "🚀 Bắt đầu chơi!" → set `mm_onboarded = '1'` + Bibi happy
-- Trigger trong `go('s-home')` → `checkOnboarding()`
+### localStorage keys
+| Key | Nội dung |
+|-----|---------|
+| `mm_key` | Groq API key |
+| `mm_hist` | Word history (english, vietnamese, emoji, timestamp, source) |
+| `mm_scoreday` | Điểm hôm nay |
+| `mm_wcnt` | Tổng từ đã học |
+| `mm_streak` | Streak data (current, best, days[], milestones[]) |
+| `mm_quest` | Daily quest (date, quests{scan,game,story}, bonusGiven) |
+| `mm_stickers` | Sticker data (unlocked[], themeBadges[], wordsSinceLastSticker) |
+| `mm_migrated_v3_1` | Migration flag |
+| `mm_onboarded` | Onboarding flag |
 
 ---
 
 ### Các file đã tạo
 | File | Mô tả | Trạng thái |
 |------|-------|-----------|
-| `index.html` | App tích hợp 3 module + v3.1 engagement loop | ✅ Production ready |
-| `magic-moment.html` | Bản standalone chỉ Scan + Scene | ✅ (cũ, superseded) |
-| `storyduo.html` | Bản standalone chỉ StoryDuo | ✅ (cũ, superseded) |
+| `index.html` | App tích hợp toàn bộ features (v4.0) | ✅ Production ready |
 | `vercel.json` | Config deploy Vercel | ✅ |
 | `SKILL.md` | Technical patterns & code snippets | ✅ |
 | `INSTRUCTIONS.md` | Product vision & pedagogy | ✅ |
@@ -199,73 +139,35 @@ GitHub:      Giapkhampha/magicmoment           ✅ (repo của user)
 
 ---
 
-## 🗺️ ROADMAP
+## 🗺️ ROADMAP — Phase 3 (chưa làm)
 
-### ✅ Phase 2 — Engagement Loop (HOÀN THÀNH v3.1)
-- [x] **Streak Calendar** — tick, milestone, badge ✅
-- [x] **Mascot Bibi** — 6 states, speech bubble, greeting logic ✅
-- [x] **Daily Quest** — 3 quest + bonus, auto-reset 0h ✅
-- [x] **Onboarding** — modal lần đầu, giới thiệu Bibi + quest ✅
+### Ưu tiên cao
+- [ ] **Family Challenge** — Ba & Mẹ thi đua điểm, multi-profile, leaderboard tuần
+- [ ] **Story Library** — 50+ câu chuyện mẫu có sẵn
 
-### ✅ Phase 2B — Viral Engine (HOÀN THÀNH v3.2)
-- [x] **Share Card** — Canvas 1080×1920, Web Share API → TikTok/Facebook ✅
-- [x] **Sticker Album** — 30 stickers, 5 chủ đề, unlock mỗi 5 từ, rare 20% ✅
+### Ưu tiên trung bình
+- [ ] **Printable Book** — Xuất StoryDuo ra PDF in được
+- [ ] **Pronunciation Premium** — Phân tích phoneme sâu hơn (học từ ELSA)
+- [ ] **Theme Packs** — Gói chủ đề pre-built (động vật, màu sắc, số...)
 
-### ✅ Phase 2C — Parent Dashboard (HOÀN THÀNH v3.3)
-- [x] **Parent Dashboard** — Bar chart, top topics, review words, sticker progress, all-time stats ✅
-
-### Phase 3 — Family & Platform
-- [ ] **Family Challenge** — Multi-profile, leaderboard tuần
-- [ ] **StoryDuo — Printable Book** — Print CSS → PDF
-- [ ] **PWA / Offline** — Service Worker, cài lên màn hình home
-
-### Phase 4 — Platform
-- [ ] Multi-child profiles
-- [ ] Teacher Mode
-- [ ] Offline / PWA
-- [ ] React Native app
+### Ưu tiên thấp / Phase 4
+- [ ] **PenPal Planet** — Kết nối bé với bé quốc tế
+- [ ] **Offline / PWA** — Service Worker
+- [ ] **React Native** — iOS/Android native app
 
 ---
 
-## 💡 CONTEXT QUAN TRỌNG CHO LẦN SAU
+## 💡 CONTEXT QUAN TRỌNG CHO SESSION MỚI
 
-### Về người dùng
-- Bố **không biết code**, cần hướng dẫn step-by-step
-- Dùng **Samsung Android** + **Windows Chrome**
-- Đã có Groq API key: `gsk_cXzynZKVmkb...` (đừng lưu key thật vào đây!)
-- Đã deploy thành công lên Vercel lần 1
-
-### Về style code
-- **Không dùng framework** (React, Vue...) — vanilla HTML/CSS/JS duy nhất
-- Mọi thứ trong 1 file `.html`
-- JS phải validate được bằng `node -e "new Function(content)"`
-- Khi sửa file, luôn verify syntax sau mỗi `str_replace`
-
-### Về design
-- Tông màu chính: **Navy dark** background + **Gold** gradient
-- Font: Baloo 2 (tiêu đề) + Caveat (viết tay/VI) + Nunito (body)
-- Animations nhẹ nhàng, **KHÔNG shake/vibrate** (gây lo lắng bé)
-- Confetti chỉ khi đúng, điểm trừ không bao giờ hiển thị
-- Mọi text error phải bằng **tiếng Việt**
-
-### Về pedagogy (không thay đổi)
-- Học qua ngữ cảnh thật (TPR + Krashen)
-- Song ngữ VI-EN song song (Bilingual Immersion)
-- Narrative learning (từ trong câu chuyện nhớ lâu hơn)
-- Luôn khuyến khích, không bao giờ phạt
-
----
-
-## 📁 CẤU TRÚC FILE RECOMMEND
-
-```
-project/
-├── index.html          ← App chính (production)
-├── vercel.json         ← Deploy config
-├── SKILL.md            ← Technical patterns
-├── INSTRUCTIONS.md     ← Product vision
-└── STATUS.md           ← File này (update mỗi session)
-```
+- Con gái tên **Maya**, 3 tuổi
+- Dùng **"Bé"** hoặc **"Bé yêu"** trong app — không hardcode tên cụ thể
+- Ba dùng **Samsung Android** + **Windows Chrome**
+- Stack: Vanilla HTML/CSS/JS · Groq API (gsk_...) · Vercel
+- Repo: Giapkhampha/magicmoment
+- Version hiện tại: **v4.0**
+- Mọi text error: **tiếng Việt**
+- KHÔNG dùng framework, KHÔNG external asset
+- JS validate: `node -e "new Function(require('fs').readFileSync('index.html','utf8').match(/<script>([\s\S]*)<\/script>/)[1])"`
 
 ---
 
@@ -281,4 +183,4 @@ Claude cần đọc file này và:
 ---
 
 *File này được tạo vào ngày 28/04/2026 — cuối session build Magic Moment v3*
-*Cập nhật mỗi khi có tính năng mới hoặc thay đổi quan trọng*
+*Cập nhật lần cuối: 29/04/2026 — v4.0 Final Deploy*
