@@ -68,6 +68,17 @@ body{font-family:'Nunito',sans-serif;background:var(--navy);min-height:100dvh;ov
 .key-steps{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:13px;padding:12px 14px;margin-bottom:12px;font-size:.76rem;color:rgba(255,255,255,.6);line-height:1.8;}
 .key-steps a{color:var(--gold);text-decoration:underline;}
 .key-steps strong{color:rgba(255,255,255,.85);}
+.key-welcome-text{font-size:.82rem;color:rgba(255,248,236,.65);line-height:1.65;margin-bottom:14px;text-align:center;}
+.key-welcome-text strong{color:var(--gold);}
+.key-divider{border:none;border-top:1px solid var(--border);margin:2px 0 14px;}
+.key-section-title{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:white;margin-bottom:10px;text-align:center;}
+.key-steps-list{display:flex;flex-direction:column;gap:8px;margin-bottom:14px;}
+.key-step{display:flex;align-items:flex-start;gap:10px;font-size:.78rem;color:rgba(255,248,236,.75);line-height:1.5;}
+.key-step-num{min-width:22px;height:22px;background:linear-gradient(135deg,var(--gold),var(--coral));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:800;color:#1A1035;flex-shrink:0;margin-top:1px;}
+.key-step a{color:var(--gold);text-decoration:underline;}
+.key-step strong{color:rgba(255,248,236,.92);}
+.key-step code{background:rgba(255,255,255,.1);border-radius:4px;padding:1px 5px;font-family:monospace;font-size:.74rem;color:var(--mint);}
+.key-security-note{background:rgba(255,217,74,.06);border:1px solid rgba(255,217,74,.2);border-radius:10px;padding:9px 12px;margin-top:10px;font-size:.72rem;color:rgba(255,248,236,.55);line-height:1.55;text-align:center;}
 .key-input{width:100%;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:13px;padding:12px 14px;color:white;font-family:'Nunito',sans-serif;font-size:.88rem;outline:none;margin-bottom:11px;transition:border-color .2s;}
 .key-input:focus{border-color:var(--mint);}
 .btn-key{width:100%;background:linear-gradient(135deg,var(--mint),#06B6D4);border:none;border-radius:13px;padding:14px;color:#0F0A2E;font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;cursor:pointer;transition:transform .15s;}
@@ -683,12 +694,22 @@ canvas{display:none;}
     <div style="color:rgba(255,255,255,.38);font-size:.78rem;margin-top:3px;">📸 Scan • 🖼️ Khám phá • 📖 Kể chuyện</div>
   </div>
   <div class="key-card">
-    <div class="key-title">🔑 Nhập Groq API Key</div>
+    <!-- Welcome -->
+    <div class="key-title">👋 Chào ba/mẹ!</div>
+    <div class="key-welcome-text">Magic Moment giúp ba/mẹ và bé học tiếng Anh <strong>cùng nhau</strong> — không cần giỏi tiếng Anh, AI sẽ làm cầu nối.</div>
+    <hr class="key-divider">
+    <!-- API Key setup -->
+    <div class="key-section-title">🔑 Cài đặt API Key <span style="font-size:.65rem;font-weight:600;opacity:.7;">(1 lần duy nhất)</span></div>
     <div style="text-align:center;margin-bottom:12px;"><span class="badge-free">✅ Miễn phí 100%</span></div>
-    <div class="key-steps">Lấy key tại <a href="https://console.groq.com" target="_blank">console.groq.com</a><br><strong>API Keys → Create API Key</strong></div>
+    <div class="key-steps-list">
+      <div class="key-step"><span class="key-step-num">1</span><span>Vào <a href="https://console.groq.com" target="_blank">console.groq.com</a> → đăng nhập Google</span></div>
+      <div class="key-step"><span class="key-step-num">2</span><span>Chọn tab <strong>"API Keys"</strong> → <strong>"Create API Key"</strong></span></div>
+      <div class="key-step"><span class="key-step-num">3</span><span>Copy key (bắt đầu bằng <code>gsk_...</code>)</span></div>
+      <div class="key-step"><span class="key-step-num">4</span><span>Dán vào ô bên dưới → nhấn <strong>"Vào ứng dụng"</strong></span></div>
+    </div>
     <input class="key-input" type="password" id="key-inp" placeholder="gsk_..." autocomplete="off">
     <button class="btn-key" onclick="saveKey()">✨ Vào ứng dụng!</button>
-    <div class="key-note">~14,400 request/ngày miễn phí 🎉</div>
+    <div class="key-security-note">💡 Key chỉ lưu trên máy ba/mẹ — không gửi đi đâu<br>~14,400 lượt/ngày miễn phí 🎉</div>
     <div class="err-box" id="err-box"><span id="err-msg-key"></span></div>
   </div>
 </div>
