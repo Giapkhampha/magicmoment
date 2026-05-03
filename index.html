@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="description" content="Ba & Bé yêu cùng học tiếng Anh mỗi ngày — Magic Moment">
-<meta name="theme-color" content="#0F0A2E">
+<meta name="theme-color" content="#FFD94A">
 <meta property="og:title" content="Magic Moment — Ba & Bé học tiếng Anh">
 <meta property="og:description" content="Học tiếng Anh qua đồ vật thật trong nhà. Miễn phí mãi mãi.">
 <meta property="og:type" content="website">
@@ -12,6 +12,8 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Magic Moment">
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
 <title>Magic Moment ✨ — Ba & Bé học tiếng Anh</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Caveat:wght@400;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -623,6 +625,35 @@ canvas{display:none;}
 .help-footer{text-align:center;padding:24px 16px;font-size:.75rem;opacity:.4;}
 #help-bibi-svg{animation:bibi-wave-body .6s ease-in-out 3;}
 #help-bibi-svg .bibi-paw-r{animation:bibi-paw .38s ease-in-out 5 alternate;}
+/* ECOSYSTEM FOOTER */
+.eco-footer{margin-top:24px;padding:20px 16px 24px;border-top:1px solid var(--border);}
+.eco-brand{display:block;text-align:center;color:rgba(255,255,255,.5);font:600 .78rem 'Nunito',sans-serif;margin-bottom:16px;text-decoration:none;transition:color .2s;}
+.eco-brand:hover{color:var(--gold);}
+.eco-heading{text-align:center;font:700 .78rem 'Nunito',sans-serif;opacity:.5;margin-bottom:12px;color:white;}
+.eco-cards{display:flex;gap:10px;flex-wrap:wrap;}
+.eco-card{flex:1;min-width:140px;display:flex;align-items:center;gap:10px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 14px;cursor:pointer;transition:transform .12s,border-color .2s;text-decoration:none;color:white;position:relative;overflow:hidden;}
+.eco-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.eco-card.eco-a::before{background:linear-gradient(90deg,#4ECDC4,#A855F7);}
+.eco-card.eco-b::before{background:linear-gradient(90deg,#FFB347,#EF476F);}
+.eco-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.25);}
+.eco-card:active{transform:scale(.97);}
+.eco-icon{font-size:1.7rem;flex-shrink:0;}
+.eco-text{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0;}
+.eco-title{font:700 .92rem 'Baloo 2',cursive;color:white;}
+.eco-sub{font:500 .7rem 'Nunito',sans-serif;opacity:.6;line-height:1.3;}
+@media(max-width:400px){.eco-cards{flex-direction:column;}.eco-card{min-width:100%;}}
+/* PWA INSTALL */
+.btn-install{width:100%;margin-top:12px;padding:12px 16px;background:linear-gradient(135deg,var(--gold),#FFB347);border:none;border-radius:14px;font:700 0.92rem 'Baloo 2',cursive;color:#0F0A2E;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(255,217,74,.3);transition:transform 0.12s;}
+.btn-install:active{transform:scale(0.97);}
+.btn-install:hover{transform:translateY(-2px);}
+.ios-hint{position:fixed;bottom:-100px;left:16px;right:16px;background:linear-gradient(135deg,#1a1130,#0F0A2E);border:1px solid var(--gold);border-radius:16px;padding:14px;z-index:1000;transition:bottom 0.4s ease-out;box-shadow:0 8px 24px rgba(0,0,0,.5);}
+.ios-hint.show{bottom:16px;}
+.ios-hint-content{display:flex;align-items:center;gap:12px;}
+.ios-hint-icon{font-size:1.8rem;}
+.ios-hint-text{flex:1;}
+.ios-hint-title{font:700 0.92rem 'Baloo 2',cursive;color:var(--gold);}
+.ios-hint-desc{font:500 0.78rem 'Nunito',sans-serif;color:rgba(255,255,255,.85);margin-top:2px;}
+.ios-hint-close{background:rgba(255,255,255,.1);border:none;border-radius:50%;width:28px;height:28px;color:white;cursor:pointer;flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -717,7 +748,32 @@ canvas{display:none;}
     <button class="btn-ghost" onclick="go('s-key')" style="font-size:.74rem;">⚙️</button>
   </div>
   <div class="err-msg" id="err-home"></div>
-  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.2 · Magic Moment ✨</div>
+  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.4.1 · Magic Moment ✨</div>
+  <div style="padding:0 16px;">
+    <button id="btn-install-pwa" class="btn-install" onclick="installPWA()" style="display:none;">
+      📱 Cài đặt app trên màn hình
+    </button>
+  </div>
+  <div class="eco-footer">
+    <a href="https://giapkhamphame.vercel.app" target="_blank" rel="noopener" class="eco-brand">🌸 Made with ❤️ by Ba Maya · giapkhampha.me</a>
+    <div class="eco-heading">Khám phá thêm trong hệ sinh thái:</div>
+    <div class="eco-cards">
+      <a href="https://giapkhamphame.vercel.app" target="_blank" rel="noopener" class="eco-card eco-a">
+        <span class="eco-icon">🌐</span>
+        <div class="eco-text">
+          <span class="eco-title">Giáp Khám Phá</span>
+          <span class="eco-sub">Sản phẩm AI · Sách hay · Tài nguyên</span>
+        </div>
+      </a>
+      <a href="https://maya-journey.vercel.app" target="_blank" rel="noopener" class="eco-card eco-b">
+        <span class="eco-icon">📔</span>
+        <div class="eco-text">
+          <span class="eco-title">Ba &amp; Maya Journey</span>
+          <span class="eco-sub">Nhật ký 90 ngày học cùng con</span>
+        </div>
+      </a>
+    </div>
+  </div>
 </div>
 
 <!-- ════════ CAMERA ════════ -->
@@ -1282,6 +1338,7 @@ window.onload=()=>{
   makeStars();
   updateScore();
   migrateToV3_1();
+  migrateHistV45();
   updateStreakBadge();
   go(apiKey?'s-home':'s-key');
   if(apiKey)checkHelpAutoOpen();
@@ -1362,9 +1419,9 @@ Reply ONLY valid JSON, no markdown:
     document.getElementById('w-ph').textContent=d.phonetic||'';
     document.getElementById('w-vi').textContent=`${d.emoji} ${d.vietnamese}`;
     document.getElementById('w-sent').textContent=`"${d.sentence}"`;
-    wordHist.unshift({image:dataUrl,english:d.english,vietnamese:d.vietnamese,emoji:d.emoji,timestamp:Date.now(),source:'scan'});
-    if(wordHist.length>30)wordHist.pop();
-    localStorage.setItem('mm_hist',JSON.stringify(wordHist));
+    const thumb=await compressForHistory(dataUrl);
+    wordHist.unshift({image:thumb,english:d.english,vietnamese:d.vietnamese,emoji:d.emoji,timestamp:Date.now(),source:'scan'});
+    safeSetHist(wordHist);
     wordCnt++;localStorage.setItem('mm_wcnt',wordCnt);
     document.getElementById('btn-try').classList.remove('rec');
     document.getElementById('btn-try').textContent='🎤 Con thử nói nào!';
@@ -1764,6 +1821,63 @@ async function groqChat(prompt,maxTokens=400){
 }
 
 // ════════════════════════════════════════════════
+//  STORAGE HELPERS
+// ════════════════════════════════════════════════
+async function compressForHistory(dataUrl){
+  return new Promise((resolve)=>{
+    const img=new Image();
+    img.onload=()=>{
+      const c=document.createElement('canvas');
+      const SIZE=96;
+      c.width=SIZE;c.height=SIZE;
+      const ctx=c.getContext('2d');
+      const min=Math.min(img.width,img.height);
+      const sx=(img.width-min)/2,sy=(img.height-min)/2;
+      ctx.drawImage(img,sx,sy,min,min,0,0,SIZE,SIZE);
+      resolve(c.toDataURL('image/jpeg',0.5));
+    };
+    img.onerror=()=>resolve('');
+    img.src=dataUrl;
+  });
+}
+function safeSetHist(histArray){
+  const MAX_ITEMS=50;
+  while(histArray.length>MAX_ITEMS)histArray.pop();
+  try{
+    localStorage.setItem('mm_hist',JSON.stringify(histArray));
+    return true;
+  }catch(e){
+    if(e.name==='QuotaExceededError'||e.code===22||e.code===1014){
+      console.warn('Storage quota exceeded, cleaning up...');
+      for(let i=histArray.length-1;i>=0&&i>10;i--){
+        if(histArray[i].image)histArray[i].image='';
+      }
+      try{
+        localStorage.setItem('mm_hist',JSON.stringify(histArray));
+        return true;
+      }catch(e2){
+        histArray.length=Math.min(histArray.length,25);
+        try{
+          localStorage.setItem('mm_hist',JSON.stringify(histArray));
+          return true;
+        }catch(e3){
+          histArray.forEach(item=>{item.image='';});
+          try{
+            localStorage.setItem('mm_hist',JSON.stringify(histArray));
+            return true;
+          }catch(e4){
+            console.error('Cannot save mm_hist even after cleanup');
+            return false;
+          }
+        }
+      }
+    }
+    console.error('Storage error:',e);
+    return false;
+  }
+}
+
+// ════════════════════════════════════════════════
 //  SHARED UTILS
 // ════════════════════════════════════════════════
 function speakWord(text){
@@ -1940,6 +2054,21 @@ function migrateToV3_1(){
     localStorage.setItem('mm_streak',JSON.stringify({current:1,best:1,lastDay:today,days:[today],milestones:[]}));
   }
   localStorage.setItem('mm_migrated_v3_1','1');
+}
+function migrateHistV45(){
+  if(localStorage.getItem('mm_hist_compressed_v45'))return;
+  let needSave=false;
+  if(wordHist.length>50){wordHist.length=50;needSave=true;}
+  const totalSize=JSON.stringify(wordHist).length;
+  if(totalSize>500000){
+    const sevenDaysAgo=Date.now()-7*24*60*60*1000;
+    wordHist.forEach(item=>{
+      if(item.image&&item.timestamp<sevenDaysAgo)item.image='';
+    });
+    needSave=true;
+  }
+  if(needSave)safeSetHist(wordHist);
+  localStorage.setItem('mm_hist_compressed_v45','true');
 }
 
 // ════════════════════════════════════════════════
@@ -2620,8 +2749,7 @@ function markKnown(){
   if(isNew){
     ps.learned.push(word.en);
     wordHist.unshift({image:'',english:word.en,vietnamese:word.vi,emoji:word.emoji,timestamp:Date.now(),source:'theme:'+tpCurrent.id});
-    if(wordHist.length>100)wordHist.pop();
-    localStorage.setItem('mm_hist',JSON.stringify(wordHist));
+    safeSetHist(wordHist);
     wordCnt++;
     localStorage.setItem('mm_wcnt',wordCnt);
     if(!tpStreakTicked){tickStreak();tpStreakTicked=true;}
@@ -2795,7 +2923,63 @@ window.addEventListener('load', function() {
     loader.style.opacity = '0';
     setTimeout(function(){ loader.remove(); }, 400);
   }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('SW registered:', reg.scope))
+      .catch(err => console.log('SW registration failed:', err));
+  }
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const isInStandaloneMode = ('standalone' in window.navigator) && (window.navigator.standalone);
+  if (isIOS && !isInStandaloneMode && !localStorage.getItem('mm_ios_hint_shown')) {
+    setTimeout(() => {
+      const hint = document.getElementById('ios-install-hint');
+      if (hint) hint.classList.add('show');
+    }, 30000);
+  }
 });
+
+// PWA install prompt
+let deferredInstallPrompt = null;
+
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  const installBtn = document.getElementById('btn-install-pwa');
+  if (installBtn) installBtn.style.display = 'flex';
+});
+
+window.addEventListener('appinstalled', () => {
+  console.log('PWA installed');
+  const installBtn = document.getElementById('btn-install-pwa');
+  if (installBtn) installBtn.style.display = 'none';
+  deferredInstallPrompt = null;
+  localStorage.setItem('mm_pwa_installed', 'true');
+});
+
+async function installPWA() {
+  if (!deferredInstallPrompt) return;
+  deferredInstallPrompt.prompt();
+  const { outcome } = await deferredInstallPrompt.userChoice;
+  console.log('Install outcome:', outcome);
+  deferredInstallPrompt = null;
+}
+
+function dismissIOSHint() {
+  document.getElementById('ios-install-hint').classList.remove('show');
+  localStorage.setItem('mm_ios_hint_shown', 'true');
+}
 </script>
+
+<!-- iOS install hint banner -->
+<div id="ios-install-hint" class="ios-hint">
+  <div class="ios-hint-content">
+    <span class="ios-hint-icon">📱</span>
+    <div class="ios-hint-text">
+      <div class="ios-hint-title">Cài đặt Magic Moment</div>
+      <div class="ios-hint-desc">Tap nút Chia sẻ <span style="font-size:1.2em;">⬆️</span> → "Thêm vào màn hình chính"</div>
+    </div>
+    <button class="ios-hint-close" onclick="dismissIOSHint()">✕</button>
+  </div>
+</div>
 </body>
 </html>

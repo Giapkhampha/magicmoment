@@ -1,5 +1,5 @@
 # STATUS.md — Magic Moment Project
-> Cập nhật lần cuối: 29/04/2026 (v4.2 — In-App Help Guide)
+> Cập nhật lần cuối: 30/04/2026 (v4.4 — PWA Installable)
 > Mục đích: File này giúp Claude hiểu toàn bộ ngữ cảnh dự án để tiếp tục phát triển
 
 ---
@@ -15,9 +15,9 @@
 
 ---
 
-## ✅ ĐÃ HOÀN THÀNH (v4.0)
+## ✅ ĐÃ HOÀN THÀNH (v4.4)
 
-### App chính: `index.html` (Magic Moment v4.0)
+### App chính: `index.html` (Magic Moment v4.3)
 
 #### Phase 1 — MVP (3 modules cốt lõi)
 - **Magic Scan** — Chụp ảnh → AI nhận dạng → TTS + mic chấm phát âm
@@ -51,16 +51,40 @@
 - Parent Dashboard: getTopTopics() hiện "🐱 Động vật" thay vì "theme:animals"
 
 #### v4.2 — In-App Help Guide (Phase 3 Feature 2)
-- **Help Guide** — 9 sections accordion với Bibi mini SVG (wave state) làm tour guide
-- Auto-popup lần đầu cho user mới (sau khi đóng onboarding modal)
-- Icon ❓ góc trên phải home screen → mở help bất kỳ lúc nào
-- CTA "Thử ngay" trong từng section → đi thẳng vào đúng module
-- localStorage key mới: `mm_help_seen_v1`
+- **Help Guide** — 1 screen mới (`s-help`), 9 sections accordion với Bibi mini SVG (`#help-bibi-svg`, wave state) làm tour guide
+- Auto-popup lần đầu: sau khi `closeOnboarding()` set `mm_onboarded`, gọi `checkHelpAutoOpen()` → delay 800ms → `openHelp()`
+- Guard logic: `checkHelpAutoOpen()` chỉ chạy khi `!mm_help_seen_v1 && mm_onboarded` (tránh conflict với onboarding modal)
+- Icon ❓ (`btn-help-home`) góc trên phải home screen (position:absolute top:16px right:16px) → mở help bất kỳ lúc nào
+- CTA "Thử ngay" trong từng section → đi thẳng vào đúng module (onclick attribute inline)
+- `exitHelp()` → set `mm_help_seen_v1` + `go('s-home')`; `markHelpSeen()` gọi thêm khi bấm CTA
+- 4 call sites cho `checkHelpAutoOpen()`: `window.onload`, `saveKey()`, `closeOnboarding()` + định nghĩa hàm
+- CTA screen mapping thực tế: scan→`go('s-cam')` · scene→`go('s-scene')` · story→`go('s-sd-home');renderSDHome()` · theme→`openThemes()` · dashboard→`openDashboard()`
+- localStorage key mới: `mm_help_seen_v1` (versioned, reset khi nội dung help thay đổi)
 - Sections: Bắt đầu nhanh · Magic Scan · Scene Explorer · StoryDuo · Theme Packs · Phần thưởng · Dashboard · Mẹo · Hỏi đáp
+- CSS mới: `.help-bibi-banner`, `.bibi-mini`, `.help-accordion`, `.help-item`, `.help-header`, `.help-body`, `.help-cta`, `.help-tip`, `.help-table`, `.btn-help-home`, `#help-bibi-svg` animation scope
+- Version badge cập nhật: `v4.2 · Magic Moment ✨`
 
-#### v4.1 — Theme Packs (Phase 3 Feature 1)
-- **Theme Packs** — 5 chủ đề starter: Animals, Colors, Food, Body, Numbers
-- *(chi tiết xem phần v4.1 bên dưới)*
+#### v4.4 — PWA Installable
+- **Service Worker** (`sw.js`) — Cache strategy: network-first HTML/JS/CSS, cache-first icons, skip Groq API calls
+- **Manifest** (`manifest.json`) — App metadata, 3 icons (192/512/maskable), standalone display, theme gold #FFD94A
+- **Install prompt** — `btn-install-pwa` tự hiện khi browser fire `beforeinstallprompt` (Android Chrome); ẩn sau khi install
+- **iOS hint** — Banner slide-up hướng dẫn iOS Safari user add to home screen; hiện sau 30s, dismiss 1 lần (flag `mm_ios_hint_shown`)
+- **Offline support** — Theme Packs + Help Guide hoạt động không cần internet; Magic Scan/StoryDuo báo lỗi (cần Groq API)
+- **Update flow** — SW activate → clear old caches → load version mới
+- localStorage keys mới: `mm_pwa_installed`, `mm_ios_hint_shown`
+- Files mới: `manifest.json`, `sw.js`; icons đã có sẵn tại `/icons/`
+- Version badge: v4.3 → v4.4
+
+#### v4.3 — Ecosystem Footer
+- **Eco Footer** — section cuối s-home, chỉ hiển thị ở home, không xuất hiện screen khác
+- Brand signature: `🌸 Made with ❤️ by Ba Maya · giapkhampha.me` (clickable → hub chính)
+- 2 link cards side-by-side (stack vertical ≤400px):
+  - **Giáp Khám Phá** (`eco-a`, teal→purple) → `giapkhamphame.vercel.app`
+  - **Ba & Maya Journey** (`eco-b`, amber→rose) → `maya-journey.vercel.app`
+- `<a href>` tag thật, `target="_blank" rel="noopener"` — không dùng JS onclick
+- Accent bar 3px trên mỗi card qua `::before` pseudo-element
+- CSS: `.eco-footer`, `.eco-brand`, `.eco-heading`, `.eco-cards`, `.eco-card`, `.eco-icon`, `.eco-text`, `.eco-title`, `.eco-sub`
+- Version badge: `v4.2` → `v4.3`
 
 #### v4.0 — Polish & Deploy
 - **Meta tags** — description, theme-color, OG tags (Facebook/Zalo share preview)
@@ -81,13 +105,21 @@
 | `mm_stickers` | Sticker data (unlocked[], themeBadges[], wordsSinceLastSticker) |
 | `mm_migrated_v3_1` | Migration flag |
 | `mm_onboarded` | Onboarding flag |
+| `mm_themes` | Theme Packs data ({packId: {completed, completedAt, learned[], timesPlayed}}) |
+| `mm_help_seen_v1` | Flag đã xem Help Guide (versioned) |
+| `mm_pwa_installed` | Flag đã install PWA (ẩn install button) |
+| `mm_ios_hint_shown` | Flag đã thấy iOS install hint (không hiện lại) |
 
 ---
 
 ### Các file đã tạo
 | File | Mô tả | Trạng thái |
 |------|-------|-----------|
-| `index.html` | App tích hợp toàn bộ features (v4.0) | ✅ Production ready |
+| `index.html` | App tích hợp toàn bộ features (v4.4) | ✅ Production ready |
+| `manifest.json` | PWA manifest — tên, icons, màu, display mode | ✅ |
+| `sw.js` | Service Worker — cache strategy, offline support | ✅ |
+| `HELP_GUIDE_DESIGN.md` | Design doc cho In-App Help Guide (v4.2) | ✅ Archived |
+| `THEME_PACKS_DESIGN.md` | Design doc cho Theme Packs (v4.1) | ✅ Archived |
 | `vercel.json` | Config deploy Vercel | ✅ |
 | `SKILL.md` | Technical patterns & code snippets | ✅ |
 | `INSTRUCTIONS.md` | Product vision & pedagogy | ✅ |
@@ -164,21 +196,68 @@ GitHub:      Giapkhampha/magicmoment           ✅ (repo của user)
 
 ---
 
-## 🗺️ ROADMAP — Phase 3 (chưa làm)
+## 🗺️ ROADMAP — Updated post v4.3 (Ecosystem Aware)
 
-### Ưu tiên cao
-- [ ] **Family Challenge** — Ba & Mẹ thi đua điểm, multi-profile, leaderboard tuần
-- [ ] **Story Library** — 50+ câu chuyện mẫu có sẵn
+### Phase 3 — DONE ✅
+- [x] **Theme Packs** — 5 chủ đề starter, 40 từ vựng (v4.1)
+- [x] **In-App Help Guide** — 9 sections accordion, auto-popup (v4.2)
+- [x] **Ecosystem Footer** — brand signature + 2 link cards (v4.3)
 
-### Ưu tiên trung bình
-- [ ] **Printable Book** — Xuất StoryDuo ra PDF in được
-- [ ] **Pronunciation Premium** — Phân tích phoneme sâu hơn (học từ ELSA)
-- [ ] **Theme Packs** — Gói chủ đề pre-built (động vật, màu sắc, số...)
+### Phase 4 — Top 3 ưu tiên kế tiếp
 
-### Ưu tiên thấp / Phase 4
-- [ ] **PenPal Planet** — Kết nối bé với bé quốc tế
-- [ ] **Offline / PWA** — Service Worker
-- [ ] **React Native** — iOS/Android native app
+**Quyết định dựa trên: ecosystem context (3 apps Giáp Khám Phá) + giáo dục impact + observation Maya thực tế**
+
+#### 🥇 #1 — PWA Installable ✅ DONE (v4.4)
+
+#### 🥈 #1 (mới) — Word Jar / Spaced Repetition (~4h)
+- Bình "từ cần ôn" tự động xuất hiện sau 3/7/14/30 ngày
+- Algorithm: dựa trên SM-2 simplified
+- Mỗi ngày tap "Word Jar" → 5 từ ngẫu nhiên cần ôn
+- **Lý do ưu tiên:** Vấn đề lớn nhất hiện tại = bé học từ rồi quên. Đây là single feature có giáo dục impact cao nhất trên toàn roadmap.
+
+#### 🥉 #3 — Theme Packs Level 2 (~3h)
+- 6 packs mới: Home, Nature, Actions, Feelings, Family, Clothes
+- 8 từ × 6 pack = 48 từ Level 2
+- Phù hợp 4-5 tuổi (sau khi Maya thuộc Level 1)
+- **Lý do ưu tiên:** Content depth — tránh chán khi bé hết Level 1.
+
+### Phase 5 — Khi có signals từ user
+
+**Không hardcode trước — quyết định dựa trên observation.**
+
+| Trigger | Build feature |
+|---------|---------------|
+| Bé hết Theme Pack Level 2 | Theme Packs Level 3 (4 packs: School/Transport/Clothes/Seasons) |
+| Mẹ/ông bà ghen tị muốn tham gia | Multi-Profile (2-3 profile chung 1 device) |
+| Ba muốn theo dõi từ điện thoại khác | Cloud Sync (Supabase free tier) |
+| StoryDuo thành hit | Story Sharing (link chia sẻ sách cho ông bà) |
+| Mic phát hiện nhiều bé phát âm sai | Pronunciation Premium (phoneme analysis) |
+
+### Hướng dài hạn (parking lot — chờ ecosystem mature)
+
+- **Cross-app integration** (Magic Moment ↔ Maya Journey): Học từ Magic Moment auto-post vào nhật ký Maya Journey
+- **Shared Word Bank**: Từ vựng học ở Magic Moment xuất hiện trong bài viết Giáp Khám Phá
+- **Custom Domain**: `magicmoment.giapkhampha.me` (sau khi mua giapkhampha.me)
+- **Native App** (React Native): Wrap thành iOS/Android app
+
+### ❌ Đã loại / Giảm priority sau ecosystem awareness
+
+| Feature | Trạng thái | Lý do |
+|---------|-----------|-------|
+| Story Library (50 chuyện) | ⬇️ Giảm | Sách hay đã có ở Giáp Khám Phá hub |
+| Onboarding Video | ❌ Loại | Có thể làm content trên Giáp Khám Phá thay vì nhồi vào app |
+| Community feature | ❌ Loại | Giáp Khám Phá đóng vai trò community |
+| PenPal Planet | ⬇️ Giảm | Phức tạp, cần backend; không phải core value |
+| Printable Book | ⬇️ Giảm | Nice-to-have, không tăng learning |
+
+---
+
+## 💡 NGUYÊN TẮC PHÁT TRIỂN POST-v4.3
+
+1. **Magic Moment FOCUS:** Học tiếng Anh qua AI (vision, voice, narrative)
+2. **KHÔNG ôm đồm:** Sách hay, phương pháp giáo dục, community — đã có ở Giáp Khám Phá hub
+3. **Observe trước khi build:** Quan sát Maya & ba dùng 2-3 tuần trước khi quyết Phase 5
+4. **Ecosystem first:** Mọi feature mới nghĩ đến tích hợp với Maya Journey + Giáp Khám Phá
 
 ---
 
@@ -189,7 +268,7 @@ GitHub:      Giapkhampha/magicmoment           ✅ (repo của user)
 - Ba dùng **Samsung Android** + **Windows Chrome**
 - Stack: Vanilla HTML/CSS/JS · Groq API (gsk_...) · Vercel
 - Repo: Giapkhampha/magicmoment
-- Version hiện tại: **v4.2**
+- Version hiện tại: **v4.4**
 - Mọi text error: **tiếng Việt**
 - KHÔNG dùng framework, KHÔNG external asset
 - JS validate: `node -e "new Function(require('fs').readFileSync('index.html','utf8').match(/<script>([\s\S]*)<\/script>/)[1])"`
@@ -208,4 +287,4 @@ Claude cần đọc file này và:
 ---
 
 *File này được tạo vào ngày 28/04/2026 — cuối session build Magic Moment v3*
-*Cập nhật lần cuối: 29/04/2026 — v4.0 Final Deploy*
+*Cập nhật lần cuối: 29/04/2026 — v4.3 Ecosystem Footer*
