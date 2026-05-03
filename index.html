@@ -1339,6 +1339,7 @@ window.onload=()=>{
   updateScore();
   migrateToV3_1();
   migrateHistV45();
+  migrateHistV451();
   updateStreakBadge();
   go(apiKey?'s-home':'s-key');
   if(apiKey)checkHelpAutoOpen();
@@ -1847,33 +1848,35 @@ function safeSetHist(histArray){
     localStorage.setItem('mm_hist',JSON.stringify(histArray));
     return true;
   }catch(e){
-    if(e.name==='QuotaExceededError'||e.code===22||e.code===1014){
-      console.warn('Storage quota exceeded, cleaning up...');
-      for(let i=histArray.length-1;i>=0&&i>10;i--){
-        if(histArray[i].image)histArray[i].image='';
-      }
+    // Catch ALL errors (QuotaExceededError tên khác nhau tuỳ browser)
+    console.warn('mm_hist write failed, cleaning up...', e.name);
+    // Free old data first — some mobile browsers need space before overwrite
+    try{localStorage.removeItem('mm_hist');}catch(ex){}
+    // Strategy 1: clear images from older entries (keep top 10)
+    for(let i=histArray.length-1;i>=0&&i>10;i--){
+      if(histArray[i].image)histArray[i].image='';
+    }
+    try{
+      localStorage.setItem('mm_hist',JSON.stringify(histArray));
+      return true;
+    }catch(e2){
+      // Strategy 2: trim to 20 items
+      histArray.length=Math.min(histArray.length,20);
       try{
         localStorage.setItem('mm_hist',JSON.stringify(histArray));
         return true;
-      }catch(e2){
-        histArray.length=Math.min(histArray.length,25);
+      }catch(e3){
+        // Strategy 3: clear ALL images
+        histArray.forEach(item=>{item.image='';});
         try{
           localStorage.setItem('mm_hist',JSON.stringify(histArray));
           return true;
-        }catch(e3){
-          histArray.forEach(item=>{item.image='';});
-          try{
-            localStorage.setItem('mm_hist',JSON.stringify(histArray));
-            return true;
-          }catch(e4){
-            console.error('Cannot save mm_hist even after cleanup');
-            return false;
-          }
+        }catch(e4){
+          console.error('Cannot save mm_hist even after full cleanup');
+          return false;
         }
       }
     }
-    console.error('Storage error:',e);
-    return false;
   }
 }
 
@@ -2069,6 +2072,19 @@ function migrateHistV45(){
   }
   if(needSave)safeSetHist(wordHist);
   localStorage.setItem('mm_hist_compressed_v45','true');
+}
+function migrateHistV451(){
+  // Fix v4.4.1b: migrateHistV45 missed recent images (7-day filter).
+  // Remove ALL full-size images (>10KB in base64 = >10000 chars).
+  // Thumbnails from v4.4.1+ are <8000 chars; full-size scans are >40000 chars.
+  if(localStorage.getItem('mm_hist_v451'))return;
+  let needSave=false;
+  if(wordHist.length>50){wordHist.length=50;needSave=true;}
+  wordHist.forEach(item=>{
+    if(item.image&&item.image.length>10000){item.image='';needSave=true;}
+  });
+  if(needSave)safeSetHist(wordHist);
+  localStorage.setItem('mm_hist_v451','true');
 }
 
 // ════════════════════════════════════════════════
