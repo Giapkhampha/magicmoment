@@ -1,290 +1,238 @@
-# STATUS.md — Magic Moment Project
-> Cập nhật lần cuối: 30/04/2026 (v4.4 — PWA Installable)
-> Mục đích: File này giúp Claude hiểu toàn bộ ngữ cảnh dự án để tiếp tục phát triển
+# STATUS.md — Magic Moment Live State
+
+> **File SỐNG.** Cập nhật mỗi khi có sprint mới hoàn thành.
+> Đây là file Claude/AI nên đọc TRƯỚC TIÊN khi bắt đầu phiên mới để biết "đang ở đâu".
+
+> **Cập nhật lần cuối:** 04/05/2026 (v4.4.2 — Domain migration to giapkhampha.me)
 
 ---
 
-## 🎯 DỰ ÁN LÀ GÌ?
+## 🎯 Đang ở đâu?
 
-**Magic Moment** — Web app học tiếng Anh cho trẻ 3-6 tuổi, ba/mẹ đồng hành.
-- **Người dùng:** Bố (mất gốc tiếng Anh) + con gái Maya 3 tuổi
-- **Triết lý:** "Ba là người chơi cùng, không phải giáo viên" — AI làm cầu nối
-- **Stack:** Single-file HTML/CSS/JS · Groq API (free) · Deploy Vercel
-- **Live URL:** `https://[tên-project].vercel.app` (do user deploy)
-- **Repo:** Giapkhampha/magicmoment
+- **Version hiện tại:** v4.4.2
+- **URL chính thức:** https://magicmoment.giapkhampha.me ⭐
+- **URL cũ (vẫn hoạt động):** https://magicmoment-five.vercel.app (redirect 307 → magicmoment.giapkhampha.me)
+- **Trạng thái:** ✅ Production stable
+- **Sprint vừa hoàn thành:** Domain migration (v4.4.2)
+- **Sprint tiếp theo:** Backend Proxy v4.5 (key pool, user không cần nhập key)
 
 ---
 
-## ✅ ĐÃ HOÀN THÀNH (v4.4)
+## ✅ Đã hoàn thành (lịch sử versions)
 
-### App chính: `index.html` (Magic Moment v4.3)
+### v4.4.2 — Domain Migration (04/05/2026)
+- Migrate domain từ `magicmoment-five.vercel.app` → `magicmoment.giapkhampha.me`
+- Setup CNAME `magicmoment` → `cname.vercel-dns.com` trong Cloudflare
+- Add domain vào Vercel project → SSL auto-issued
+- Vercel redirect cũ: `magicmoment-five.vercel.app` → 307 → `learn-01.vercel.app` (Vercel internal)
+- Bổ sung meta tags trong `<head>`: `og:url`, `canonical` → URL mới
+- Fix 1 hardcoded URL trong canvas share card (line 2390)
+- Bump cache: `magic-moment-v4.4` → `magic-moment-v4.4.2` (force SW refresh)
+- Version badge: v4.4.1 → v4.4.2
+- **Commit:** `7fcd9f0`
+- **Push command dùng:** `git push origin master:main --force-with-lease`
 
-#### Phase 1 — MVP (3 modules cốt lõi)
+### v4.4 — PWA Installable (30/04/2026)
+- Service Worker với cache strategy: precache shell + network-first HTML/JS/CSS
+- manifest.json với 3 icons (192/512/maskable) — Ba Maya tự thiết kế Canva (🐰 + 🪄 + sparkles trên gold)
+- Install prompt button trên home khi `beforeinstallprompt` fire
+- iOS install hint banner sau 30 giây cho Safari users
+- Folder `/icons/` upload trực tiếp lên GitHub (không qua git CLI)
+- Vercel env vars: chưa cần thêm gì
+- **Files mới:** `manifest.json`, `sw.js`, `icons/icon-192.png`, `icons/icon-512.png`, `icons/icon-maskable.png`
+
+### v4.3 — Ecosystem Footer (29/04/2026)
+- Section cuối home, chỉ hiển thị ở `s-home`
+- Brand: "🌸 Made with ❤️ by Ba Maya · giapkhampha.me"
+- 2 link cards: Giáp Khám Phá (teal→purple), Ba & Maya Journey (amber→rose)
+- `<a href>` tag thật, `target="_blank" rel="noopener"`
+- Accent bar 3px qua `::before` pseudo-element
+
+### v4.2 — In-App Help Guide (29/04/2026)
+- Screen mới `s-help`, 9 sections accordion
+- Bibi mini SVG (wave state) làm tour guide
+- Auto-popup lần đầu sau `closeOnboarding()` (delay 800ms)
+- Icon ❓ (`btn-help-home`) góc trên phải home (position absolute)
+- CTA "Thử ngay" trong từng section
+- localStorage key mới: `mm_help_seen_v1`
+- Sections: Bắt đầu nhanh · Magic Scan · Scene Explorer · StoryDuo · Theme Packs · Phần thưởng · Dashboard · Mẹo · Hỏi đáp
+
+### v4.1 — Theme Packs (29/04/2026)
+- 5 chủ đề starter: Animals, Colors, Food, Body, Numbers
+- 8 từ × 5 pack = 40 từ (data hardcoded, không gọi API)
+- Flashcard UI với queue logic ("Đã thuộc"/"Chưa rõ")
+- +50⭐ bonus + sticker khi hoàn thành pack lần đầu
+- Review mode (đã completed): không cộng bonus lần 2
+- localStorage: `mm_themes` = `{packId: {completed, completedAt, learned[], timesPlayed}}`
+- Home tile mới "📚 Chủ đề" (amber→gold gradient)
+
+### v4.0 — Polish & Deploy (28/04/2026)
+- Meta tags: description, theme-color, OG tags
+- PWA meta cơ bản (apple-mobile-web-app-capable)
+- Loading screen với loader 🐰
+- Error boundary: `window.onerror` + `window.onunhandledrejection`
+- Version badge v4.0 ở footer
+- Deploy chính thức trên Vercel
+
+### v3.x — Engagement Loop (trước 28/04)
+- **Streak Calendar** với cột mốc 3/7/14/30/60/100 ngày
+- **Mascot Bibi** SVG inline 6 states
+- **Daily Quest** 3 nhiệm vụ/ngày, +50⭐ bonus
+- **Sticker Album** 30 stickers × 5 themes, rare 20%, flip animation
+- **Share Card** Canvas 1080×1920 với Web Share API
+
+### v2.x — Parent Insight
+- **Parent Dashboard** với bar chart 7 ngày, top topics, sticker progress
+
+### v1.x — MVP (3 modules cốt lõi)
 - **Magic Scan** — Chụp ảnh → AI nhận dạng → TTS + mic chấm phát âm
 - **Scene Explorer** — Upload ảnh → ghim đồ vật → Đố Tìm + Quiz
-- **StoryDuo** — Ba kể chuyện VI → AI dịch EN + emoji scene + 3 từ vựng
+- **StoryDuo** — Ba kể VI → AI dịch EN + emoji scene + 3 từ vựng
 
-#### Phase 2A — Engagement Loop
-- **Streak Calendar** — Tick hằng ngày, cột mốc 3/7/14/30/60/100 ngày
-- **Mascot Bibi** — Thỏ trắng SVG inline, 6 states (idle/happy/thinking/celebrate/sleeping/wave)
-- **Daily Quest** — 3 nhiệm vụ/ngày reset 0h, bonus +50⭐ khi hoàn thành cả 3
-- **UI Responsive** — Mobile-first, max-width 480px, safe area iPhone/Android
+---
 
-#### Phase 2B — Viral Engine
-- **Sticker Album** — 30 stickers × 5 chủ đề, rare 20%, flip animation, theme badge
-- **Share Card** — Canvas 1080×1920, Web Share API, fallback download
+## 🐛 Bugs đã fix gần đây (để không lặp)
 
-#### Phase 2C — Parent Insight
-- **Parent Dashboard** — Bar chart 7 ngày, top topics, sticker progress, review words, all-time stats
+| Bug | Khi nào | Fix |
+|-----|---------|-----|
+| `mm_hist exceeded quota` trên mobile | v4.4.1 hotfix | Compress image về thumbnail 96x96 + safeSetHist với auto-cleanup |
+| Hardcoded `magicmoment.vercel.app` trong share card | v4.4.2 | Search & replace |
+| PWA install button không hiện sau migrate domain | v4.4.2 | Cache mới (`v4.4.2`) + clear PWA cũ trên browser |
+| `Failed to fetch` từ file:// | (cũ) | Bắt buộc dùng localhost hoặc Vercel |
+| `Illegal return statement` | (cũ) | Validate JS với `node -e "new Function()"` sau mọi edit |
+| AI trả JSON lỗi trailing comma | (cũ) | parseJSON() 3 lớp |
+| Camera mở file dialog thay webcam | (cũ) | Tách 2 màn hình: webcam (getUserMedia) + file input |
+| Pollinations.ai timeout | (cũ) | Bỏ hoàn toàn, dùng Emoji Scene |
 
-#### v4.1 — Theme Packs (Phase 3)
-- **Theme Packs** — 5 chủ đề starter: Animals, Colors, Food, Body, Numbers
-- 8 từ × 5 pack = 40 từ cấu trúc; data hardcoded (no API)
-- Flashcard UI: emoji + EN (Baloo 2 gold) + IPA + VI (Caveat) + example sentence
-- TTS auto khi mở card; nút Nghe lại + Nói thử (en-US mic + Levenshtein check)
-- "✅ Đã thuộc" → +5⭐, vào wordHist(source:'theme:packId'), tryUnlockSticker, progressQuest
-- "🤔 Chưa rõ" → word đẩy về cuối queue, gặp lại sau
-- Hoàn thành pack lần đầu: +50⭐ bonus + forceUnlock sticker từ đúng theme
-- Review mode (pack completed): ôn lại tất cả, không cộng bonus lần 2
-- localStorage: mm_themes = {packId: {completed, completedAt, learned[], timesPlayed}}
-- Home: story tile thu nhỏ về 2x2 grid, thêm tile "📚 Chủ đề" (amber→gold)
-- Parent Dashboard: getTopTopics() hiện "🐱 Động vật" thay vì "theme:animals"
+---
 
-#### v4.2 — In-App Help Guide (Phase 3 Feature 2)
-- **Help Guide** — 1 screen mới (`s-help`), 9 sections accordion với Bibi mini SVG (`#help-bibi-svg`, wave state) làm tour guide
-- Auto-popup lần đầu: sau khi `closeOnboarding()` set `mm_onboarded`, gọi `checkHelpAutoOpen()` → delay 800ms → `openHelp()`
-- Guard logic: `checkHelpAutoOpen()` chỉ chạy khi `!mm_help_seen_v1 && mm_onboarded` (tránh conflict với onboarding modal)
-- Icon ❓ (`btn-help-home`) góc trên phải home screen (position:absolute top:16px right:16px) → mở help bất kỳ lúc nào
-- CTA "Thử ngay" trong từng section → đi thẳng vào đúng module (onclick attribute inline)
-- `exitHelp()` → set `mm_help_seen_v1` + `go('s-home')`; `markHelpSeen()` gọi thêm khi bấm CTA
-- 4 call sites cho `checkHelpAutoOpen()`: `window.onload`, `saveKey()`, `closeOnboarding()` + định nghĩa hàm
-- CTA screen mapping thực tế: scan→`go('s-cam')` · scene→`go('s-scene')` · story→`go('s-sd-home');renderSDHome()` · theme→`openThemes()` · dashboard→`openDashboard()`
-- localStorage key mới: `mm_help_seen_v1` (versioned, reset khi nội dung help thay đổi)
-- Sections: Bắt đầu nhanh · Magic Scan · Scene Explorer · StoryDuo · Theme Packs · Phần thưởng · Dashboard · Mẹo · Hỏi đáp
-- CSS mới: `.help-bibi-banner`, `.bibi-mini`, `.help-accordion`, `.help-item`, `.help-header`, `.help-body`, `.help-cta`, `.help-tip`, `.help-table`, `.btn-help-home`, `#help-bibi-svg` animation scope
-- Version badge cập nhật: `v4.2 · Magic Moment ✨`
+## 🔑 Technical state hiện tại
 
-#### v4.4 — PWA Installable
-- **Service Worker** (`sw.js`) — Cache strategy: network-first HTML/JS/CSS, cache-first icons, skip Groq API calls
-- **Manifest** (`manifest.json`) — App metadata, 3 icons (192/512/maskable), standalone display, theme gold #FFD94A
-- **Install prompt** — `btn-install-pwa` tự hiện khi browser fire `beforeinstallprompt` (Android Chrome); ẩn sau khi install
-- **iOS hint** — Banner slide-up hướng dẫn iOS Safari user add to home screen; hiện sau 30s, dismiss 1 lần (flag `mm_ios_hint_shown`)
-- **Offline support** — Theme Packs + Help Guide hoạt động không cần internet; Magic Scan/StoryDuo báo lỗi (cần Groq API)
-- **Update flow** — SW activate → clear old caches → load version mới
-- localStorage keys mới: `mm_pwa_installed`, `mm_ios_hint_shown`
-- Files mới: `manifest.json`, `sw.js`; icons đã có sẵn tại `/icons/`
-- Version badge: v4.3 → v4.4
+### API & Models
+- **Provider:** Groq (free tier, key user tự nhập)
+- **Vision:** `meta-llama/llama-4-scout-17b-16e-instruct` (1,000 req/ngày Vision)
+- **Text:** `llama-3.3-70b-versatile` (1,000 req/ngày Text)
+- **Key format:** `gsk_...`, lưu localStorage `mm_key`
+- **⚠️ Pain point:** User mới phải tự lấy key Groq → friction → sẽ fix ở v4.5 (Backend Proxy)
 
-#### v4.3 — Ecosystem Footer
-- **Eco Footer** — section cuối s-home, chỉ hiển thị ở home, không xuất hiện screen khác
-- Brand signature: `🌸 Made with ❤️ by Ba Maya · giapkhampha.me` (clickable → hub chính)
-- 2 link cards side-by-side (stack vertical ≤400px):
-  - **Giáp Khám Phá** (`eco-a`, teal→purple) → `giapkhamphame.vercel.app`
-  - **Ba & Maya Journey** (`eco-b`, amber→rose) → `maya-journey.vercel.app`
-- `<a href>` tag thật, `target="_blank" rel="noopener"` — không dùng JS onclick
-- Accent bar 3px trên mỗi card qua `::before` pseudo-element
-- CSS: `.eco-footer`, `.eco-brand`, `.eco-heading`, `.eco-cards`, `.eco-card`, `.eco-icon`, `.eco-text`, `.eco-title`, `.eco-sub`
-- Version badge: `v4.2` → `v4.3`
+### localStorage keys hiện tại
 
-#### v4.0 — Polish & Deploy
-- **Meta tags** — description, theme-color, OG tags (Facebook/Zalo share preview)
-- **PWA meta** — apple-mobile-web-app-capable, status-bar-style, title
-- **Loading screen** — Loader 🐰 fade-out khi app sẵn sàng (xóa trắng màn hình)
-- **Error boundary** — `window.onerror` + `window.onunhandledrejection` (log, không crash)
-- **Version badge** — "v4.0 · Magic Moment ✨" ở footer home
-
-### localStorage keys
 | Key | Nội dung |
-|-----|---------|
-| `mm_key` | Groq API key |
-| `mm_hist` | Word history (english, vietnamese, emoji, timestamp, source) |
+|-----|----------|
+| `mm_key` | Groq API key user nhập |
+| `mm_hist` | Word history (tối đa 50 items, image thumbnail 96x96) |
 | `mm_scoreday` | Điểm hôm nay |
 | `mm_wcnt` | Tổng từ đã học |
 | `mm_streak` | Streak data (current, best, days[], milestones[]) |
-| `mm_quest` | Daily quest (date, quests{scan,game,story}, bonusGiven) |
-| `mm_stickers` | Sticker data (unlocked[], themeBadges[], wordsSinceLastSticker) |
-| `mm_migrated_v3_1` | Migration flag |
+| `mm_quest` | Daily quest (date, quests, bonusGiven) |
+| `mm_stickers` | Sticker data (unlocked[], themeBadges[]) |
+| `mm_themes` | Theme Packs data |
 | `mm_onboarded` | Onboarding flag |
-| `mm_themes` | Theme Packs data ({packId: {completed, completedAt, learned[], timesPlayed}}) |
-| `mm_help_seen_v1` | Flag đã xem Help Guide (versioned) |
-| `mm_pwa_installed` | Flag đã install PWA (ẩn install button) |
-| `mm_ios_hint_shown` | Flag đã thấy iOS install hint (không hiện lại) |
+| `mm_help_seen_v1` | Help Guide đã xem |
+| `mm_pwa_installed` | PWA đã cài |
+| `mm_ios_hint_shown` | iOS install hint đã hiện |
+| `mm_hist_compressed_v45` | Migration flag (v4.4.1) |
 
----
-
-### Các file đã tạo
-| File | Mô tả | Trạng thái |
-|------|-------|-----------|
-| `index.html` | App tích hợp toàn bộ features (v4.4) | ✅ Production ready |
-| `manifest.json` | PWA manifest — tên, icons, màu, display mode | ✅ |
-| `sw.js` | Service Worker — cache strategy, offline support | ✅ |
-| `HELP_GUIDE_DESIGN.md` | Design doc cho In-App Help Guide (v4.2) | ✅ Archived |
-| `THEME_PACKS_DESIGN.md` | Design doc cho Theme Packs (v4.1) | ✅ Archived |
-| `vercel.json` | Config deploy Vercel | ✅ |
-| `SKILL.md` | Technical patterns & code snippets | ✅ |
-| `INSTRUCTIONS.md` | Product vision & pedagogy | ✅ |
-| `STATUS.md` | File này | ✅ |
-
----
-
-## 🔧 TECHNICAL DECISIONS ĐÃ CHỐT
-
-### API
-- **Groq** (không phải Anthropic/Claude API) vì miễn phí hoàn toàn
-- Vision model: `meta-llama/llama-4-scout-17b-16e-instruct`
-- Text model: `llama-3.3-70b-versatile`
-- Key format: `gsk_...` — lưu localStorage key `mm_key`
-
-### Illustration
-- **KHÔNG dùng Pollinations.ai** (chậm, không ổn định)
-- Thay bằng **Emoji Scene** (CSS animation) — instant, không cần API
-- AI trả về `scene_emojis[]` + `bg_from` + `bg_to` trong JSON
-
-### Camera
-- **Desktop:** `getUserMedia()` → video stream → canvas capture
-- **Mobile:** `<input type="file" accept="image/*" capture="environment">`
-- Hai nút riêng biệt (không gộp) để tránh nhầm lẫn
-
-### CORS Fix
-- App **BẮT BUỘC** chạy từ `http://` hoặc `https://`
-- File `file://` → lỗi CORS → không gọi được API
-- Local dev: `python -m http.server 8080`
-- Production: Vercel
-
-### JSON Parsing
-- AI đôi khi trả JSON lỗi → dùng parser 3 lớp:
-  1. `JSON.parse()` thuần
-  2. `new Function('return (...)')()` — eval fallback
-  3. Throw error rõ ràng
-- Luôn clean trailing commas, control chars trước khi parse
-
-### Scoring (không phạt)
+### Files trong repo
 ```
-Mọi action đều có điểm dương:
-- Đúng: +10-15⭐ (tùy game)
-- Sai:  +5⭐ (khuyến khích tiếp tục)
-- Confetti: CHỈ khi đúng
+magicmoment/
+├── index.html           ← App chính (v4.4.2, ~170KB)
+├── manifest.json        ← PWA manifest
+├── sw.js                ← Service Worker (CACHE_NAME: magic-moment-v4.4.2)
+├── vercel.json          ← Routing config
+├── icons/
+│   ├── icon-192.png
+│   ├── icon-512.png
+│   └── icon-maskable.png
+├── CLAUDE.md            ← Entry point (mới tạo 04/05/2026)
+└── docs/
+    ├── CONTEXT.md       ← Bối cảnh (mới)
+    ├── STATUS.md        ← File này (file SỐNG)
+    ├── ROADMAP.md       ← Kế hoạch (mới)
+    └── CONVENTIONS.md   ← Code style (mới)
 ```
 
----
-
-## 🐛 BUGS ĐÃ FIX (để không lặp lại)
-
-| Bug | Nguyên nhân | Fix áp dụng |
-|-----|-------------|-------------|
-| `Illegal return statement` | `str_replace` xoá mất function declaration | Luôn verify JS với `node -e "new Function()"` sau edit |
-| `Failed to fetch` | Mở `file://` trên Chrome Windows | Hướng dẫn dùng localhost hoặc Vercel |
-| `Unexpected number in JSON` | AI trả JSON có trailing comma | parseJSON() 3 lớp |
-| Camera mở file dialog thay vì webcam | `capture="environment"` không work trên desktop | Tách 2 màn hình: webcam (getUserMedia) và file input |
-| Ảnh Pollinations không load | Server timeout + CORS | Bỏ hoàn toàn, dùng Emoji Scene |
-| StoryDuo dịch quá ngắn | `max_tokens: 300` + prompt "cho bé 3 tuổi" | Tăng lên 600-700 tokens, bỏ yêu cầu "simple" |
-| `ls1 is not defined` | Trong showLoad(), `ls1` không có quotes | Fix thành `'ls1','ls2','ls3'` |
+### Deploy
+- **GitHub:** github.com/Giapkhampha/magicmoment
+- **Local branch:** `master`
+- **Production branch:** `main` (Vercel watch)
+- **Push:** `git push origin master:main --force-with-lease`
+- **Vercel project:** giaptdtc / magicmoment (Hobby plan, free)
 
 ---
 
-## 📊 TRẠNG THÁI DEPLOY
+## ⏭️ Đang làm / Đang vướng
 
+### Đang làm
+- Tạo knowledge architecture (CLAUDE.md, CONTEXT.md, STATUS.md, ROADMAP.md, CONVENTIONS.md)
+
+### Đang vướng / cần quyết
+- Chưa setup PWA install lại trên domain mới (cần clear PWA cũ + reload)
+- Chưa làm Backend Proxy (v4.5) — user mới vẫn phải lấy key Groq
+
+### Sẵn sàng làm tiếp (priority order)
+1. **Backend Proxy v4.5** — User không cần nhập API key (chi tiết trong ROADMAP.md)
+2. **Word Jar / Spaced Repetition** — Bé học từ rồi quên → cần ôn lại
+3. **Theme Packs Level 2** — 6 packs mới (Home, Nature, Actions, Feelings, Family, Clothes)
+
+---
+
+## 📊 Capacity / Performance state
+
+### Quota Groq hiện tại (free, 1 key Ba Maya)
+- Vision: 1,000 req/ngày
+- Text: 1,000 req/ngày
+- → ~80 user/ngày capacity (bottleneck Vision)
+
+### Sau khi v4.5 Backend Proxy (kế hoạch)
+- 1 Super tier ($20/mo) + 4 Free keys = 14,000 req/ngày Vision
+- → ~1,100 user/ngày capacity
+
+### Vercel state
+- Hobby plan (free)
+- Auto-deploy từ branch `main`
+- Functions chưa dùng (chưa có `/api/` folder)
+- Bandwidth + builds: chưa hit limit
+
+---
+
+## 🌐 Domain & DNS
+
+### Cloudflare DNS records cho `giapkhampha.me`
 ```
-Local dev:   http://localhost:8080/index.html  ✅
-Vercel:      https://[user-domain].vercel.app  ✅ (user đã deploy)
-GitHub:      Giapkhampha/magicmoment           ✅ (repo của user)
+A     | giapkhampha.me     | 76.76.21.21         | DNS only ✓
+CNAME | www                | cname.vercel-dns.com | DNS only ✓
+CNAME | pdf                | cname.vercel-dns.com | DNS only ✓
+CNAME | magicmoment        | cname.vercel-dns.com | DNS only ✓ (mới v4.4.2)
+MX × 3 | route1-3.mx.cloudflare.net | (Email Routing)
+TXT × 2 | DKIM + SPF        | (Email Routing)
 ```
 
-**Lưu ý deploy:** User đã thành công deploy lên Vercel với:
-- Framework: **Other** (không phải Angular/React/...)
-- File chính: `index.html` → `vercel.json` route tất cả về đây
+### Email forwarding active
+- `lienhe@giapkhampha.me` → Gmail Ba Maya ✓
+- (Tương lai có thể thêm: `magic@`, `pdf@`, etc.)
 
 ---
 
-## 🗺️ ROADMAP — Updated post v4.3 (Ecosystem Aware)
+## 🔥 Quick reference cho Claude/AI
 
-### Phase 3 — DONE ✅
-- [x] **Theme Packs** — 5 chủ đề starter, 40 từ vựng (v4.1)
-- [x] **In-App Help Guide** — 9 sections accordion, auto-popup (v4.2)
-- [x] **Ecosystem Footer** — brand signature + 2 link cards (v4.3)
+Khi user request feature mới:
+1. **Đọc ROADMAP.md** xem feature đó có trong plan không
+2. **Đọc CONVENTIONS.md** xem có patterns đã chốt liên quan không
+3. **Đọc section "Bugs đã fix"** ở trên xem có lesson learned không
+4. **Hỏi user** trước khi sửa nếu có gì mơ hồ
 
-### Phase 4 — Top 3 ưu tiên kế tiếp
+Khi sửa bug:
+1. **Đọc section "Bugs đã fix gần đây"** xem có pattern tương tự
+2. **Verify bug reproducer** trước khi đoán nguyên nhân
+3. **Sửa nhỏ + test** thay vì rewrite lớn
 
-**Quyết định dựa trên: ecosystem context (3 apps Giáp Khám Phá) + giáo dục impact + observation Maya thực tế**
-
-#### 🥇 #1 — PWA Installable ✅ DONE (v4.4)
-
-#### 🥈 #1 (mới) — Word Jar / Spaced Repetition (~4h)
-- Bình "từ cần ôn" tự động xuất hiện sau 3/7/14/30 ngày
-- Algorithm: dựa trên SM-2 simplified
-- Mỗi ngày tap "Word Jar" → 5 từ ngẫu nhiên cần ôn
-- **Lý do ưu tiên:** Vấn đề lớn nhất hiện tại = bé học từ rồi quên. Đây là single feature có giáo dục impact cao nhất trên toàn roadmap.
-
-#### 🥉 #3 — Theme Packs Level 2 (~3h)
-- 6 packs mới: Home, Nature, Actions, Feelings, Family, Clothes
-- 8 từ × 6 pack = 48 từ Level 2
-- Phù hợp 4-5 tuổi (sau khi Maya thuộc Level 1)
-- **Lý do ưu tiên:** Content depth — tránh chán khi bé hết Level 1.
-
-### Phase 5 — Khi có signals từ user
-
-**Không hardcode trước — quyết định dựa trên observation.**
-
-| Trigger | Build feature |
-|---------|---------------|
-| Bé hết Theme Pack Level 2 | Theme Packs Level 3 (4 packs: School/Transport/Clothes/Seasons) |
-| Mẹ/ông bà ghen tị muốn tham gia | Multi-Profile (2-3 profile chung 1 device) |
-| Ba muốn theo dõi từ điện thoại khác | Cloud Sync (Supabase free tier) |
-| StoryDuo thành hit | Story Sharing (link chia sẻ sách cho ông bà) |
-| Mic phát hiện nhiều bé phát âm sai | Pronunciation Premium (phoneme analysis) |
-
-### Hướng dài hạn (parking lot — chờ ecosystem mature)
-
-- **Cross-app integration** (Magic Moment ↔ Maya Journey): Học từ Magic Moment auto-post vào nhật ký Maya Journey
-- **Shared Word Bank**: Từ vựng học ở Magic Moment xuất hiện trong bài viết Giáp Khám Phá
-- **Custom Domain**: `magicmoment.giapkhampha.me` (sau khi mua giapkhampha.me)
-- **Native App** (React Native): Wrap thành iOS/Android app
-
-### ❌ Đã loại / Giảm priority sau ecosystem awareness
-
-| Feature | Trạng thái | Lý do |
-|---------|-----------|-------|
-| Story Library (50 chuyện) | ⬇️ Giảm | Sách hay đã có ở Giáp Khám Phá hub |
-| Onboarding Video | ❌ Loại | Có thể làm content trên Giáp Khám Phá thay vì nhồi vào app |
-| Community feature | ❌ Loại | Giáp Khám Phá đóng vai trò community |
-| PenPal Planet | ⬇️ Giảm | Phức tạp, cần backend; không phải core value |
-| Printable Book | ⬇️ Giảm | Nice-to-have, không tăng learning |
+Khi user nói "deploy / push":
+1. **`git push origin master:main --force-with-lease`** (KHÔNG `git push origin main` thuần)
+2. **Đợi Vercel build** ~1-2 phút
+3. **Hard refresh** (`Ctrl+Shift+R`) trên production để verify
 
 ---
 
-## 💡 NGUYÊN TẮC PHÁT TRIỂN POST-v4.3
-
-1. **Magic Moment FOCUS:** Học tiếng Anh qua AI (vision, voice, narrative)
-2. **KHÔNG ôm đồm:** Sách hay, phương pháp giáo dục, community — đã có ở Giáp Khám Phá hub
-3. **Observe trước khi build:** Quan sát Maya & ba dùng 2-3 tuần trước khi quyết Phase 5
-4. **Ecosystem first:** Mọi feature mới nghĩ đến tích hợp với Maya Journey + Giáp Khám Phá
-
----
-
-## 💡 CONTEXT QUAN TRỌNG CHO SESSION MỚI
-
-- Con gái tên **Maya**, 3 tuổi
-- Dùng **"Bé"** hoặc **"Bé yêu"** trong app — không hardcode tên cụ thể
-- Ba dùng **Samsung Android** + **Windows Chrome**
-- Stack: Vanilla HTML/CSS/JS · Groq API (gsk_...) · Vercel
-- Repo: Giapkhampha/magicmoment
-- Version hiện tại: **v4.4**
-- Mọi text error: **tiếng Việt**
-- KHÔNG dùng framework, KHÔNG external asset
-- JS validate: `node -e "new Function(require('fs').readFileSync('index.html','utf8').match(/<script>([\s\S]*)<\/script>/)[1])"`
-
----
-
-## 🚀 KHI BẮT ĐẦU SESSION MỚI
-
-Claude cần đọc file này và:
-1. Hỏi user muốn build feature nào tiếp theo
-2. Đọc lại SKILL.md trước khi viết code mới
-3. Verify JS syntax sau mỗi lần sửa file
-4. Test case đầu tiên: chạy từ localhost, không từ file://
-5. Mọi feature mới → update STATUS.md phần "Đã hoàn thành"
-
----
-
-*File này được tạo vào ngày 28/04/2026 — cuối session build Magic Moment v3*
-*Cập nhật lần cuối: 29/04/2026 — v4.3 Ecosystem Footer*
+*File version 4.4.2 — 04/05/2026*
+*Update mỗi khi: ship version mới, fix bug đáng nhớ, đổi infrastructure*
