@@ -1,5 +1,5 @@
 // sw.js - Magic Moment Service Worker v1
-const CACHE_NAME = 'magic-moment-v4.4.2';
+const CACHE_NAME = 'magic-moment-v4.5';
 const RUNTIME_CACHE = 'magic-moment-runtime';
 
 const PRECACHE_URLS = [
@@ -33,8 +33,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // Skip API calls (Groq) — let browser handle natively
-  if (url.hostname.includes('groq.com') || url.hostname.includes('api.')) {
+  // Skip API calls — let browser handle natively
+  if (url.hostname.includes('groq.com') || url.hostname.includes('api.') || url.pathname.startsWith('/api/')) {
     return;
   }
 

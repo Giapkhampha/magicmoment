@@ -667,6 +667,19 @@ canvas{display:none;}
 .ios-hint-title{font:700 0.92rem 'Baloo 2',cursive;color:var(--gold);}
 .ios-hint-desc{font:500 0.78rem 'Nunito',sans-serif;color:rgba(255,255,255,.85);margin-top:2px;}
 .ios-hint-close{background:rgba(255,255,255,.1);border:none;border-radius:50%;width:28px;height:28px;color:white;cursor:pointer;flex-shrink:0;}
+
+/* ══════════════════════════════════════
+   SETTINGS SCREEN
+══════════════════════════════════════ */
+.settings-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius-card);padding:20px;width:100%;max-width:480px;backdrop-filter:blur(16px);}
+.settings-section-title{font-family:'Baloo 2',cursive;font-size:1rem;font-weight:800;color:white;margin-bottom:14px;}
+.settings-option{display:flex;align-items:flex-start;gap:12px;padding:12px;border-radius:12px;cursor:pointer;transition:background .2s;margin-bottom:6px;border:1px solid transparent;}
+.settings-option:active{transform:scale(.98);}
+.settings-radio{font-size:1.1rem;color:var(--gold);flex-shrink:0;margin-top:2px;min-width:18px;}
+.settings-opt-label{font-size:.88rem;font-weight:700;color:white;}
+.settings-opt-sub{font-size:.72rem;color:rgba(255,255,255,.45);margin-top:2px;}
+.status-badge-pill{display:inline-block;background:rgba(255,255,255,.06);border:1px solid var(--border);border-radius:999px;padding:3px 12px;font-size:.75rem;color:rgba(255,255,255,.55);cursor:pointer;transition:opacity .2s;}
+.status-badge-pill:active{opacity:.6;}
 </style>
 </head>
 <body>
@@ -716,6 +729,7 @@ canvas{display:none;}
 
 <!-- ════════ HOME ════════ -->
 <div class="screen hidden" id="s-home">
+  <button class="btn-help-home" onclick="go('s-settings')" style="position:absolute;top:16px;left:16px;z-index:20;" title="Cài đặt">⚙️</button>
   <button class="btn-help-home" onclick="openHelp()" style="position:absolute;top:16px;right:16px;z-index:20;" title="Hướng dẫn sử dụng">❓</button>
   <div class="home-logo">
     <span class="home-icon">🪄</span>
@@ -726,6 +740,9 @@ canvas{display:none;}
     <div class="score-card"><div class="score-label">⭐ Hôm nay</div><div class="score-num" id="sc-today">0</div></div>
     <div class="score-card"><div class="score-label">📚 Đã học</div><div class="score-num" id="sc-words">0</div></div>
     <div class="score-card" id="streak-badge-card" style="background:linear-gradient(135deg,rgba(255,107,107,.12),rgba(255,179,71,.1));border-color:rgba(255,179,71,.3);"><div class="score-label">🔥 Streak</div><div class="score-num" id="sc-streak" style="color:var(--coral);">0</div></div>
+  </div>
+  <div style="text-align:center;margin-bottom:8px;opacity:.7;" onclick="go('s-settings')">
+    <span class="status-badge-pill" id="status-badge-text">💛 Server Ba Maya</span>
   </div>
   <!-- Daily Quest Section -->
   <div class="quest-section" id="quest-card">
@@ -768,10 +785,9 @@ canvas{display:none;}
     <button class="btn-ghost" onclick="showHistory()">📖 Từ đã học</button>
     <button class="btn-album-home" onclick="renderAlbum();go('s-album')">🎟️ <span id="album-home-count">0</span>/30</button>
     <button class="btn-dashboard" onclick="openDashboard()">📊 Báo cáo</button>
-    <button class="btn-ghost" onclick="go('s-key')" style="font-size:.74rem;">⚙️</button>
   </div>
   <div class="err-msg" id="err-home"></div>
-  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.4.2 · Magic Moment ✨</div>
+  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.5 · Magic Moment ✨</div>
   <div style="padding:0 16px;">
     <button id="btn-install-pwa" class="btn-install" onclick="installPWA()" style="display:none;">
       📱 Cài đặt app trên màn hình
@@ -1280,6 +1296,42 @@ canvas{display:none;}
   </div>
 </div>
 
+<!-- ════════ SETTINGS ════════ -->
+<div class="screen hidden" id="s-settings" style="justify-content:flex-start;overflow-y:auto;">
+  <div style="width:100%;max-width:480px;padding-bottom:30px;">
+    <button class="btn-back" style="position:relative;top:0;left:0;backdrop-filter:none;" onclick="go('s-home')">← Về nhà</button>
+    <div style="text-align:center;margin:20px 0 24px;">
+      <span style="font-size:2.4rem;display:block;">⚙️</span>
+      <div style="font-family:'Baloo 2',cursive;font-size:1.6rem;font-weight:800;color:white;margin-top:6px;">Cài đặt</div>
+    </div>
+    <div class="settings-card">
+      <div class="settings-section-title">🤖 Chế độ AI</div>
+      <div class="settings-option" id="opt-server" onclick="setMode('server')">
+        <span class="settings-radio" id="radio-server">◉</span>
+        <div>
+          <div class="settings-opt-label">💛 Dùng server Ba Maya</div>
+          <div class="settings-opt-sub">Mặc định · Miễn phí · Không cần nhập key</div>
+        </div>
+      </div>
+      <div class="settings-option" id="opt-power" onclick="setMode('power')">
+        <span class="settings-radio" id="radio-power">○</span>
+        <div>
+          <div class="settings-opt-label">🔑 Dùng API key cá nhân</div>
+          <div class="settings-opt-sub">Nâng cao · Dùng quota riêng</div>
+        </div>
+      </div>
+      <div id="key-input-wrap" style="display:none;margin-top:12px;">
+        <input class="key-input" type="password" id="settings-key-inp" placeholder="gsk_..." autocomplete="off">
+        <div style="font-size:.72rem;color:rgba(255,255,255,.4);margin-top:4px;text-align:center;">
+          Lấy key tại: <a href="https://console.groq.com" target="_blank" rel="noopener" style="color:var(--gold);">console.groq.com</a>
+        </div>
+        <button class="btn-key" style="margin-top:10px;" onclick="savePowerKey()">💾 Lưu key</button>
+      </div>
+    </div>
+    <button class="btn-ghost" style="width:100%;margin-top:16px;" onclick="go('s-home')">← Về trang chủ</button>
+  </div>
+</div>
+
 <!-- ONBOARDING MODAL -->
 <div class="onboard-overlay" id="onboard-overlay">
   <div class="onboard-card">
@@ -1337,7 +1389,8 @@ window.onunhandledrejection = function(e) {
 // ════════════════════════════════════════════════
 //  SHARED STATE
 // ════════════════════════════════════════════════
-let apiKey    = localStorage.getItem('mm_key')       || '';
+let apiKey       = localStorage.getItem('mm_key')        || '';
+let powerUserMode= localStorage.getItem('mm_power_user') === '1';
 let scoreDay  = +localStorage.getItem('mm_scoreday') || 0;
 let wordCnt   = +localStorage.getItem('mm_wcnt')     || 0;
 let wordHist  = JSON.parse(localStorage.getItem('mm_hist')     || '[]');
@@ -1363,9 +1416,10 @@ window.onload=()=>{
   migrateToV3_1();
   migrateHistV45();
   migrateHistV451();
+  migrateToV45();
   updateStreakBadge();
-  go(apiKey?'s-home':'s-key');
-  if(apiKey)checkHelpAutoOpen();
+  go('s-home');
+  checkHelpAutoOpen();
 };
 function makeStars(){
   const c=document.getElementById('stars');
@@ -1376,7 +1430,7 @@ function makeStars(){
     c.appendChild(s);
   }
 }
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='s-home'){setTimeout(initBibiOnHome,60);setTimeout(renderQuests,80);checkOnboarding();updateAlbumHomeCount();}}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='s-home'){setTimeout(initBibiOnHome,60);setTimeout(renderQuests,80);checkOnboarding();updateAlbumHomeCount();updateStatusBadge();}if(id==='s-settings'){updateSettingsUI();}}
 function updateScore(){document.getElementById('sc-today').textContent=scoreDay;document.getElementById('sc-words').textContent=wordCnt;}
 
 // ════════════════════════════════════════════════
@@ -1820,26 +1874,32 @@ function showHistory(){
 async function groqVision(b64url,prompt){
   const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),28000);
   try{
-    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
-      method:'POST',signal:ctrl.signal,
-      headers:{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`},
+    const useDirect=powerUserMode&&apiKey;
+    const url=useDirect?'https://api.groq.com/openai/v1/chat/completions':'/api/groq';
+    const headers={'Content-Type':'application/json'};
+    if(useDirect)headers['Authorization']=`Bearer ${apiKey}`;
+    const res=await fetch(url,{
+      method:'POST',signal:ctrl.signal,headers,
       body:JSON.stringify({model:'meta-llama/llama-4-scout-17b-16e-instruct',max_tokens:800,messages:[{role:'user',content:[{type:'image_url',image_url:{url:b64url}},{type:'text',text:prompt}]}]})
     });
     clearTimeout(timer);
-    if(!res.ok){const e=await res.json().catch(()=>({}));if(res.status===401){showKeyErr('API key không hợp lệ');go('s-key');}throw new Error(e.error?.message||`HTTP ${res.status}`);}
+    if(!res.ok){const e=await res.json().catch(()=>({}));const msg=e.error?.message||`Lỗi ${res.status}`;if(res.status===401&&useDirect){go('s-settings');}throw new Error(msg);}
     const d=await res.json();return d.choices?.[0]?.message?.content||'';
   }catch(e){clearTimeout(timer);if(e.name==='AbortError')throw new Error('Timeout — kiểm tra mạng!');throw e;}
 }
 async function groqChat(prompt,maxTokens=400){
   const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),28000);
   try{
-    const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
-      method:'POST',signal:ctrl.signal,
-      headers:{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`},
+    const useDirect=powerUserMode&&apiKey;
+    const url=useDirect?'https://api.groq.com/openai/v1/chat/completions':'/api/groq';
+    const headers={'Content-Type':'application/json'};
+    if(useDirect)headers['Authorization']=`Bearer ${apiKey}`;
+    const res=await fetch(url,{
+      method:'POST',signal:ctrl.signal,headers,
       body:JSON.stringify({model:'llama-3.3-70b-versatile',max_tokens:maxTokens,messages:[{role:'user',content:prompt}]})
     });
     clearTimeout(timer);
-    if(!res.ok){const e=await res.json().catch(()=>({}));if(res.status===401){showKeyErr('API key không hợp lệ');go('s-key');}throw new Error(e.error?.message||`HTTP ${res.status}`);}
+    if(!res.ok){const e=await res.json().catch(()=>({}));const msg=e.error?.message||`Lỗi ${res.status}`;if(res.status===401&&useDirect){go('s-settings');}throw new Error(msg);}
     const d=await res.json();return d.choices?.[0]?.message?.content||'';
   }catch(e){clearTimeout(timer);if(e.name==='AbortError')throw new Error('Timeout — kiểm tra mạng!');throw e;}
 }
@@ -2108,6 +2168,58 @@ function migrateHistV451(){
   });
   if(needSave)safeSetHist(wordHist);
   localStorage.setItem('mm_hist_v451','true');
+}
+function migrateToV45(){
+  if(localStorage.getItem('mm_migrated_v45'))return;
+  // v4.5: KHÔNG auto bật Power User Mode kể cả user cũ có mm_key
+  // Key cũ vẫn giữ trong localStorage, user thấy lại khi vào Settings và toggle ON
+  try{localStorage.setItem('mm_migrated_v45','1');}catch(e){}
+}
+
+// ════════════════════════════════════════════════
+//  SETTINGS (v4.5)
+// ════════════════════════════════════════════════
+function updateStatusBadge(){
+  const el=document.getElementById('status-badge-text');
+  if(!el)return;
+  el.textContent=powerUserMode?'🔑 Key cá nhân':'💛 Server Ba Maya';
+}
+function updateSettingsUI(){
+  const isPower=powerUserMode;
+  document.getElementById('radio-server').textContent=isPower?'○':'◉';
+  document.getElementById('radio-power').textContent=isPower?'◉':'○';
+  document.getElementById('opt-server').style.background=isPower?'':'rgba(255,217,74,.06)';
+  document.getElementById('opt-server').style.borderColor=isPower?'transparent':'rgba(255,217,74,.25)';
+  document.getElementById('opt-power').style.background=isPower?'rgba(255,217,74,.06)':'';
+  document.getElementById('opt-power').style.borderColor=isPower?'rgba(255,217,74,.25)':'transparent';
+  const keyWrap=document.getElementById('key-input-wrap');
+  keyWrap.style.display=isPower?'block':'none';
+  if(isPower&&apiKey)document.getElementById('settings-key-inp').value=apiKey;
+}
+function setMode(mode){
+  powerUserMode=mode==='power';
+  try{
+    if(powerUserMode)localStorage.setItem('mm_power_user','1');
+    else localStorage.removeItem('mm_power_user');
+  }catch(e){}
+  updateSettingsUI();
+  updateStatusBadge();
+}
+function savePowerKey(){
+  const v=document.getElementById('settings-key-inp').value.trim();
+  if(!v.startsWith('gsk_')){
+    const el=document.getElementById('settings-key-inp');
+    el.style.borderColor='var(--coral)';
+    setTimeout(()=>{el.style.borderColor='';}  ,2000);
+    return;
+  }
+  apiKey=v;
+  try{localStorage.setItem('mm_key',apiKey);}catch(e){}
+  powerUserMode=true;
+  try{localStorage.setItem('mm_power_user','1');}catch(e){}
+  updateSettingsUI();
+  updateStatusBadge();
+  go('s-home');
 }
 
 // ════════════════════════════════════════════════
