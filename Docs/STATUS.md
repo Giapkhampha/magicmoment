@@ -3,22 +3,37 @@
 > **File SỐNG.** Cập nhật mỗi khi có sprint mới hoàn thành.
 > Đây là file Claude/AI nên đọc TRƯỚC TIÊN khi bắt đầu phiên mới để biết "đang ở đâu".
 
-> **Cập nhật lần cuối:** 04/05/2026 (v4.4.2 — Domain migration to giapkhampha.me)
+> **Cập nhật lần cuối:** 04/05/2026 (v4.5 — Backend Proxy)
 
 ---
 
 ## 🎯 Đang ở đâu?
 
-- **Version hiện tại:** v4.4.2
+- **Version hiện tại:** v4.5
 - **URL chính thức:** https://magicmoment.giapkhampha.me ⭐
 - **URL cũ (vẫn hoạt động):** https://magicmoment-five.vercel.app (redirect 307 → magicmoment.giapkhampha.me)
-- **Trạng thái:** ✅ Production stable
-- **Sprint vừa hoàn thành:** Domain migration (v4.4.2)
-- **Sprint tiếp theo:** Backend Proxy v4.5 (key pool, user không cần nhập key)
+- **Trạng thái:** ⏳ Code v4.5 sẵn sàng — GROQ_KEYS đã setup trên Vercel (Production + Preview), chờ push code
+- **Sprint vừa hoàn thành:** Backend Proxy (v4.5)
+- **Sprint tiếp theo:** Word Jar / Spaced Repetition
 
 ---
 
 ## ✅ Đã hoàn thành (lịch sử versions)
+
+### v4.5 — Backend Proxy (04/05/2026)
+- Tạo `api/groq.js` — Vercel Serverless Function proxy đến Groq API
+- Key pool round-robin từ `GROQ_KEYS` env var (comma-separated)
+- Rate limit per IP: 30 req/phút + 100 req/giờ (in-memory Map)
+- Fail-over khi key trả 429/401 — thử key tiếp theo (max 3 lần)
+- Response headers: `X-Pool-Status`, `X-RateLimit-Remaining-Minute/Hour`
+- Thêm screen `s-settings` với toggle Power User Mode (◉/○)
+- Badge status "💛 Server Ba Maya" / "🔑 Key cá nhân" dưới score bar
+- Icon ⚙️ góc trên trái home (đối xứng ❓ phải)
+- `groqVision()` + `groqChat()` tự động dùng `/api/groq` khi Power User OFF
+- Migration `migrateToV45()` — KHÔNG auto bật Power User cho user cũ
+- Service Worker: skip `/api/` paths, bump cache `v4.5`
+- **Vercel env vars cần setup:** `GROQ_KEYS=gsk_xxx1,gsk_xxx2,...`
+- **Files mới/sửa:** `api/groq.js` (mới), `index.html`, `sw.js`, `vercel.json`
 
 ### v4.4.2 — Domain Migration (04/05/2026)
 - Migrate domain từ `magicmoment-five.vercel.app` → `magicmoment.giapkhampha.me`
@@ -95,6 +110,7 @@
 
 | Bug | Khi nào | Fix |
 |-----|---------|-----|
+| Vision model `llama-4-scout` bị Groq gỡ → Magic Scan + Scene Explorer chết (404) | v4.5.1 | Đổi sang `qwen/qwen3.6-27b` + `reasoning_effort:'none'` (tắt thinking) |
 | `mm_hist exceeded quota` trên mobile | v4.4.1 hotfix | Compress image về thumbnail 96x96 + safeSetHist với auto-cleanup |
 | Hardcoded `magicmoment.vercel.app` trong share card | v4.4.2 | Search & replace |
 | PWA install button không hiện sau migrate domain | v4.4.2 | Cache mới (`v4.4.2`) + clear PWA cũ trên browser |
@@ -109,11 +125,11 @@
 ## 🔑 Technical state hiện tại
 
 ### API & Models
-- **Provider:** Groq (free tier, key user tự nhập)
-- **Vision:** `meta-llama/llama-4-scout-17b-16e-instruct` (1,000 req/ngày Vision)
-- **Text:** `llama-3.3-70b-versatile` (1,000 req/ngày Text)
-- **Key format:** `gsk_...`, lưu localStorage `mm_key`
-- **⚠️ Pain point:** User mới phải tự lấy key Groq → friction → sẽ fix ở v4.5 (Backend Proxy)
+- **Provider:** Groq — qua `/api/groq` proxy (v4.5), hoặc direct nếu Power User Mode ON
+- **Vision:** `qwen/qwen3.6-27b` (thinking model — LUÔN gửi `reasoning_effort:'none'` để tắt reasoning) — model cũ `meta-llama/llama-4-scout-17b-16e-instruct` đã bị Groq gỡ (404 model_not_found), gây lỗi Magic Scan + Scene Explorer, fix ở v4.5.1
+- **Text:** `llama-3.3-70b-versatile` (1,000 req/ngày/key Text)
+- **Key pool:** `GROQ_KEYS` env var trên Vercel — round-robin, fail-over tự động
+- **Power User Mode:** user có thể dùng key cá nhân qua Settings screen `s-settings`
 
 ### localStorage keys hiện tại
 
@@ -132,24 +148,28 @@
 | `mm_pwa_installed` | PWA đã cài |
 | `mm_ios_hint_shown` | iOS install hint đã hiện |
 | `mm_hist_compressed_v45` | Migration flag (v4.4.1) |
+| `mm_power_user` | `'1'` nếu Power User Mode ON, null nếu OFF (v4.5) |
+| `mm_migrated_v45` | `'1'` — migration v4.5 đã chạy (v4.5) |
 
 ### Files trong repo
 ```
 magicmoment/
-├── index.html           ← App chính (v4.4.2, ~170KB)
+├── index.html           ← App chính (v4.5, ~175KB)
 ├── manifest.json        ← PWA manifest
-├── sw.js                ← Service Worker (CACHE_NAME: magic-moment-v4.4.2)
-├── vercel.json          ← Routing config
+├── sw.js                ← Service Worker (CACHE_NAME: magic-moment-v4.5)
+├── vercel.json          ← Routing config (có route /api/*)
+├── api/
+│   └── groq.js          ← Vercel Serverless proxy (v4.5, MỚI)
 ├── icons/
 │   ├── icon-192.png
 │   ├── icon-512.png
 │   └── icon-maskable.png
 ├── CLAUDE.md            ← Entry point (mới tạo 04/05/2026)
 └── docs/
-    ├── CONTEXT.md       ← Bối cảnh (mới)
+    ├── CONTEXT.md       ← Bối cảnh
     ├── STATUS.md        ← File này (file SỐNG)
-    ├── ROADMAP.md       ← Kế hoạch (mới)
-    └── CONVENTIONS.md   ← Code style (mới)
+    ├── ROADMAP.md       ← Kế hoạch
+    └── CONVENTIONS.md   ← Code style
 ```
 
 ### Deploy
@@ -164,16 +184,16 @@ magicmoment/
 ## ⏭️ Đang làm / Đang vướng
 
 ### Đang làm
-- Tạo knowledge architecture (CLAUDE.md, CONTEXT.md, STATUS.md, ROADMAP.md, CONVENTIONS.md)
+- (trống — v4.5 code xong, GROQ_KEYS đã setup trên Vercel, chờ Ba commit + push)
 
 ### Đang vướng / cần quyết
-- Chưa setup PWA install lại trên domain mới (cần clear PWA cũ + reload)
-- Chưa làm Backend Proxy (v4.5) — user mới vẫn phải lấy key Groq
+- **Chờ Ba push code v4.5:** `git push origin master:main --force-with-lease`
+- Development env var chưa set (chỉ cần nếu test local với `vercel dev`)
 
 ### Sẵn sàng làm tiếp (priority order)
-1. **Backend Proxy v4.5** — User không cần nhập API key (chi tiết trong ROADMAP.md)
-2. **Word Jar / Spaced Repetition** — Bé học từ rồi quên → cần ôn lại
-3. **Theme Packs Level 2** — 6 packs mới (Home, Nature, Actions, Feelings, Family, Clothes)
+1. **Word Jar / Spaced Repetition** — Bé học từ rồi quên → cần ôn lại
+2. **Theme Packs Level 2** — 6 packs mới (Home, Nature, Actions, Feelings, Family, Clothes)
+3. **Leaderboard / Social** — Ba & bé so sánh progress với bạn bè
 
 ---
 
@@ -184,14 +204,14 @@ magicmoment/
 - Text: 1,000 req/ngày
 - → ~80 user/ngày capacity (bottleneck Vision)
 
-### Sau khi v4.5 Backend Proxy (kế hoạch)
-- 1 Super tier ($20/mo) + 4 Free keys = 14,000 req/ngày Vision
-- → ~1,100 user/ngày capacity
+### Với v4.5 Backend Proxy (đã implement)
+- Capacity phụ thuộc số key trong `GROQ_KEYS`
+- 1 Super tier ($20/mo) + 4 Free keys = ~14,000 req/ngày Vision → ~1,100 user/ngày
 
 ### Vercel state
 - Hobby plan (free)
 - Auto-deploy từ branch `main`
-- Functions chưa dùng (chưa có `/api/` folder)
+- **Functions: có `/api/groq.js`** (v4.5) — cần env var `GROQ_KEYS`
 - Bandwidth + builds: chưa hit limit
 
 ---
@@ -234,5 +254,5 @@ Khi user nói "deploy / push":
 
 ---
 
-*File version 4.4.2 — 04/05/2026*
+*File version 4.5 — 04/05/2026*
 *Update mỗi khi: ship version mới, fix bug đáng nhớ, đổi infrastructure*

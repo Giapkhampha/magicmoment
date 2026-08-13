@@ -43,7 +43,7 @@ localStorage.setItem('mm_scoreday', scoreDay);
 
 ### Keys & Models
 - Key bắt đầu bằng `gsk_` | Free: ~14,400 req/ngày
-- **Vision** (nhận dạng ảnh): `meta-llama/llama-4-scout-17b-16e-instruct`
+- **Vision** (nhận dạng ảnh): `qwen/qwen3.6-27b` + `reasoning_effort:'none'` (model cũ `llama-4-scout` đã bị Groq gỡ)
 - **Text** (dịch/nội dung): `llama-3.3-70b-versatile`
 
 ### Vision Call
@@ -56,7 +56,8 @@ async function groqVision(b64url, prompt) {
       method: 'POST', signal: ctrl.signal,
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
       body: JSON.stringify({
-        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        model: 'qwen/qwen3.6-27b',
+        reasoning_effort: 'none', // tắt thinking
         max_tokens: 800,
         messages: [{ role: 'user', content: [
           { type: 'image_url', image_url: { url: b64url } },

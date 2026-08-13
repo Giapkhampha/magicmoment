@@ -149,7 +149,8 @@ async function groqVision(b64url, prompt) {
         'Authorization': `Bearer ${apiKey}` 
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        model: 'qwen/qwen3.6-27b',
+        reasoning_effort: 'none', // BẮT BUỘC — tắt thinking, nếu không sẽ trả khối <think> phá parseJSON
         max_tokens: 800,
         messages: [{ role: 'user', content: [
           { type: 'image_url', image_url: { url: b64url } },

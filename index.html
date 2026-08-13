@@ -787,7 +787,7 @@ canvas{display:none;}
     <button class="btn-dashboard" onclick="openDashboard()">📊 Báo cáo</button>
   </div>
   <div class="err-msg" id="err-home"></div>
-  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.5 · Magic Moment ✨</div>
+  <div style="text-align:center;padding:8px 0 16px;font:600 0.65rem 'Nunito',sans-serif;color:rgba(255,255,255,0.15)">v4.5.1 · Magic Moment ✨</div>
   <div style="padding:0 16px;">
     <button id="btn-install-pwa" class="btn-install" onclick="installPWA()" style="display:none;">
       📱 Cài đặt app trên màn hình
@@ -1880,7 +1880,7 @@ async function groqVision(b64url,prompt){
     if(useDirect)headers['Authorization']=`Bearer ${apiKey}`;
     const res=await fetch(url,{
       method:'POST',signal:ctrl.signal,headers,
-      body:JSON.stringify({model:'meta-llama/llama-4-scout-17b-16e-instruct',max_tokens:800,messages:[{role:'user',content:[{type:'image_url',image_url:{url:b64url}},{type:'text',text:prompt}]}]})
+      body:JSON.stringify({model:'qwen/qwen3.6-27b',reasoning_effort:'none',max_tokens:800,messages:[{role:'user',content:[{type:'image_url',image_url:{url:b64url}},{type:'text',text:prompt}]}]})
     });
     clearTimeout(timer);
     if(!res.ok){const e=await res.json().catch(()=>({}));const msg=e.error?.message||`Lỗi ${res.status}`;if(res.status===401&&useDirect){go('s-settings');}throw new Error(msg);}

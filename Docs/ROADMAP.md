@@ -37,28 +37,18 @@
 - [x] Hotfix mm_hist quota (v4.4.1)
 - [x] Domain migration giapkhampha.me (v4.4.2)
 
+### Phase 4 — Frictionless (một phần)
+- [x] Backend Proxy — user không cần API key (v4.5)
+
 ---
 
-## 🎯 Phase 4 — Frictionless + Retention (Next)
+## 🎯 Phase 4 — Frictionless + Retention (Đang làm)
 
-### Sprint 4.1 — Backend Proxy v4.5 ⭐⭐⭐ (priority cao nhất)
+### ~~Sprint 4.1 — Backend Proxy v4.5~~ ✅ SHIPPED (04/05/2026)
 
-**Vấn đề cần giải:** User mới phải tự lấy Groq API key → friction → nhiều người bỏ.
-
-**Giải pháp:**
-- Vercel Serverless Function `/api/groq.js`
-- Key pool: 1 Super Groq ($20/mo) + 4 Free keys → 14,000 req/ngày Vision
-- Round-robin với cooldown khi key fail
-- Rate limit per IP: 30/min, 100/giờ
-- Power user mode: Settings toggle "Dùng key cá nhân" (preserve UX cũ)
-- Status badge: "💛 Server Ba Maya" hoặc "🔑 Key cá nhân"
-
-**Effort:** ~5h Claude Code + 1.5h Ba chuẩn bị keys
-**Capacity sau khi ship:** ~1,100 user/ngày
-**Files mới:** `/api/groq.js`
-**Vercel env:** `GROQ_KEYS` (comma-separated)
-
-**Spec đầy đủ:** Có sẵn trong file `BACKEND_PROXY_v4.5_PLAN.md` (output từ phiên trước)
+- `/api/groq.js` Vercel Serverless proxy, key pool round-robin, rate limit per IP
+- Settings screen `s-settings`, Power User Mode toggle, status badge home
+- Spec đầy đủ: [docs/SPEC_v4.5.md](SPEC_v4.5.md)
 
 ---
 
@@ -187,5 +177,5 @@ Nếu 5 câu trên không có câu trả lời rõ → **không build, để par
 
 ---
 
-*File version 1.0 — 04/05/2026*
+*File version 1.1 — 04/05/2026*
 *Update khi observation thay đổi priority hoặc ship sprint xong*

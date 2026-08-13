@@ -1,5 +1,5 @@
 // sw.js - Magic Moment Service Worker v1
-const CACHE_NAME = 'magic-moment-v4.5';
+const CACHE_NAME = 'magic-moment-v4.5.1';
 const RUNTIME_CACHE = 'magic-moment-runtime';
 
 const PRECACHE_URLS = [
