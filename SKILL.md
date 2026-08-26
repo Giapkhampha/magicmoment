@@ -44,7 +44,7 @@ localStorage.setItem('mm_scoreday', scoreDay);
 ### Keys & Models
 - Key bắt đầu bằng `gsk_` | Free: ~14,400 req/ngày
 - **Vision** (nhận dạng ảnh): `qwen/qwen3.6-27b` + `reasoning_effort:'none'` (model cũ `llama-4-scout` đã bị Groq gỡ)
-- **Text** (dịch/nội dung): `llama-3.3-70b-versatile`
+- **Text** (dịch/nội dung): `qwen/qwen3.6-27b` + `reasoning_effort:'none'` (model cũ `llama-3.3-70b-versatile` đã bị Groq gỡ) — dùng chung model với Vision
 
 ### Vision Call
 ```js
@@ -77,7 +77,7 @@ async function groqVision(b64url, prompt) {
 ```js
 async function groqChat(prompt, maxTokens = 400) {
   // Giống groqVision nhưng content là string
-  // model: 'llama-3.3-70b-versatile'
+  // model: 'qwen/qwen3.6-27b', reasoning_effort: 'none'
 }
 ```
 

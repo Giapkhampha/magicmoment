@@ -111,6 +111,7 @@
 | Bug | Khi nào | Fix |
 |-----|---------|-----|
 | Vision model `llama-4-scout` bị Groq gỡ → Magic Scan + Scene Explorer chết (404) | v4.5.1 | Đổi sang `qwen/qwen3.6-27b` + `reasoning_effort:'none'` (tắt thinking) |
+| Text model `llama-3.3-70b-versatile` bị Groq gỡ → StoryDuo chết (404) | v4.5.2 | Đổi text sang `qwen/qwen3.6-27b` + `reasoning_effort:'none'` — dùng chung 1 model |
 | `mm_hist exceeded quota` trên mobile | v4.4.1 hotfix | Compress image về thumbnail 96x96 + safeSetHist với auto-cleanup |
 | Hardcoded `magicmoment.vercel.app` trong share card | v4.4.2 | Search & replace |
 | PWA install button không hiện sau migrate domain | v4.4.2 | Cache mới (`v4.4.2`) + clear PWA cũ trên browser |
@@ -127,7 +128,7 @@
 ### API & Models
 - **Provider:** Groq — qua `/api/groq` proxy (v4.5), hoặc direct nếu Power User Mode ON
 - **Vision:** `qwen/qwen3.6-27b` (thinking model — LUÔN gửi `reasoning_effort:'none'` để tắt reasoning) — model cũ `meta-llama/llama-4-scout-17b-16e-instruct` đã bị Groq gỡ (404 model_not_found), gây lỗi Magic Scan + Scene Explorer, fix ở v4.5.1
-- **Text:** `llama-3.3-70b-versatile` (1,000 req/ngày/key Text)
+- **Text:** `qwen/qwen3.6-27b` + `reasoning_effort:'none'` — model cũ `llama-3.3-70b-versatile` đã bị Groq gỡ (404), gây lỗi StoryDuo, fix ở v4.5.2. Nay dùng CHUNG 1 model qwen cho cả vision + text.
 - **Key pool:** `GROQ_KEYS` env var trên Vercel — round-robin, fail-over tự động
 - **Power User Mode:** user có thể dùng key cá nhân qua Settings screen `s-settings`
 
