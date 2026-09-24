@@ -9,7 +9,7 @@
 
 ## 🎯 Đang ở đâu?
 
-- **Version hiện tại:** v4.5
+- **Version hiện tại:** v4.5.3
 - **URL chính thức:** https://magicmoment.giapkhampha.me ⭐
 - **URL cũ (vẫn hoạt động):** https://magicmoment-five.vercel.app (redirect 307 → magicmoment.giapkhampha.me)
 - **Trạng thái:** ⏳ Code v4.5 sẵn sàng — GROQ_KEYS đã setup trên Vercel (Production + Preview), chờ push code
@@ -110,6 +110,7 @@
 
 | Bug | Khi nào | Fix |
 |-----|---------|-----|
+| Model `qwen/qwen3.6-27b` bị Groq gỡ (404) → Magic Scan + Scene Explorer + StoryDuo chết | v4.5.3 | Đổi cả vision + text sang `qwen/qwen3.8-27b` (test proxy: text + vision đều OK). LỖI LẶP LẦN 3 — Groq rotate model theo quý |
 | Vision model `llama-4-scout` bị Groq gỡ → Magic Scan + Scene Explorer chết (404) | v4.5.1 | Đổi sang `qwen/qwen3.6-27b` + `reasoning_effort:'none'` (tắt thinking) |
 | Text model `llama-3.3-70b-versatile` bị Groq gỡ → StoryDuo chết (404) | v4.5.2 | Đổi text sang `qwen/qwen3.6-27b` + `reasoning_effort:'none'` — dùng chung 1 model |
 | `mm_hist exceeded quota` trên mobile | v4.4.1 hotfix | Compress image về thumbnail 96x96 + safeSetHist với auto-cleanup |
@@ -127,8 +128,7 @@
 
 ### API & Models
 - **Provider:** Groq — qua `/api/groq` proxy (v4.5), hoặc direct nếu Power User Mode ON
-- **Vision:** `qwen/qwen3.6-27b` (thinking model — LUÔN gửi `reasoning_effort:'none'` để tắt reasoning) — model cũ `meta-llama/llama-4-scout-17b-16e-instruct` đã bị Groq gỡ (404 model_not_found), gây lỗi Magic Scan + Scene Explorer, fix ở v4.5.1
-- **Text:** `qwen/qwen3.6-27b` + `reasoning_effort:'none'` — model cũ `llama-3.3-70b-versatile` đã bị Groq gỡ (404), gây lỗi StoryDuo, fix ở v4.5.2. Nay dùng CHUNG 1 model qwen cho cả vision + text.
+- **Vision + Text (dùng CHUNG 1 model):** `qwen/qwen3.8-27b` (thinking model — LUÔN gửi `reasoning_effort:'none'` để tắt reasoning). Lịch sử model bị Groq gỡ (404): `llama-4-scout` (v4.5.1) → `qwen/qwen3.6-27b` (v4.5.3). ⚠️ Groq rotate model theo quý — khi app lỗi 404 lần sau, test model mới qua proxy rồi đổi (xem quy trình dưới)
 - **Key pool:** `GROQ_KEYS` env var trên Vercel — round-robin, fail-over tự động
 - **Power User Mode:** user có thể dùng key cá nhân qua Settings screen `s-settings`
 
